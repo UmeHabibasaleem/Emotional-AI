@@ -7,6 +7,8 @@ public class AgentMove : MonoBehaviour {
     Animator AnimZombie;
     float speed = 5.0f;
     public float food;
+   
+   
   
     // Use this for initialization
     void Start()
