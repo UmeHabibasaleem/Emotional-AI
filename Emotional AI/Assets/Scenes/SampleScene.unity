@@ -7549,7 +7549,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 877429408}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: -7, y: 0.5, z: -5}
+  m_LocalPosition: {x: -7.06, y: 0.5, z: -4.94}
   m_LocalScale: {x: 2.5, y: 2.5, z: 2.5}
   m_Children: []
   m_Father: {fileID: 0}
@@ -8786,7 +8786,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1038353067}
   m_LocalRotation: {x: 0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: 0.94, y: 0, z: 0}
+  m_LocalPosition: {x: 0.94, y: 0, z: 3.88}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 2139491916}
@@ -16279,7 +16279,7 @@ Prefab:
       objectReference: {fileID: 0}
     - target: {fileID: 4759799888039420, guid: 4cf198dbd48ae43aa90c7e17459e4f60, type: 2}
       propertyPath: m_LocalPosition.y
-      value: 1.373
+      value: 0.89
       objectReference: {fileID: 0}
     - target: {fileID: 4759799888039420, guid: 4cf198dbd48ae43aa90c7e17459e4f60, type: 2}
       propertyPath: m_LocalPosition.z
@@ -16507,7 +16507,7 @@ Transform:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1846254021}
   m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
-  m_LocalPosition: {x: 0, y: 0, z: 0}
+  m_LocalPosition: {x: 0.02, y: 0, z: 0}
   m_LocalScale: {x: 1.89, y: 0.7808, z: 1}
   m_Children:
   - {fileID: 1618439388}
@@ -18571,8 +18571,14 @@ MonoBehaviour:
   Timepassed: 0
   Food: 0
   Health: 0
+  action: 0
+  Food1: {fileID: 877429408}
+  Food2: {fileID: 1101065285}
+  Food3: {fileID: 1185085739}
   FoodFiller: {fileID: 1986203625}
   HealthFiller: {fileID: 1618439389}
+  Hallo: {fileID: 1038353067}
+  dist: 0
 --- !u!54 &2139491919
 Rigidbody:
   m_ObjectHideFlags: 0

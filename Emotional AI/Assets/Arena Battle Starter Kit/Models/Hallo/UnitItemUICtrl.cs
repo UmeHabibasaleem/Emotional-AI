@@ -9,6 +9,7 @@ public class UnitItemUICtrl : MonoBehaviour {
     public SpriteRenderer BottomCircle;
     public Transform NavigationCircle;
     public TextMeshPro NameText;
+  
 
     public SpriteRenderer EnergyFiller;
     public SpriteRenderer FoodBar;
