@@ -6,6 +6,8 @@ using UnityEngine;
 public class AgentMove : MonoBehaviour {
     Animator AnimZombie;
     public float Timepassed;
+    public float Timecheck;
+    public Lara Lara;
     float speed = 5.0f;
     public float Food;
     public float Health;
@@ -30,23 +32,28 @@ public class AgentMove : MonoBehaviour {
     void Start()
     {
         Timepassed = 0;
+        Timecheck = 0;
         Food = 10;
         Health = 15;
         healthinc = false;
         AnimZombie = GetComponent<Animator>();
+        Food3.SetActive(false);
     }
 
     // Update is called once per frame
     void Update()
     {
+
         Vector3 targetPos = AnimZombie.transform.position;
+        targetPos.y = 0;
         Timepassed += Time.deltaTime;
+        Timecheck += Time.deltaTime;
         seconds = (int)Timepassed;
 
         if (seconds == count)
         {
             count += 1;
-            action = Random.Range(0, 6);
+            action = Random.Range(0, 7);
             healthinc = false;
             once = false;
 
@@ -67,16 +74,43 @@ public class AgentMove : MonoBehaviour {
         
 
         float dist1 = Vector3.Distance(Hallo.transform.position, Food1.transform.position);
-        dist = dist1;
+        float dist2 = Vector3.Distance(Hallo.transform.position, Food2.transform.position);
+        float dist3 = Vector3.Distance(Hallo.transform.position, Food3.transform.position);
 
-        if (action == 5 && once == false /*&& dist1 < 1.42*/)
+        if (action == 5 && once == false && (dist1 < 1.42 || dist2 < 1.42 || dist3 < 1.42))
         {
             Food++;
             this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
             once = true;
-            
+            if(dist1 < 1.42)
+            {
+                Food1.SetActive(false);
+                Timecheck = 0;
+
+            }
+            else if( dist2 < 1.42f)
+            {
+                Food2.SetActive(false);
+                Timecheck = 0;
+
+            }
+            else if (dist3 < 1.42f)
+            {
+                Food3.SetActive(false);
+                Timecheck = 0;
+
+            }
+
 
         }
+        if((int)Timecheck == 5)
+        {
+            Food1.SetActive(true);
+            Food2.SetActive(true);
+            Food3.SetActive(true);
+
+        }
+       
         if(Food - PrevFood == 1 && healthinc == false)
         {
             Health += 0.5f;
@@ -92,16 +126,28 @@ public class AgentMove : MonoBehaviour {
         }
 
         //Stop Agent Animation
-        //    if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.A))
+          // if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.A))
         if(action == 0)
         {
             AnimZombie.SetTrigger("idle");
         }
 
         //Attack Agent Animation
-        if (Input.GetKeyDown(KeyCode.A))
+        if (action == 7)
         {
             AnimZombie.SetTrigger("attack");
+            
+        }
+        if (Marko.action == 7 && Vector3.Distance(this.transform.position, Marko.transform.position) < 3)
+        {
+            Food--;
+            this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
+
+        }
+        if (Lara.action == 7 && Vector3.Distance(this.transform.position, Lara.transform.position) < 3)
+        {
+            Food--;
+            this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
         }
         float DistanceWithMarko = Vector3.Distance(this.transform.position, Marko.transform.position);
 

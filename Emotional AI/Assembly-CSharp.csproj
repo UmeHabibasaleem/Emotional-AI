@@ -65,6 +65,7 @@
     <Compile Include="Assets\Arena Battle Starter Kit\Models\Hallo\UnitItemUICtrl.cs" />
     <Compile Include="Assets\BulletFire.cs" />
     <Compile Include="Assets\CameraFacing.cs" />
+    <Compile Include="Assets\Lara.cs" />
     <Compile Include="Assets\MarkoScript.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01.cs" />
     <Compile Include="Assets\TextMesh Pro\Examples &amp; Extras\Scripts\Benchmark01_UGUI.cs" />

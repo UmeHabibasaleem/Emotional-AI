@@ -7,6 +7,7 @@ public class MarkoScript : MonoBehaviour
 {
     Animator AnimZombie;
     public float Timepassed;
+    public Lara Lara;
     float speed = 5.0f;
     public float Food;
     public float Health;
@@ -48,7 +49,7 @@ public class MarkoScript : MonoBehaviour
         {
             count += 1;
 
-            action = Random.Range(0, 6);
+            action = Random.Range(0, 7);
             healthinc = false;
             once = false;
 
@@ -101,9 +102,21 @@ public class MarkoScript : MonoBehaviour
         }
 
         //Attack Agent Animation
-        if (Input.GetKeyDown(KeyCode.A))
+        if (action == 7)
         {
             AnimZombie.SetTrigger("attack");
+        }
+
+        if (Hallo.action == 7 && Vector3.Distance(this.transform.position, Hallo.transform.position) < 3)
+        {
+            Food--;
+            this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
+            
+        }
+        if (Lara.action == 7 && Vector3.Distance(this.transform.position, Lara.transform.position) < 3)
+        {
+            Food--;
+            this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
         }
 
 
