@@ -25,6 +25,7 @@ public class AgentMove : MonoBehaviour {
     bool once = false;
     bool healthinc;
     public float dist;
+    public MarkoScript Marko;
     // Use this for initialization
     void Start()
     {
@@ -45,8 +46,7 @@ public class AgentMove : MonoBehaviour {
         if (seconds == count)
         {
             count += 1;
-
-            action = Random.Range(0, 4);
+            action = Random.Range(0, 6);
             healthinc = false;
             once = false;
 
@@ -69,7 +69,7 @@ public class AgentMove : MonoBehaviour {
         float dist1 = Vector3.Distance(Hallo.transform.position, Food1.transform.position);
         dist = dist1;
 
-        if (action == 3 && once == false /*&& dist1 < 1.42*/)
+        if (action == 5 && once == false /*&& dist1 < 1.42*/)
         {
             Food++;
             this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
@@ -79,7 +79,7 @@ public class AgentMove : MonoBehaviour {
         }
         if(Food - PrevFood == 1 && healthinc == false)
         {
-            Health++;
+            Health += 0.5f;
             this.HealthFiller.size = new Vector2(this.HealthFiller.size.x + 0.02f, this.HealthFiller.size.y);
             healthinc = true;
         }
@@ -102,6 +102,21 @@ public class AgentMove : MonoBehaviour {
         if (Input.GetKeyDown(KeyCode.A))
         {
             AnimZombie.SetTrigger("attack");
+        }
+        float DistanceWithMarko = Vector3.Distance(this.transform.position, Marko.transform.position);
+
+        if (action == 6 && DistanceWithMarko <= 1.42f)
+        {
+            this.Food -= 0.5f;
+            Marko.Food += 0.5f;
+            if(this.FoodFiller.size.x > 0)
+            { 
+            this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
+            }
+            if (Marko.FoodFiller.size.x <= 1)
+            {
+                Marko.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
+            }
         }
 
     }
