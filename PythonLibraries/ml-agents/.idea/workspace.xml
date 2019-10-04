@@ -1,0 +1,787 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<project version="4">
+  <component name="ChangeListManager">
+    <list default="true" id="5aa880ef-89cd-4627-8999-217a0aba57e6" name="Default Changelist" comment="" />
+    <option name="EXCLUDED_CONVERTED_TO_IGNORED" value="true" />
+    <option name="SHOW_DIALOG" value="false" />
+    <option name="HIGHLIGHT_CONFLICTS" value="true" />
+    <option name="HIGHLIGHT_NON_ACTIVE_CHANGELIST" value="false" />
+    <option name="LAST_RESOLUTION" value="IGNORE" />
+  </component>
+  <component name="FavoritesManager">
+    <favorites_list name="ml-agents" />
+  </component>
+  <component name="FileEditorManager">
+    <leaf SIDE_TABS_SIZE_LIMIT_KEY="300">
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/Downloads/Compressed/P20-Self-Driving-Car-20191004T080349Z-001/P20-Self-Driving-Car/Self_Driving_Car/ai.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="1598">
+              <caret line="102" column="30" selection-start-line="102" selection-start-column="30" selection-end-line="102" selection-end-column="30" />
+              <folding>
+                <element signature="e#54#72#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$USER_HOME$/Downloads/Compressed/P20-Self-Driving-Car-20191004T080349Z-001/P20-Self-Driving-Car/Self_Driving_Car/map.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="85">
+              <caret line="5" selection-start-line="5" selection-end-line="5" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="true">
+        <entry file="file://C:/ProgramData/Anaconda3/Lib/site-packages/matplotlib/pyplot.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="80">
+              <caret line="31" column="28" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="28" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://C:/ProgramData/Anaconda3/Lib/site-packages/matplotlib/colorbar.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="595">
+              <caret line="35" selection-start-line="35" selection-end-line="35" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://C:/ProgramData/Anaconda3/Lib/site-packages/matplotlib/contour.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="20" selection-start-line="20" selection-end-line="20" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://C:/ProgramData/Anaconda3/Lib/site-packages/matplotlib/text.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="21" selection-start-line="21" selection-end-line="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://C:/ProgramData/Anaconda3/Lib/site-packages/matplotlib/textpath.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="323">
+              <caret line="19" selection-start-line="19" selection-end-line="19" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://C:/ProgramData/Anaconda3/Lib/site-packages/matplotlib/mathtext.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="340">
+              <caret line="37" selection-start-line="37" selection-end-line="37" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mlagents/envs/communicator_objects/__init__.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="357">
+              <caret line="21" selection-start-line="21" selection-end-line="21" />
+            </state>
+          </provider>
+        </entry>
+      </file>
+      <file pinned="false" current-in-tab="false">
+        <entry file="file://$PROJECT_DIR$/mlagents/envs/communicator_objects/unity_to_external_pb2_grpc.py">
+          <provider selected="true" editor-type-id="text-editor">
+            <state relative-caret-position="102">
+              <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
+              <folding>
+                <element signature="e#70#81#0" expanded="true" />
+              </folding>
+            </state>
+          </provider>
+        </entry>
+      </file>
+    </leaf>
+  </component>
+  <component name="FileTemplateManagerImpl">
+    <option name="RECENT_TEMPLATES">
+      <list>
+        <option value="Python Script" />
+      </list>
+    </option>
+  </component>
+  <component name="FindInProjectRecents">
+    <findStrings>
+      <find />
+      <find>initialize_trainers</find>
+      <find>PPOModel</find>
+      <find>PPOPolicy</find>
+      <find>trainer_parameter</find>
+      <find>info</find>
+      <find>safe_concat_lists</find>
+      <find>AllBrainInfo</find>
+      <find>stats</find>
+      <find>episodes</find>
+      <find>stat</find>
+      <find>step(actionlst)</find>
+      <find>single_</find>
+      <find>step</find>
+      <find>batch_rewa</find>
+      <find>last_reward</find>
+      <find>train_model</find>
+      <find>tc</find>
+      <find>training_buffer</find>
+      <find>model</find>
+      <find>build</find>
+      <find>reset</find>
+      <find>resetParameters</find>
+      <find>re</find>
+      <find>RESE</find>
+      <find>unity in</find>
+      <find>terminal</find>
+      <find>self._n_agents</find>
+      <find>self.n</find>
+      <find>Number of agents in in</find>
+    </findStrings>
+  </component>
+  <component name="IdeDocumentHistory">
+    <option name="CHANGED_PATHS">
+      <list>
+        <option value="$PROJECT_DIR$/gym-unity/gym_unity/envs/gympractice.py" />
+        <option value="$PROJECT_DIR$/config/trainer_config.yaml" />
+        <option value="$PROJECT_DIR$/ml-agents-envs/mlagents/envs/brain.py" />
+        <option value="$PROJECT_DIR$/ml-agents/mlagents/trainers/ppo/models.py" />
+        <option value="$PROJECT_DIR$/ml-agents/mlagents/trainers/trainer.py" />
+        <option value="$PROJECT_DIR$/gym-unity/gym_unity/envs/NewdqnMethod.py" />
+        <option value="$PROJECT_DIR$/gym-unity/gym_unity/envs/VisualEnviroment.py" />
+        <option value="$PROJECT_DIR$/gym-unity/gym_unity/envs/multiagent.py" />
+        <option value="$USER_HOME$/AppData/Local/conda/conda/envs/ml-agents/Lib/site-packages/tensorflow/python/saved_model/saved_model.py" />
+        <option value="$USER_HOME$/AppData/Local/conda/conda/envs/ml-agents/Lib/site-packages/tensorflow/python/saved_model/builder_impl.py" />
+        <option value="$PROJECT_DIR$/gym-unity/gym_unity/envs/NewVisualEnviroment.py" />
+        <option value="$PROJECT_DIR$/ml-agents/mlagents/trainers/learn.py" />
+        <option value="$PROJECT_DIR$/ml-agents/mlagents/trainers/ppo/trainer.py" />
+        <option value="$PROJECT_DIR$/ml-agents/mlagents/trainers/trainer_controller.py" />
+        <option value="$PROJECT_DIR$/gym-unity/gym_unity/envs/unity_env.py" />
+        <option value="C:/cartpole-master/cartpole.py" />
+        <option value="$USER_HOME$/AppData/Local/conda/conda/envs/ml-agents/Lib/site-packages/tensorflow/python/keras/backend/__init__.py" />
+        <option value="$PROJECT_DIR$/gym-unity/gym_unity/envs/DqnMethod.py" />
+        <option value="$PROJECT_DIR$/gym-unity/gym_unity/envs/cartpole.py" />
+        <option value="$PROJECT_DIR$/gym-unity/gym_unity/envs/Emotional_DQN.py" />
+        <option value="$USER_HOME$/AppData/Local/conda/conda/envs/ml-agents/Lib/site-packages/mlagents/envs/environment.py" />
+        <option value="$PROJECT_DIR$/gym-unity/gym_unity/envs/PracticeOfDQN.py" />
+        <option value="$USER_HOME$/AppData/Local/conda/conda/envs/ml-agents/Lib/site-packages/gym_unity/envs/unity_env.py" />
+        <option value="$PROJECT_DIR$/../pycharmfiles/test/venv/Lib/site-packages/keras/backend/tensorflow_backend.py" />
+        <option value="$PROJECT_DIR$/../pycharmfiles/test/venv/Lib/site-packages/gym_unity/envs/unity_env.py" />
+        <option value="$PROJECT_DIR$/gym-unity/gym_unity/envs/FileForpython.py" />
+        <option value="$PROJECT_DIR$/../MaterialofFinalYearProject/P20-Self-Driving-Car/Self_Driving_Car/map.py" />
+        <option value="$PROJECT_DIR$/gym-unity/gym_unity/envs/MergeDQN.py" />
+        <option value="$PROJECT_DIR$/gym-unity/gym_unity/envs/EditCode1.py" />
+        <option value="$PROJECT_DIR$/gym-unity/gym_unity/envs/EditCode.py" />
+        <option value="$PROJECT_DIR$/gym-unity/gym_unity/envs/F1DQN.py" />
+        <option value="$PROJECT_DIR$/gym-unity/gym_unity/envs/RealDQN.py" />
+        <option value="$PROJECT_DIR$/gym_unity/envs/RealDQN.py" />
+        <option value="$PROJECT_DIR$/gym_unity/envs/unity_env.py" />
+        <option value="$PROJECT_DIR$/mlagents/envs/__init__.py" />
+        <option value="C:/ProgramData/Anaconda3/Lib/site-packages/PIL/Image.py" />
+        <option value="C:/ProgramData/Anaconda3/Lib/site-packages/numpy/_distributor_init.py" />
+        <option value="C:/ProgramData/Anaconda3/Lib/site-packages/gym/spaces/__init__.py" />
+        <option value="C:/ProgramData/Anaconda3/Lib/site-packages/gym/spaces/space.py" />
+        <option value="C:/ProgramData/Anaconda3/Lib/site-packages/gym/envs/tests/test_envs_semantics.py" />
+        <option value="$PROJECT_DIR$/gym_unity/envs/scores/score_logger.py" />
+        <option value="$PROJECT_DIR$/gym_unity/envs/TestDQN.py" />
+        <option value="$PROJECT_DIR$/gym_unity/envs/EditCode.py" />
+      </list>
+    </option>
+  </component>
+  <component name="ProjectFrameBounds" extendedState="6">
+    <option name="x" value="370" />
+    <option name="y" value="14" />
+    <option name="width" value="956" />
+    <option name="height" value="788" />
+  </component>
+  <component name="ProjectView">
+    <navigator proportions="" version="1">
+      <foldersAlwaysOnTop value="true" />
+    </navigator>
+    <panes>
+      <pane id="Scope" />
+      <pane id="ProjectPane">
+        <subPane>
+          <expand>
+            <path>
+              <item name="ml-agents" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ml-agents" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ml-agents" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ml-agents" type="462c0819:PsiDirectoryNode" />
+              <item name="gym_unity" type="462c0819:PsiDirectoryNode" />
+            </path>
+            <path>
+              <item name="ml-agents" type="b2602c69:ProjectViewProjectNode" />
+              <item name="ml-agents" type="462c0819:PsiDirectoryNode" />
+              <item name="gym_unity" type="462c0819:PsiDirectoryNode" />
+              <item name="envs" type="462c0819:PsiDirectoryNode" />
+            </path>
+          </expand>
+          <select />
+        </subPane>
+      </pane>
+    </panes>
+  </component>
+  <component name="PropertiesComponent">
+    <property name="last_opened_file_path" value="$PROJECT_DIR$" />
+    <property name="restartRequiresConfirmation" value="false" />
+    <property name="settings.editor.selected.configurable" value="com.jetbrains.python.configuration.PyActiveSdkModuleConfigurable" />
+  </component>
+  <component name="RunDashboard">
+    <option name="ruleStates">
+      <list>
+        <RuleState>
+          <option name="name" value="ConfigurationTypeDashboardGroupingRule" />
+        </RuleState>
+        <RuleState>
+          <option name="name" value="StatusDashboardGroupingRule" />
+        </RuleState>
+      </list>
+    </option>
+  </component>
+  <component name="RunManager" selected="Python.map">
+    <configuration name="DqnMethod" type="PythonConfigurationType" factoryName="Python">
+      <module name="ml-agents" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/gym-unity/gym_unity/envs" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/gym-unity/gym_unity/envs/DqnMethod.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="RealDQN (1)" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="ml-agents" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/gym_unity/envs" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/gym_unity/envs/RealDQN.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="RealDQN" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="ml-agents" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/gym-unity/gym_unity/envs" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/gym-unity/gym_unity/envs/RealDQN.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="TestDQN" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="ml-agents" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$PROJECT_DIR$/gym_unity/envs" />
+      <option name="IS_MODULE_SDK" value="true" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$PROJECT_DIR$/gym_unity/envs/TestDQN.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="ai" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="ml-agents" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$USER_HOME$/Downloads/Compressed/P20-Self-Driving-Car-20191004T080349Z-001/P20-Self-Driving-Car/Self_Driving_Car" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$USER_HOME$/Downloads/Compressed/P20-Self-Driving-Car-20191004T080349Z-001/P20-Self-Driving-Car/Self_Driving_Car/ai.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <configuration name="map" type="PythonConfigurationType" factoryName="Python" temporary="true">
+      <module name="ml-agents" />
+      <option name="INTERPRETER_OPTIONS" value="" />
+      <option name="PARENT_ENVS" value="true" />
+      <envs>
+        <env name="PYTHONUNBUFFERED" value="1" />
+      </envs>
+      <option name="SDK_HOME" value="" />
+      <option name="WORKING_DIRECTORY" value="$USER_HOME$/Downloads/Compressed/P20-Self-Driving-Car-20191004T080349Z-001/P20-Self-Driving-Car/Self_Driving_Car" />
+      <option name="IS_MODULE_SDK" value="false" />
+      <option name="ADD_CONTENT_ROOTS" value="true" />
+      <option name="ADD_SOURCE_ROOTS" value="true" />
+      <option name="SCRIPT_NAME" value="$USER_HOME$/Downloads/Compressed/P20-Self-Driving-Car-20191004T080349Z-001/P20-Self-Driving-Car/Self_Driving_Car/map.py" />
+      <option name="PARAMETERS" value="" />
+      <option name="SHOW_COMMAND_LINE" value="false" />
+      <option name="EMULATE_TERMINAL" value="false" />
+      <option name="MODULE_MODE" value="false" />
+      <option name="REDIRECT_INPUT" value="false" />
+      <option name="INPUT_FILE" value="" />
+      <method v="2" />
+    </configuration>
+    <recent_temporary>
+      <list>
+        <item itemvalue="Python.map" />
+        <item itemvalue="Python.ai" />
+        <item itemvalue="Python.TestDQN" />
+        <item itemvalue="Python.RealDQN (1)" />
+        <item itemvalue="Python.RealDQN" />
+      </list>
+    </recent_temporary>
+  </component>
+  <component name="SvnConfiguration">
+    <configuration />
+  </component>
+  <component name="TaskManager">
+    <task active="true" id="Default" summary="Default task">
+      <changelist id="5aa880ef-89cd-4627-8999-217a0aba57e6" name="Default Changelist" comment="" />
+      <created>1561607271683</created>
+      <option name="number" value="Default" />
+      <option name="presentableId" value="Default" />
+      <updated>1561607271683</updated>
+    </task>
+    <servers />
+  </component>
+  <component name="TodoView">
+    <todo-panel id="selected-file">
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+    <todo-panel id="all">
+      <are-packages-shown value="true" />
+      <is-autoscroll-to-source value="true" />
+    </todo-panel>
+  </component>
+  <component name="ToolWindowManager">
+    <frame x="-8" y="-8" width="1382" height="744" extended-state="7" />
+    <editor active="true" />
+    <layout>
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.82168674" visible="true" weight="0.28422618" />
+      <window_info id="Structure" order="1" sideWeight="0.17831326" side_tool="true" weight="0.25818452" />
+      <window_info id="Favorites" order="2" sideWeight="0.5008183" weight="0.24479167" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.58928573" weight="0.3289689" />
+      <window_info anchor="bottom" id="Run" order="2" sideWeight="0.6599702" weight="0.60392797" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4222586" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49925596" weight="0.3289689" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49330357" weight="0.39770868" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.34002978" side_tool="true" weight="0.5499182" />
+      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.76116073" weight="0.3289689" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout>
+    <layout-to-restore>
+      <window_info content_ui="combo" id="Project" order="0" sideWeight="0.82168674" visible="true" weight="0.28422618" />
+      <window_info id="Structure" order="1" sideWeight="0.17831326" side_tool="true" weight="0.25818452" />
+      <window_info id="Favorites" order="2" sideWeight="0.5008183" weight="0.24479167" />
+      <window_info anchor="bottom" id="Message" order="0" />
+      <window_info anchor="bottom" id="Find" order="1" sideWeight="0.58928573" weight="0.3289689" />
+      <window_info active="true" anchor="bottom" id="Run" order="2" sideWeight="0.6599702" visible="true" weight="0.40752864" />
+      <window_info anchor="bottom" id="Debug" order="3" weight="0.4222586" />
+      <window_info anchor="bottom" id="Cvs" order="4" weight="0.25" />
+      <window_info anchor="bottom" id="Inspection" order="5" weight="0.4" />
+      <window_info anchor="bottom" id="TODO" order="6" sideWeight="0.49925596" weight="0.3289689" />
+      <window_info anchor="bottom" id="Version Control" order="7" />
+      <window_info anchor="bottom" id="Terminal" order="8" sideWeight="0.49330357" weight="0.39770868" />
+      <window_info anchor="bottom" id="Event Log" order="9" sideWeight="0.34002978" side_tool="true" weight="0.5499182" />
+      <window_info anchor="bottom" id="Python Console" order="10" sideWeight="0.76116073" weight="0.3289689" />
+      <window_info anchor="right" id="Commander" internal_type="SLIDING" order="0" type="SLIDING" weight="0.4" />
+      <window_info anchor="right" id="Ant Build" order="1" weight="0.25" />
+      <window_info anchor="right" content_ui="combo" id="Hierarchy" order="2" weight="0.25" />
+    </layout-to-restore>
+  </component>
+  <component name="XDebuggerManager">
+    <breakpoint-manager>
+      <breakpoints>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ml-agents-envs/mlagents/envs/brain.py</url>
+          <line>36</line>
+          <option name="timeStamp" value="3" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/gym-unity/gym_unity/envs/NewdqnMethod.py</url>
+          <line>148</line>
+          <option name="timeStamp" value="6" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/gym-unity/gym_unity/envs/NewdqnMethod.py</url>
+          <line>19</line>
+          <option name="timeStamp" value="7" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/gym-unity/gym_unity/envs/NewdqnMethod.py</url>
+          <line>119</line>
+          <option name="timeStamp" value="8" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/gym-unity/gym_unity/envs/DqnMethod.py</url>
+          <line>123</line>
+          <option name="timeStamp" value="9" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$USER_HOME$/AppData/Local/conda/conda/envs/ml-agents/Lib/site-packages/gym_unity/envs/unity_env.py</url>
+          <line>238</line>
+          <option name="timeStamp" value="10" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ml-agents/mlagents/trainers/trainer_controller.py</url>
+          <line>244</line>
+          <option name="timeStamp" value="12" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ml-agents/mlagents/trainers/trainer.py</url>
+          <line>116</line>
+          <option name="timeStamp" value="13" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$PROJECT_DIR$/ml-agents/mlagents/trainers/ppo/trainer.py</url>
+          <line>167</line>
+          <option name="timeStamp" value="14" />
+        </line-breakpoint>
+        <line-breakpoint enabled="true" suspend="THREAD" type="python-line">
+          <url>file://$USER_HOME$/AppData/Local/conda/conda/envs/ml-agents/Lib/site-packages/gym_unity/envs/unity_env.py</url>
+          <line>77</line>
+          <option name="timeStamp" value="15" />
+        </line-breakpoint>
+      </breakpoints>
+    </breakpoint-manager>
+  </component>
+  <component name="editorHistoryManager">
+    <entry file="file://$PROJECT_DIR$/../pycharmfiles/test/venv/Lib/site-packages/mlagents/envs/environment.py" />
+    <entry file="file://$PROJECT_DIR$/gym-unity/gym_unity/envs/FileForpython.py" />
+    <entry file="file://$PROJECT_DIR$/gym-unity/gym_unity/envs/0eat.txt" />
+    <entry file="file://$PROJECT_DIR$/gym-unity/README.md" />
+    <entry file="file://$PROJECT_DIR$/gym-unity/gym_unity/envs/DqnMethod.py" />
+    <entry file="file://$PROJECT_DIR$/../MaterialofFinalYearProject/P20-Self-Driving-Car/Self_Driving_Car/ai.py" />
+    <entry file="file://$PROJECT_DIR$/../MaterialofFinalYearProject/P20-Self-Driving-Car/Self_Driving_Car/map.py" />
+    <entry file="file://$PROJECT_DIR$/../pycharmfiles/test/venv/Lib/site-packages/tensorflow/python/keras/saving/hdf5_format.py" />
+    <entry file="file://$PROJECT_DIR$/../pycharmfiles/test/venv/Lib/site-packages/h5py/_hl/group.py" />
+    <entry file="file://$PROJECT_DIR$/../pycharmfiles/test/venv/Lib/site-packages/tensorflow/python/keras/engine/network.py" />
+    <entry file="file://$PROJECT_DIR$/gym-unity/gym_unity/envs/F1DQN.py" />
+    <entry file="file://$PROJECT_DIR$/gym-unity/gym_unity/envs/MergeDQN.py" />
+    <entry file="file://$PROJECT_DIR$/gym-unity/gym_unity/envs/EditCode1.py" />
+    <entry file="file://$PROJECT_DIR$/gym-unity/gym_unity/envs/EditCode.py" />
+    <entry file="file://$PROJECT_DIR$/gym-unity/gym_unity/envs/RealDQN.py" />
+    <entry file="file://C:/ProgramData/Anaconda3/pkgs/tensorflow-base-1.13.1-mkl_py36hcaf7020_0/Lib/site-packages/tensorflow/contrib/tpu/python/tpu/keras_support.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="32538">
+          <caret line="1967" column="6" selection-start-line="1967" selection-start-column="6" selection-end-line="1967" selection-end-column="6" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/Lib/site-packages/PIL/Image.py" />
+    <entry file="file://C:/ProgramData/Anaconda3/Lib/site-packages/gym/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="153">
+          <caret line="9" selection-start-line="9" selection-end-line="9" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/Lib/site-packages/gym/spaces/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state>
+          <caret column="1" selection-start-column="1" selection-end-column="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/Lib/site-packages/numpy/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="137">
+          <caret line="139" column="4" selection-start-line="139" selection-start-column="4" selection-end-line="139" selection-end-column="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/Lib/site-packages/numpy/_distributor_init.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="147">
+          <caret line="33" selection-start-line="33" selection-end-line="33" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gym_unity/envs/RealDQN.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="24" selection-start-line="4" selection-start-column="24" selection-end-line="4" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/Lib/site-packages/gym/spaces/space.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="187">
+          <caret line="11" column="63" selection-start-line="11" selection-start-column="63" selection-end-line="11" selection-end-column="63" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/Lib/site-packages/gym/envs/tests/test_envs_semantics.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="136">
+          <caret line="15" column="36" selection-start-line="15" selection-start-column="36" selection-end-line="15" selection-end-column="36" />
+          <folding>
+            <element signature="e#105#144#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/Lib/site-packages/tensorflow/python/framework/dtypes.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="7871">
+          <caret line="469" column="26" selection-start-line="469" selection-start-column="26" selection-end-line="469" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/Lib/imp.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="5814">
+          <caret line="342" column="26" selection-start-line="342" selection-start-column="26" selection-end-line="342" selection-end-column="26" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/Lib/site-packages/tensorflow/python/pywrap_tensorflow.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="40" selection-start-line="40" selection-end-line="40" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/Lib/site-packages/tensorflow/python/pywrap_tensorflow_internal.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="578">
+          <caret line="34" selection-start-line="34" selection-end-line="34" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/Lib/site-packages/gym/utils/seeding.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" column="29" selection-start-line="4" selection-start-column="29" selection-end-line="4" selection-end-column="29" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mlagents/envs/base_unity_environment.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="51">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mlagents/envs/brain.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/../RunPythonScriptFromCS/DaysBetweenDates.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="3" selection-start-line="3" selection-end-line="5" />
+          <folding>
+            <element signature="e#0#29#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gym_unity/envs/TestDQN.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1904">
+          <caret line="114" column="16" selection-start-line="114" selection-start-column="16" selection-end-line="114" selection-end-column="16" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gym_unity/envs/EditCode.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="220">
+          <caret line="112" selection-start-line="112" selection-end-line="112" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gym_unity/envs/EditCode1.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gym_unity/envs/scores/score_logger.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="34">
+          <caret line="3" selection-start-line="3" selection-end-line="3" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/Lib/site-packages/grpc/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="374">
+          <caret line="22" selection-start-line="22" selection-end-line="22" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gym_unity/envs/__init__.py">
+      <provider selected="true" editor-type-id="text-editor" />
+    </entry>
+    <entry file="file://$PROJECT_DIR$/gym_unity/envs/unity_env.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="68">
+          <caret line="4" selection-start-line="4" selection-end-line="4" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mlagents/envs/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="17">
+          <caret line="1" selection-start-line="1" selection-end-line="1" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mlagents/envs/environment.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="833">
+          <caret line="66" selection-start-line="66" selection-end-line="66" />
+          <folding>
+            <element signature="e#0#13#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Downloads/Compressed/P20-Self-Driving-Car-20191004T080349Z-001/P20-Self-Driving-Car/Self_Driving_Car/ai.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="1598">
+          <caret line="102" column="30" selection-start-line="102" selection-start-column="30" selection-end-line="102" selection-end-column="30" />
+          <folding>
+            <element signature="e#54#72#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$USER_HOME$/Downloads/Compressed/P20-Self-Driving-Car-20191004T080349Z-001/P20-Self-Driving-Car/Self_Driving_Car/map.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="85">
+          <caret line="5" selection-start-line="5" selection-end-line="5" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/Lib/site-packages/matplotlib/colorbar.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="595">
+          <caret line="35" selection-start-line="35" selection-end-line="35" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/Lib/site-packages/matplotlib/contour.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="20" selection-start-line="20" selection-end-line="20" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/Lib/site-packages/matplotlib/text.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/Lib/site-packages/matplotlib/textpath.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="323">
+          <caret line="19" selection-start-line="19" selection-end-line="19" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/Lib/site-packages/matplotlib/mathtext.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="340">
+          <caret line="37" selection-start-line="37" selection-end-line="37" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mlagents/envs/communicator_objects/__init__.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="357">
+          <caret line="21" selection-start-line="21" selection-end-line="21" />
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://$PROJECT_DIR$/mlagents/envs/communicator_objects/unity_to_external_pb2_grpc.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="102">
+          <caret line="8" column="6" selection-start-line="8" selection-start-column="6" selection-end-line="8" selection-end-column="6" />
+          <folding>
+            <element signature="e#70#81#0" expanded="true" />
+          </folding>
+        </state>
+      </provider>
+    </entry>
+    <entry file="file://C:/ProgramData/Anaconda3/Lib/site-packages/matplotlib/pyplot.py">
+      <provider selected="true" editor-type-id="text-editor">
+        <state relative-caret-position="80">
+          <caret line="31" column="28" selection-start-line="31" selection-start-column="23" selection-end-line="31" selection-end-column="28" />
+        </state>
+      </provider>
+    </entry>
+  </component>
+</project>
