@@ -28,10 +28,22 @@ public class AgentMove : MonoBehaviour {
     bool healthinc;
     public float dist;
     public MarkoScript Marko;
-
-    public float Dopamin = 3;
-    public float OxetocinForMarko = 2;
-    public float OxetocinForLara = 2;
+    public GameObject Coin1;
+    public GameObject Coin2;
+    public GameObject Coin3;
+    public GameObject Coin4;
+    public GameObject AIDkit1;
+    public GameObject AIDkit2;
+    public float Cointime = 0;
+    public int Coinseconds;
+    Coin coin;
+    bool Attack= false;
+    BulletFire bulletfire;
+    
+    FirstAidKit Aidkit;
+    public int numberofCoins = 0;
+    
+   
     // Use this for initialization
     void Start()
     {
@@ -42,6 +54,9 @@ public class AgentMove : MonoBehaviour {
         healthinc = false;
         AnimZombie = GetComponent<Animator>();
         Food3.SetActive(false);
+        coin = new Coin();
+        bulletfire = new BulletFire();
+        Aidkit = new FirstAidKit();
     }
 
     // Update is called once per frame
@@ -65,17 +80,13 @@ public class AgentMove : MonoBehaviour {
         if (seconds == i)
         {
             Food = Food - 0.5f;
-            if (FoodFiller.size.x > 0)
-            {
-                this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
-            }
+            this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
             i += 2;
 
         }
         if (PrevFood - Food == 1)
         {
             Health -= 0.5f;
-
             this.HealthFiller.size = new Vector2(this.HealthFiller.size.x - 0.02f, this.HealthFiller.size.y);
             PrevFood = Food;
           }
@@ -88,10 +99,7 @@ public class AgentMove : MonoBehaviour {
         if (action == 5 && once == false && (dist1 < 1.42 || dist2 < 1.42 || dist3 < 1.42))
         {
             Food++;
-            if (FoodFiller.size.x <= 1)
-            {
-                this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
-            }
+            this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
             once = true;
             if(dist1 < 1.42)
             {
@@ -129,40 +137,48 @@ public class AgentMove : MonoBehaviour {
             healthinc = true;
         }
         //Run Agent Animation 
-        
-        if (action == 1 || action == 2 || action == 3 || action == 4)
+        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.A))
+        // if (action == 1 || action == 2 || action == 3 || action == 4)
         {
             AnimZombie.SetTrigger("run");
             
         }
 
         //Stop Agent Animation
-          // if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.A))
-        if(action == 0)
+       if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.A))
+       // if(action == 0)
         {
             AnimZombie.SetTrigger("idle");
         }
 
         //Attack Agent Animation
-        if (action == 7)
+        if (Input.GetKeyDown(KeyCode.A))
+       // if (action == 7)
         {
             AnimZombie.SetTrigger("attack");
             
         }
-        if (Marko.action == 7 && Vector3.Distance(this.transform.position, Marko.transform.position) < 3)
+        if (Vector3.Distance(this.transform.position, Marko.transform.position) < 3)
         {
-            Food--;
-            this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
+            Debug.Log("Marko calling");
+            AnimZombie.SetTrigger("attack");
+           // bulletfire.fire();
+            // bulletfire.check = true;
+
+            Marko.Food--;
+            Marko.FoodFiller.size = new Vector2(Marko.FoodFiller.size.x - 0.02f, Marko.FoodFiller.size.y);
 
         }
-        if (Lara.action == 7 && Vector3.Distance(this.transform.position, Lara.transform.position) < 3)
+        if (Vector3.Distance(this.transform.position, Lara.transform.position) < 3)
         {
-            Food--;
-            this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
+            AnimZombie.SetTrigger("attack");
+            //bulletfire.check = true;
+           // bulletfire.fire();
+            Lara.Food--;
+            Lara.FoodFiller.size = new Vector2(Lara.FoodFiller.size.x - 0.02f, Lara.FoodFiller.size.y);
         }
         float DistanceWithMarko = Vector3.Distance(this.transform.position, Marko.transform.position);
-        float DistanceWithLara = Vector3.Distance(this.transform.position, Lara.transform.position);
-        //sharing with marko
+
         if (action == 6 && DistanceWithMarko <= 1.42f)
         {
             this.Food -= 0.5f;
@@ -176,21 +192,24 @@ public class AgentMove : MonoBehaviour {
                 Marko.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
             }
         }
-        //sharing with lara
-        if (action == 6 && DistanceWithLara <= 1.42f)
+        Cointime = Cointime + Time.deltaTime;
+        Coinseconds = (int)Cointime;
+        bool Coincheck = coin.coin_production(Coinseconds,Hallo, Coin1, Coin2, Coin3, Coin4);
+        bool check = Aidkit.AIDKIT(Coinseconds, Hallo, AIDkit1, AIDkit2);
+        if(check == true)
         {
-            this.Food -= 0.5f;
-            Lara.Food += 0.5f;
-            Lara.OxetocinForHallo += 0.5f;
-            if (this.FoodFiller.size.x > 0)
-            {
-                this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
+            Health += 0.5f;
+            this.HealthFiller.size = new Vector2(this.HealthFiller.size.x + 0.004f, this.HealthFiller.size.y);
+        }
+        if (Coincheck == true)
+        {
+            ++numberofCoins;
+        }
 
-            }
-            if (Lara.FoodFiller.size.x <= 1)
-            {
-                Lara.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
-            }
+        if (Coinseconds == 5)
+        {
+            Cointime = 0;
+            Coinseconds = 0;
         }
 
     }
@@ -199,16 +218,16 @@ public class AgentMove : MonoBehaviour {
 
         //Move PLayer
 
-
-        //Move Player forward
-        if (action == 1)
+        if (Input.GetKey(KeyCode.RightArrow))
+            //Move Player forward
+      //  if (action == 1)
         {
             transform.GetComponent<Rigidbody>().rotation = Quaternion.LookRotation(Vector3.left);
             transform.position += Vector3.left * Time.deltaTime * speed;
         }
 
-        //if (Input.GetKey(KeyCode.UpArrow))
-        if (action == 2)
+        if (Input.GetKey(KeyCode.UpArrow))
+       // if (action == 2)
 
         {
             transform.GetComponent<Rigidbody>().rotation = Quaternion.LookRotation(Vector3.forward);
@@ -216,18 +235,18 @@ public class AgentMove : MonoBehaviour {
         }
 
         //Move Player Backward
-        //  if (Input.GetKey(KeyCode.DownArrow))
-        if (action == 3)
+         if (Input.GetKey(KeyCode.DownArrow))
+       // if (action == 3)
         {
             transform.GetComponent<Rigidbody>().rotation = Quaternion.LookRotation(Vector3.back);
             transform.position -= Vector3.forward * Time.deltaTime * speed;
         }
 
         //Move Player left
-        //if (Input.GetKey(KeyCode.LeftArrow))
+        if (Input.GetKey(KeyCode.LeftArrow))
         
         //Move Player Right
-        if (action == 4)
+        //if (action == 4)
         {
             transform.GetComponent<Rigidbody>().rotation = Quaternion.LookRotation(Vector3.right);
             transform.position -= Vector3.left * Time.deltaTime * speed;
