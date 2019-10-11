@@ -1,7 +1,9 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
+
 using UnityEngine;
+
 
 public class MarkoScript : MonoBehaviour
 {
@@ -28,6 +30,11 @@ public class MarkoScript : MonoBehaviour
     bool healthinc;
     public float dist;
     public AgentMove Hallo;
+    public float Dopamin = 1;
+    public float OxetocinForHallo = 2;
+    public float OxetocinForLara = 2;
+    public float Reward = 0;
+    ActionList l = new ActionList();
     // Use this for initialization
     void Start()
     {
@@ -54,10 +61,14 @@ public class MarkoScript : MonoBehaviour
             once = false;
 
         }
+        //after two seconds
         if (seconds == i)
         {
             Food = Food - 0.5f;
-            this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
+            if (FoodFiller.size.x > 0 )
+            {
+               this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
+            }
             i += 2;
 
         }
@@ -75,7 +86,11 @@ public class MarkoScript : MonoBehaviour
         if (action == 5 && once == false /*&& dist1 < 1.42*/)
         {
             Food++;
-            this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
+            this.Dopamin += 0.5f;
+            if (FoodFiller.size.x <= 1)
+            {
+                this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
+            }
             once = true;
 
 
@@ -118,14 +133,14 @@ public class MarkoScript : MonoBehaviour
             Food--;
             this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
         }
-
-
+        
         float DistanceWithMarko = Vector3.Distance(this.transform.position, Hallo.transform.position);
 
         if (action == 6 && DistanceWithMarko <= 1.42f)
         {
             this.Food -= 0.5f;
             Hallo.Food += 0.5f;
+            Hallo.OxetocinForMarko += 0.5f;
             if (this.FoodFiller.size.x > 0)
             {
                 this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
@@ -135,7 +150,44 @@ public class MarkoScript : MonoBehaviour
                 Hallo.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
             }
         }
+        float DistanceWithLara = Vector3.Distance(this.transform.position, Lara.transform.position);
 
+        if (action == 6 && DistanceWithLara <= 1.42f)
+        {
+            this.Food -= 0.5f;
+            Lara.Food += 0.5f;
+            Lara.OxetocinForMarko += 0.5f;
+            if (this.FoodFiller.size.x > 0)
+            {
+                this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
+
+            }
+            if (Lara.FoodFiller.size.x <= 1)
+            {
+                Lara.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
+            }
+        }
+        AddReward(Selfish());
+
+    }
+
+    public void AddReward(float Reward)
+    {
+        this.Reward += Reward;
+    }
+
+    public void SetReward(float Reward)
+    {
+        this.Reward = Reward;
+    }
+
+    public int Selfish()
+    {
+        if (this.Dopamin > 5 && Lara.OxetocinForMarko < 4 && Hallo.OxetocinForMarko < 4)
+        {
+            return 1;
+        }
+        return 0;
     }
     private void FixedUpdate()
     {

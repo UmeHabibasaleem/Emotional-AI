@@ -22,14 +22,18 @@ public class Lara : MonoBehaviour
     Random random = new Random();
     public SpriteRenderer FoodFiller;
     public SpriteRenderer HealthFiller;
-    public GameObject Hallo;
+    
     float PrevFood = 10;
     float Pfood;
     bool once = false;
     bool healthinc;
     public float dist;
     public MarkoScript Marko;
-    public AgentMove HalloCharacter;
+    public AgentMove Hallo;
+
+    public float Dopamin = 3;
+    public float OxetocinForHallo = 2;
+    public float OxetocinForMarko = 2;
     // Use this for initialization
     void Start()
     {
@@ -61,7 +65,10 @@ public class Lara : MonoBehaviour
         if (seconds == i)
         {
             Food = Food - 0.5f;
-            this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
+            if (FoodFiller.size.x > 0)
+            {
+                this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
+            }
             i += 2;
 
         }
@@ -80,7 +87,10 @@ public class Lara : MonoBehaviour
         if (action == 5 && once == false && (dist1 < 1.42 || dist2 < 1.42 || dist3 < 1.42))
         {
             Food++;
-            this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
+            if (FoodFiller.size.x <= 1)
+            {
+                this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
+            }
             once = true;
             if (dist1 < 1.42)
             {
@@ -137,7 +147,7 @@ public class Lara : MonoBehaviour
         {
             AnimZombie.SetTrigger("attack");
         }
-        if(HalloCharacter.action == 7 && Vector3.Distance(this.transform.position, HalloCharacter.transform.position) < 3)
+        if(Hallo.action == 7 && Vector3.Distance(this.transform.position, Hallo.transform.position) < 3)
         {
             Food--;
             this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
@@ -153,6 +163,23 @@ public class Lara : MonoBehaviour
         {
             this.Food -= 0.5f;
             Marko.Food += 0.5f;
+            Marko.OxetocinForLara += 0.5f;
+            if (this.FoodFiller.size.x > 0)
+            {
+                this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
+            }
+            if (Marko.FoodFiller.size.x <= 1)
+            {
+                Marko.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
+            }
+        }
+        float DistanceWithHallo = Vector3.Distance(this.transform.position, Hallo.transform.position);
+
+        if (action == 6 && DistanceWithHallo <= 1.42f)
+        {
+            this.Food -= 0.5f;
+            Hallo.Food += 0.5f;
+            Hallo.OxetocinForLara += 0.5f;
             if (this.FoodFiller.size.x > 0)
             {
                 this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);

@@ -2563,10 +2563,12 @@ MonoBehaviour:
   Food3: {fileID: 1185085739}
   FoodFiller: {fileID: 930397511}
   HealthFiller: {fileID: 1334489972}
-  Hallo: {fileID: 1038353067}
   dist: 0
   Marko: {fileID: 1110879088}
-  HalloCharacter: {fileID: 2139491918}
+  Hallo: {fileID: 2139491918}
+  Dopamin: 3
+  OxetocinForHallo: 2
+  OxetocinForMarko: 2
 --- !u!95 &231043911
 Animator:
   serializedVersion: 3
@@ -11493,6 +11495,9 @@ MonoBehaviour:
   Marko: {fileID: 206284176}
   dist: 0
   Hallo: {fileID: 2139491918}
+  Dopamin: 3
+  OxetocinForHallo: 2
+  OxetocinForLara: 2
 --- !u!95 &1110879089
 Animator:
   serializedVersion: 3
@@ -23226,6 +23231,9 @@ MonoBehaviour:
   Hallo: {fileID: 1038353067}
   dist: 0
   Marko: {fileID: 1110879088}
+  Dopamin: 3
+  OxetocinForMarko: 2
+  OxetocinForLara: 2
 --- !u!54 &2139491919
 Rigidbody:
   m_ObjectHideFlags: 0

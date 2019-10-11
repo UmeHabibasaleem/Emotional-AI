@@ -28,6 +28,10 @@ public class AgentMove : MonoBehaviour {
     bool healthinc;
     public float dist;
     public MarkoScript Marko;
+
+    public float Dopamin = 3;
+    public float OxetocinForMarko = 2;
+    public float OxetocinForLara = 2;
     // Use this for initialization
     void Start()
     {
@@ -61,13 +65,17 @@ public class AgentMove : MonoBehaviour {
         if (seconds == i)
         {
             Food = Food - 0.5f;
-            this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
+            if (FoodFiller.size.x > 0)
+            {
+                this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
+            }
             i += 2;
 
         }
         if (PrevFood - Food == 1)
         {
             Health -= 0.5f;
+
             this.HealthFiller.size = new Vector2(this.HealthFiller.size.x - 0.02f, this.HealthFiller.size.y);
             PrevFood = Food;
           }
@@ -80,7 +88,10 @@ public class AgentMove : MonoBehaviour {
         if (action == 5 && once == false && (dist1 < 1.42 || dist2 < 1.42 || dist3 < 1.42))
         {
             Food++;
-            this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
+            if (FoodFiller.size.x <= 1)
+            {
+                this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
+            }
             once = true;
             if(dist1 < 1.42)
             {
@@ -150,7 +161,8 @@ public class AgentMove : MonoBehaviour {
             this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
         }
         float DistanceWithMarko = Vector3.Distance(this.transform.position, Marko.transform.position);
-
+        float DistanceWithLara = Vector3.Distance(this.transform.position, Lara.transform.position);
+        //sharing with marko
         if (action == 6 && DistanceWithMarko <= 1.42f)
         {
             this.Food -= 0.5f;
@@ -162,6 +174,22 @@ public class AgentMove : MonoBehaviour {
             if (Marko.FoodFiller.size.x <= 1)
             {
                 Marko.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
+            }
+        }
+        //sharing with lara
+        if (action == 6 && DistanceWithLara <= 1.42f)
+        {
+            this.Food -= 0.5f;
+            Lara.Food += 0.5f;
+            Lara.OxetocinForHallo += 0.5f;
+            if (this.FoodFiller.size.x > 0)
+            {
+                this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
+
+            }
+            if (Lara.FoodFiller.size.x <= 1)
+            {
+                Lara.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
             }
         }
 
