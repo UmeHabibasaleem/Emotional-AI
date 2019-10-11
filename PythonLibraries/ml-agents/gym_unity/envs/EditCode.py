@@ -1,127 +1,145 @@
-# AI for Self Driving Car
-
-# Importing the libraries
-
-import numpy as np
 import random
-import os
+#import copy
+import warnings
+warnings.filterwarnings('ignore')
+#import gym
+import numpy as np
+import array
+from collections import deque
+'''import keras
+from keras.models import Sequential
+from keras.layers import Dense
+import tensorflow as tf
+from keras.optimizers import Adam'''
+#import tensorflow as tf
+#from gym.envs.tests.test_envs_semantics import episodes
+import keras
+from keras.models import Sequential
+from keras.optimizers import Adam
+#from tensorflow.python.keras.models import Sequential
+#from tensorflow.python.keras.optimizers import Adam
+#from tensorflow.python.keras._impl.keras.optimizers import Adam
+#from tensorflow.python.keras.layers import Dense
+from keras.layers import Dense
+#import h5py
 import sys
+#sys.path.insert(0, '/home/maida/Downloads/Thesis/Unity3D/uni/ml-agents/gym-unity')
+#from gym_unity.envs import UnityEnv
 
-import torch
-import torch.nn as nn
-import torch.nn.functional as F
-import torch.optim as optim
-import torch.autograd as autograd
-from torch.autograd import Variable
-date1 = sys.argv[1]
-date2 = sys.argv[2]
-date3 = sys.argv[3]
-date4 = sys.argv[4]
-date5 = sys.argv[5]
-date6 = sys.argv[6]
+#from scores.score_logger import ScoreLogger
+#ENV_NAME ='C:/HinaProgramm/testingFolder/Unity Environment'
+#print(ENV_NAME)
+GAMMA = 0.90
+LEARNING_RATE = 0.0001
 
-print("Argument 1 is " , date1)
-print("Argument 2 is " , date2)
-print("Argument 3 is " , date3)
-print("Argument 4 is " , date4)
-print("Argument 5 is " , date5)
-print("Argument 6 is " , date6)
+MEMORY_SIZE = 100000
+BATCH_SIZE = 32
 
-# Creating the architecture of the Neural Network
-
-class Network(nn.Module):
-
-    def __init__(self, input_size, nb_action):
-        super(Network, self).__init__()
-        self.input_size = input_size
-        self.nb_action = nb_action
-        self.fc1 = nn.Linear(input_size, 30)
-        self.fc2 = nn.Linear(30, nb_action)
-
-    def forward(self, state):
-        x = F.relu(self.fc1(state))
-        q_values = self.fc2(x)
-        return q_values
+EXPLORATION_MAX = 1.0
+EXPLORATION_MIN = 0.01
+EXPLORATION_DECAY = 0.995
 
 
-# Implementing Experience Replay
+class DQNSolver:
 
-class ReplayMemory(object):
+    def __init__(self, observation_space, action_space):
+        self.exploration_rate = EXPLORATION_MAX
 
-    def __init__(self, capacity):
-        self.capacity = capacity
-    def push(self, event):
-        self.memory = []
+        self.action_space = action_space
+        self.memory = deque(maxlen=MEMORY_SIZE)
+        self.model = Sequential()
+        self.model.add(Dense(128, input_dim=observation_space, activation="relu"))
+        self.model.add(Dense(128, activation="relu"))
+        #self.model.add(Dense(64, activation = "relu"))
+        self.model.add(Dense(self.action_space, activation="linear"))
+        self.model.compile(loss="mse",optimizer=Adam(lr=LEARNING_RATE))
 
-        self.memory.append(event)
-        if len(self.memory) > self.capacity:
-            del self.memory[0]
+    def set_model(self , name):
+        newmodel = keras.models.load_model(name)
+        self.model = newmodel
 
-    def sample(self, batch_size):
-        samples = zip(*random.sample(self.memory, batch_size))
-        return map(lambda x: Variable(torch.cat(x, 0)), samples)
+    def remember(self, state, action, reward, next_state, done):
+        self.memory.append((state, action, reward, next_state, done))
+
+    def act(self, state):
+        if np.random.rand() < self.exploration_rate:
+            return random.randrange(self.action_space)
+        q_values = self.model.predict(state)
+        return np.argmax(q_values[0])
+
+    def experience_replay(self):
+        if len(self.memory) < BATCH_SIZE:
+            return
+        batch = random.sample(self.memory, BATCH_SIZE)
+        for state, action, reward, state_next, terminal in batch:
+            q_update = reward
+            if not terminal:
+                q_update = (reward + GAMMA * np.amax(self.model.predict(state_next)[0]))
+            q_values = self.model.predict(state)
+            q_values[0][action] = q_update
+            self.model.fit(state, q_values, verbose=0)
+        self.exploration_rate *= EXPLORATION_DECAY
+        self.exploration_rate = max(EXPLORATION_MIN, self.exploration_rate)
+
+    def save(self, name):
+        self.model.save(name)
 
 
-# Implementing Deep Q Learning
 
-class Dqn():
+def cartpole():
+    #env = UnityEnv(environment_filename=ENV_NAME, worker_id=1, use_visual=False, multiagent = True)
+    #score_logger = ScoreLogger(ENV_NAME)
+    agents_brain = []
+    agents_action = []
+    #pathname = "C:/HinaProgramm/testingFolder/Unity Environment"
+    #num_agents = env.number_agents
+    #print("Number of agents in enviroment : " , num_agents)
+    observation_space= int(sys.argv[1])
+    #print("____________Observation_space______________")
+    #print("__________Action Space________________")
+    action_space = int(sys.argv[2])
+        #agents_brain.append(DQNSolver(observation_space, action_space))
+    #print ("Length of BrainList:    ",len(agents_brain))
+    #print(action_space)
+    dqn_solver = DQNSolver(observation_space, action_space)
+    for x in range (2):
+        agents_brain.append(DQNSolver(observation_space, action_space))
+    run = 0
+    observ = array.array('f' , [float(sys.argv[3]) , float(sys.argv[4]) , float(sys.argv[5]) , float(sys.argv[6]) , float(sys.argv[7]) , float(sys.argv[8])])
+    state = observ
+    '''for x in state:
+        print("observation is ", x)'''
+    # print("______INITIAL______")
+    # print(state)
+    #initialstate = state
+    # print("*****************************initial state for unity  envirmonet**************")
+    # print(initialstate)
+    numagents = 2
+    run = 0
+    for x in range(2):
+        run += 1
+        step = 0
+        #print("_____Run _______ :", run)
+        for y in range(1):
+            #print("************Number of agents *********")
+            #print(env.number_agents)
+            step += 1
+            #env.render()
+            agents_action =[1] * numagents
+            #print(state[0])
+            #print("*******************Length of state******************")
+            #print(len(state))
+            for x in range(2):
+                agents_action[x] = agents_brain[x].act(state)
 
-    def __init__(self, input_size, nb_action, gamma):
-        self.gamma = gamma
-        self.reward_window = []
-        self.model = Network(input_size, nb_action)
-        self.memory = ReplayMemory(100000)
-        self.optimizer = optim.Adam(self.model.parameters(), lr=0.001)
-        self.last_state = torch.Tensor(input_size).unsqueeze(0)
-        self.last_action = 0
-        self.last_reward = 0
 
-    def select_action(self, state):
-        probs = F.softmax(self.model(Variable(state, volatile=True)) * 100)  # T=100
-        # action = probs.multinomial()
-        action = probs.multinomial(1)
-        return action.data[0, 0]
+            #sharecount += agents_action.count(5)
+            #eatcount += agents_action.count(6)
+            print(agents_action)
+            #return agents_action
 
-    def learn(self, batch_state, batch_next_state, batch_reward, batch_action):
-        outputs = self.model(batch_state).gather(1, batch_action.unsqueeze(1)).squeeze(1)
-        next_outputs = self.model(batch_next_state).detach().max(1)[0]
-        target = self.gamma * next_outputs + batch_reward
-        td_loss = F.smooth_l1_loss(outputs, target)
-        self.optimizer.zero_grad()
-        # td_loss.backward(retain_variables = True)
-        td_loss.background()
-        self.optimizer.step()
 
-    def update(self, reward, new_signal):
-        new_state = torch.Tensor(new_signal).float().unsqueeze(0)
-        self.memory.push(
-            (self.last_state, new_state, torch.LongTensor([int(self.last_action)]), torch.Tensor([self.last_reward])))
-        action = self.select_action(new_state)
-        if len(self.memory.memory) > 100:
-            batch_state, batch_next_state, batch_action, batch_reward = self.memory.sample(100)
-            self.learn(batch_state, batch_next_state, batch_reward, batch_action)
-        self.last_action = action
-        self.last_state = new_state
-        self.last_reward = reward
-        self.reward_window.append(reward)
-        if len(self.reward_window) > 1000:
-            del self.reward_window[0]
-        return action
 
-    def score(self):
-        return sum(self.reward_window) / (len(self.reward_window) + 1.)
 
-    def save(self):
-        torch.save({'state_dict': self.model.state_dict(),
-                    'optimizer': self.optimizer.state_dict(),
-                    }, 'last_brain.pth')
-
-    def load(self):
-        if os.path.isfile('last_brain.pth'):
-            print("=> loading checkpoint... ")
-            checkpoint = torch.load('last_brain.pth')
-            self.model.load_state_dict(checkpoint['state_dict'])
-            self.optimizer.load_state_dict(checkpoint['optimizer'])
-            print("done !")
-        else:
-            print("no checkpoint found...")
+if __name__ == "__main__":
+    cartpole()
