@@ -23,6 +23,15 @@ public class MarkoScript : MonoBehaviour
     Random random = new Random();
     public SpriteRenderer FoodFiller;
     public SpriteRenderer HealthFiller;
+
+
+    public float prevOxeHallo;
+    public float prevOxeLara;
+    public float OxetocinInHalloForMarko;
+    public float OxetocinInLaraForMarko;
+
+
+
     public GameObject Marko;
     float PrevFood = 10;
     float Pfood;
@@ -38,6 +47,9 @@ public class MarkoScript : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        OxetocinInHalloForMarko = 0;
+        OxetocinInLaraForMarko = 0;
+
         Timepassed = 0;
         Food = 10;
         Health = 15;
@@ -65,9 +77,9 @@ public class MarkoScript : MonoBehaviour
         if (seconds == i)
         {
             Food = Food - 0.5f;
-            if (FoodFiller.size.x > 0 )
+            if (FoodFiller.size.x > 0)
             {
-               this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
+                this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
             }
             i += 2;
 
@@ -126,21 +138,22 @@ public class MarkoScript : MonoBehaviour
         {
             Food--;
             this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
-            
+
         }
         if (Lara.action == 7 && Vector3.Distance(this.transform.position, Lara.transform.position) < 3)
         {
             Food--;
             this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
         }
-        
-        float DistanceWithMarko = Vector3.Distance(this.transform.position, Hallo.transform.position);
 
-        if (action == 6 && DistanceWithMarko <= 1.42f)
+        float DistanceWithHallo = Vector3.Distance(this.transform.position, Hallo.transform.position);
+
+        if (action == 6 && DistanceWithHallo <= 1.42f)
         {
             this.Food -= 0.5f;
             Hallo.Food += 0.5f;
             Hallo.OxetocinForMarko += 0.5f;
+            OxetocinInHalloForMarko += 0.5f;
             if (this.FoodFiller.size.x > 0)
             {
                 this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
@@ -157,6 +170,9 @@ public class MarkoScript : MonoBehaviour
             this.Food -= 0.5f;
             Lara.Food += 0.5f;
             Lara.OxetocinForMarko += 0.5f;
+
+            OxetocinInLaraForMarko += 0.5f;
+
             if (this.FoodFiller.size.x > 0)
             {
                 this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
@@ -170,6 +186,7 @@ public class MarkoScript : MonoBehaviour
         AddReward(Selfish());
 
     }
+
 
     public void AddReward(float Reward)
     {
