@@ -6,7 +6,7 @@ using UnityEngine;
 
 public class PythonCommunication : MonoBehaviour
 {
-    public  List<float> vectorObservation;
+ /*   public  List<float> vectorObservation;
     private const int NoAction = 0;  // do nothing!
     private const int Up = 1;
     private const int Down = 2;
@@ -22,7 +22,7 @@ public class PythonCommunication : MonoBehaviour
         Update();
 
         
-    }*/
+    }
     void Start()
     {
 
@@ -117,6 +117,6 @@ public class PythonCommunication : MonoBehaviour
         Console.WriteLine();
         Console.WriteLine("Results:");
         Console.WriteLine(results);
-    }
+    } */
 }
 

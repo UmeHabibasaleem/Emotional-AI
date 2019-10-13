@@ -44,17 +44,34 @@ public class MarkoScript : MonoBehaviour
     public float OxetocinForLara = 2;
     public float Reward = 0;
     ActionList l = new ActionList();
+
+    //For Coin Colection
+    public GameObject Coin1;
+    public GameObject Coin2;
+    public GameObject Coin3;
+    public GameObject Coin4;
+    public int numberofCoins = 0;
+    Coin coin;
+    public float Cointime = 0;
+    public int Coinseconds;
+
+    //For health kit collection
+    public GameObject AIDkit1;
+    public GameObject AIDkit2;
+    public int healthKit = 0;
+    FirstAidKit Aidkit;
     // Use this for initialization
     void Start()
     {
         OxetocinInHalloForMarko = 0;
         OxetocinInLaraForMarko = 0;
-
+        coin = new Coin();
         Timepassed = 0;
         Food = 10;
         Health = 15;
         healthinc = false;
         AnimZombie = GetComponent<Animator>();
+        Aidkit = new FirstAidKit();
     }
 
     // Update is called once per frame
@@ -185,6 +202,25 @@ public class MarkoScript : MonoBehaviour
         }
         AddReward(Selfish());
 
+        //Coin collection
+
+        Cointime = Cointime + Time.deltaTime;
+        Coinseconds = (int)Cointime;
+        numberofCoins = numberofCoins + coin.coin_production(Coinseconds, Marko, Coin1, Coin2, Coin3, Coin4);
+
+        //Health Kit Collection
+        healthKit = Aidkit.AIDKIT(Coinseconds, Marko, AIDkit1, AIDkit2);
+        if (healthKit > 0)
+        {
+            Health += 0.5f;
+            this.HealthFiller.size = new Vector2(this.HealthFiller.size.x + 0.02f, this.HealthFiller.size.y);
+            healthKit = 0;
+        }
+        if (Coinseconds == 5)
+        {
+            Cointime = 0;
+            Coinseconds = 0;
+        }
     }
 
 

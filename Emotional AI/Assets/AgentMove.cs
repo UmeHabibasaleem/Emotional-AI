@@ -8,7 +8,7 @@ public class AgentMove : MonoBehaviour {
     public float Timepassed;
     public float Timecheck;
     public Lara Lara;
-    float speed = 5.0f;
+    float speed = 3.0f;
     public float Food;
     public float Health;
     public int action;
@@ -32,6 +32,7 @@ public class AgentMove : MonoBehaviour {
     public GameObject Coin2;
     public GameObject Coin3;
     public GameObject Coin4;
+    bool Check = false;
     public GameObject AIDkit1;
     public GameObject AIDkit2;
     public float Cointime = 0;
@@ -42,8 +43,11 @@ public class AgentMove : MonoBehaviour {
     
     FirstAidKit Aidkit;
     public int numberofCoins = 0;
-    
-   
+    public float Dopamin = 3;
+    public float OxetocinForMarko = 2;
+    public float OxetocinForLara = 2;
+    public int healthKit = 0;
+
     // Use this for initialization
     void Start()
     {
@@ -57,13 +61,14 @@ public class AgentMove : MonoBehaviour {
         coin = new Coin();
         bulletfire = new BulletFire();
         Aidkit = new FirstAidKit();
+
     }
 
     // Update is called once per frame
     void Update()
     {
 
-        Vector3 targetPos = AnimZombie.transform.position;
+        Vector3 targetPos = Hallo.transform.position;
         targetPos.y = 0;
         Timepassed += Time.deltaTime;
         Timecheck += Time.deltaTime;
@@ -89,25 +94,26 @@ public class AgentMove : MonoBehaviour {
             Health -= 0.5f;
             this.HealthFiller.size = new Vector2(this.HealthFiller.size.x - 0.02f, this.HealthFiller.size.y);
             PrevFood = Food;
-          }
-        
+        }
 
+        float CoinDist = Vector3.Distance(Hallo.transform.position, Coin1.transform.position);
         float dist1 = Vector3.Distance(Hallo.transform.position, Food1.transform.position);
         float dist2 = Vector3.Distance(Hallo.transform.position, Food2.transform.position);
         float dist3 = Vector3.Distance(Hallo.transform.position, Food3.transform.position);
+
 
         if (action == 5 && once == false && (dist1 < 1.42 || dist2 < 1.42 || dist3 < 1.42))
         {
             Food++;
             this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
             once = true;
-            if(dist1 < 1.42)
+            if (dist1 < 1.42)
             {
                 Food1.SetActive(false);
                 Timecheck = 0;
 
             }
-            else if( dist2 < 1.42f)
+            else if (dist2 < 1.42f)
             {
                 Food2.SetActive(false);
                 Timecheck = 0;
@@ -122,15 +128,15 @@ public class AgentMove : MonoBehaviour {
 
 
         }
-        if((int)Timecheck == 5)
+        if ((int)Timecheck == 5)
         {
             Food1.SetActive(true);
             Food2.SetActive(true);
             Food3.SetActive(true);
 
         }
-       
-        if(Food - PrevFood == 1 && healthinc == false)
+
+        if (Food - PrevFood == 1 && healthinc == false)
         {
             Health += 0.5f;
             this.HealthFiller.size = new Vector2(this.HealthFiller.size.x + 0.02f, this.HealthFiller.size.y);
@@ -141,28 +147,28 @@ public class AgentMove : MonoBehaviour {
         // if (action == 1 || action == 2 || action == 3 || action == 4)
         {
             AnimZombie.SetTrigger("run");
-            
+
         }
 
         //Stop Agent Animation
-       if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.A))
-       // if(action == 0)
+        if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.A))
+        // if(action == 0)
         {
             AnimZombie.SetTrigger("idle");
         }
 
         //Attack Agent Animation
         if (Input.GetKeyDown(KeyCode.A))
-       // if (action == 7)
+        // if (action == 7)
         {
             AnimZombie.SetTrigger("attack");
-            
+
         }
         if (Vector3.Distance(this.transform.position, Marko.transform.position) < 3)
         {
-            Debug.Log("Marko calling");
+            //Debug.Log("Marko calling");
             AnimZombie.SetTrigger("attack");
-           // bulletfire.fire();
+            // bulletfire.fire();
             // bulletfire.check = true;
 
             Marko.Food--;
@@ -173,7 +179,7 @@ public class AgentMove : MonoBehaviour {
         {
             AnimZombie.SetTrigger("attack");
             //bulletfire.check = true;
-           // bulletfire.fire();
+            // bulletfire.fire();
             Lara.Food--;
             Lara.FoodFiller.size = new Vector2(Lara.FoodFiller.size.x - 0.02f, Lara.FoodFiller.size.y);
         }
@@ -183,9 +189,9 @@ public class AgentMove : MonoBehaviour {
         {
             this.Food -= 0.5f;
             Marko.Food += 0.5f;
-            if(this.FoodFiller.size.x > 0)
-            { 
-            this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
+            if (this.FoodFiller.size.x > 0)
+            {
+                this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
             }
             if (Marko.FoodFiller.size.x <= 1)
             {
@@ -194,22 +200,18 @@ public class AgentMove : MonoBehaviour {
         }
         Cointime = Cointime + Time.deltaTime;
         Coinseconds = (int)Cointime;
-        bool Coincheck = coin.coin_production(Coinseconds,Hallo, Coin1, Coin2, Coin3, Coin4);
-        bool check = Aidkit.AIDKIT(Coinseconds, Hallo, AIDkit1, AIDkit2);
-        if(check == true)
+        numberofCoins = numberofCoins + coin.coin_production(Coinseconds, Hallo, Coin1, Coin2, Coin3, Coin4);
+        healthKit = Aidkit.AIDKIT(Coinseconds, Hallo, AIDkit1, AIDkit2);
+        if (healthKit > 0)
         {
             Health += 0.5f;
-            this.HealthFiller.size = new Vector2(this.HealthFiller.size.x + 0.004f, this.HealthFiller.size.y);
+            this.HealthFiller.size = new Vector2(this.HealthFiller.size.x + 0.02f, this.HealthFiller.size.y);
+            healthKit = 0;
         }
-        if (Coincheck == true)
+        if (Coinseconds == 10)
         {
-            ++numberofCoins;
-        }
-
-        if (Coinseconds == 5)
-        {
-            Cointime = 0;
-            Coinseconds = 0;
+           Cointime = 0;
+           Coinseconds = 0;
         }
 
     }

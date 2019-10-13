@@ -6,7 +6,7 @@ using System.Linq;
 using UnityEngine;
 public class PythonCommunicator : MonoBehaviour
 {
-    // Start is called before the first frame update
+  /*  // Start is called before the first frame update
     public List<float> vectorObservation;
     private const int NoAction = 0;  // do nothing!
     private const int Up = 1;
@@ -25,7 +25,7 @@ public class PythonCommunicator : MonoBehaviour
          Update();
 
 
-     }*/
+     }
     void Start()
     {
 
@@ -157,5 +157,5 @@ public class PythonCommunicator : MonoBehaviour
         Console.WriteLine(results);
         return results;
 
-    }
+    } */
 }

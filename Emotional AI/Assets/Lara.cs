@@ -34,11 +34,28 @@ public class Lara : MonoBehaviour
     public float dist;
     public MarkoScript Marko;
     public AgentMove Hallo;
-
+    public GameObject LaraModel;
     public float Dopamin;
     public float OxetocinForMarko;
     public float OxetocinInHalloForLara;
     public float OxetocinInMarkoForLara;
+
+    //For Coin Collection
+    public GameObject Coin1;
+    public GameObject Coin2;
+    public GameObject Coin3;
+    public GameObject Coin4;
+    public int numberofCoins = 0;
+    Coin coin;
+    public float Cointime = 0;
+    public int Coinseconds;
+
+    //For health kit collection
+    public GameObject AIDkit1;
+    public GameObject AIDkit2;
+    public int healthKit = 0;
+    FirstAidKit Aidkit;
+
     // Use this for initialization
     void Start()
     {
@@ -53,6 +70,8 @@ public class Lara : MonoBehaviour
         Dopamin = 0;
         OxetocinInHalloForLara = 0;
         OxetocinInMarkoForLara = 0;
+        coin = new Coin();
+        Aidkit = new FirstAidKit();
     }
     public void AddReward(float Reward)
     {
@@ -229,6 +248,25 @@ public class Lara : MonoBehaviour
         if (Health <= 0)
         {
             SetReward(-1f);
+        }
+
+        //Coin collection
+        Cointime = Cointime + Time.deltaTime;
+        Coinseconds = (int)Cointime;
+        numberofCoins = numberofCoins + coin.coin_production(Coinseconds, LaraModel, Coin1, Coin2, Coin3, Coin4);
+
+        //Health Kit Collection
+        healthKit = Aidkit.AIDKIT(Coinseconds, LaraModel, AIDkit1, AIDkit2);
+        if (healthKit > 0)
+        {
+            Health += 0.5f;
+            this.HealthFiller.size = new Vector2(this.HealthFiller.size.x + 0.02f, this.HealthFiller.size.y);
+            healthKit = 0;
+        }
+        if (Coinseconds == 5)
+        {
+            Cointime = 0;
+            Coinseconds = 0;
         }
     }
     private void FixedUpdate()
