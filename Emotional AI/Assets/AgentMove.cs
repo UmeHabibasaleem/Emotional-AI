@@ -39,7 +39,7 @@ public class AgentMove : MonoBehaviour {
     public int Coinseconds;
     Coin coin;
     bool Attack= false;
-    BulletFire bulletfire;
+   
     
     FirstAidKit Aidkit;
     public int numberofCoins = 0;
@@ -47,6 +47,18 @@ public class AgentMove : MonoBehaviour {
     public float OxetocinForMarko = 2;
     public float OxetocinForLara = 2;
     public int healthKit = 0;
+
+    //Bullet fire
+    public GameObject Player;
+    public GameObject AttackParticle;
+    public GameObject ParticlesContainer;
+    BulletFire bulletfire;
+
+    private void Awake()
+    {
+        this.AttackParticle.SetActive(false);
+    }
+
 
     // Use this for initialization
     void Start()
@@ -162,7 +174,7 @@ public class AgentMove : MonoBehaviour {
         // if (action == 7)
         {
             AnimZombie.SetTrigger("attack");
-
+            bulletfire.ShootBullet(AttackParticle, Player, ParticlesContainer);
         }
         if (Vector3.Distance(this.transform.position, Marko.transform.position) < 3)
         {
@@ -179,7 +191,7 @@ public class AgentMove : MonoBehaviour {
         {
             AnimZombie.SetTrigger("attack");
             //bulletfire.check = true;
-            // bulletfire.fire();
+            
             Lara.Food--;
             Lara.FoodFiller.size = new Vector2(Lara.FoodFiller.size.x - 0.02f, Lara.FoodFiller.size.y);
         }

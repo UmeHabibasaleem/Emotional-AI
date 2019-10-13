@@ -60,6 +60,19 @@ public class MarkoScript : MonoBehaviour
     public GameObject AIDkit2;
     public int healthKit = 0;
     FirstAidKit Aidkit;
+
+    //Bullet fire
+    public GameObject Player;
+    public GameObject AttackParticle;
+    public GameObject ParticlesContainer;
+    BulletFire bulletfire;
+
+
+    private void Awake()
+    {
+        this.AttackParticle.SetActive(false);
+    }
+
     // Use this for initialization
     void Start()
     {
@@ -72,6 +85,7 @@ public class MarkoScript : MonoBehaviour
         healthinc = false;
         AnimZombie = GetComponent<Animator>();
         Aidkit = new FirstAidKit();
+        bulletfire = new BulletFire();
     }
 
     // Update is called once per frame
@@ -147,8 +161,9 @@ public class MarkoScript : MonoBehaviour
 
         //Attack Agent Animation
         if (action == 7)
-        {
+       {
             AnimZombie.SetTrigger("attack");
+            bulletfire.ShootBullet(AttackParticle, Player, ParticlesContainer);
         }
 
         if (Hallo.action == 7 && Vector3.Distance(this.transform.position, Hallo.transform.position) < 3)
