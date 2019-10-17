@@ -22,7 +22,7 @@ public class AgentMove : MonoBehaviour {
     public SpriteRenderer FoodFiller;
     public SpriteRenderer HealthFiller;
     public GameObject Hallo;
-    float PrevFood = 10;
+    float PrevFood = 15;
     float Pfood;
     bool once = false;
     bool healthinc;
@@ -54,6 +54,8 @@ public class AgentMove : MonoBehaviour {
     public GameObject ParticlesContainer;
     BulletFire bulletfire;
 
+    Vector3 AgentStartingPos;
+    
     private void Awake()
     {
         this.AttackParticle.SetActive(false);
@@ -63,6 +65,7 @@ public class AgentMove : MonoBehaviour {
     // Use this for initialization
     void Start()
     {
+        
         Timepassed = 0;
         Timecheck = 0;
         Food = 10;
@@ -73,13 +76,24 @@ public class AgentMove : MonoBehaviour {
         coin = new Coin();
         bulletfire = new BulletFire();
         Aidkit = new FirstAidKit();
-
+        AgentStartingPos = this.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
-
+       if (DieAgent.HalloLive == true)
+        {
+            AgentReset();
+        }
+            
+       // DeadTime
+       if (this.Food <= 0)
+       {
+            DieAgent.HalloDied = true;
+            Player.active = false;
+       }
+        
         Vector3 targetPos = Hallo.transform.position;
         targetPos.y = 0;
         Timepassed += Time.deltaTime;
@@ -266,5 +280,26 @@ public class AgentMove : MonoBehaviour {
             transform.position -= Vector3.left * Time.deltaTime * speed;
         }
     }
-
+    void AgentReset()
+    {
+        Timepassed = 0;
+        Timecheck = 0;
+        Food = 10;
+        Health = 15;
+        healthinc = false;
+        Food3.SetActive(false);
+        numberofCoins = 0;
+        Dopamin = 3;
+        OxetocinForMarko = 2;
+        OxetocinForLara = 2;
+        healthKit = 0;
+        seconds = 0;
+        i = 0;
+        count = 0;
+        Cointime = 0;
+        PrevFood = 15;
+        once = false;
+        DieAgent.HalloLive = false;
+        this.transform.position = AgentStartingPos;
+    }
 }

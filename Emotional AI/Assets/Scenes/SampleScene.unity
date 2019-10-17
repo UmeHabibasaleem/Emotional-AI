@@ -5414,8 +5414,8 @@ Transform:
   m_LocalPosition: {x: -3.19, y: 0, z: -7.8693256}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
-  - {fileID: 231043909}
   - {fileID: 1573471762}
+  - {fileID: 231043909}
   - {fileID: 544902943}
   - {fileID: 816201664}
   - {fileID: 914102165}
@@ -7097,7 +7097,7 @@ Transform:
   - {fileID: 1779657707}
   - {fileID: 441691187}
   m_Father: {fileID: 31804786}
-  m_RootOrder: 0
+  m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!114 &231043910
 MonoBehaviour:
@@ -46181,6 +46181,49 @@ MeshFilter:
   m_PrefabInternal: {fileID: 0}
   m_GameObject: {fileID: 1315336769}
   m_Mesh: {fileID: 10202, guid: 0000000000000000e000000000000000, type: 0}
+--- !u!1 &1321631123
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1321631124}
+  - component: {fileID: 1321631125}
+  m_Layer: 0
+  m_Name: AgentDie
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!4 &1321631124
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1321631123}
+  m_LocalRotation: {x: -0, y: 0.95876783, z: -0, w: 0.28419062}
+  m_LocalPosition: {x: 1.2, y: -0.04, z: 1.33}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 17
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!114 &1321631125
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1321631123}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 4e3abe3e07bac264f9bfdba7c588ca95, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  Hallo: {fileID: 1933964378}
+  Lara: {fileID: 231043908}
+  Marko: {fileID: 1110879083}
 --- !u!1 &1323061674
 GameObject:
   m_ObjectHideFlags: 0
@@ -58533,7 +58576,7 @@ Transform:
   m_Children:
   - {fileID: 190783578}
   m_Father: {fileID: 31804786}
-  m_RootOrder: 1
+  m_RootOrder: 0
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1001 &1575308265
 Prefab:

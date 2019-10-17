@@ -66,7 +66,7 @@ public class MarkoScript : MonoBehaviour
     public GameObject AttackParticle;
     public GameObject ParticlesContainer;
     BulletFire bulletfire;
-
+    Vector3 AgentStartingPos;
 
     private void Awake()
     {
@@ -86,11 +86,23 @@ public class MarkoScript : MonoBehaviour
         AnimZombie = GetComponent<Animator>();
         Aidkit = new FirstAidKit();
         bulletfire = new BulletFire();
+        AgentStartingPos = this.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
+        if (DieAgent.MarkoLive == true)
+        {
+            AgentReset();
+        }
+
+        // DeadTime
+        if (this.Food <= 0)
+        {
+            DieAgent.MarkoDied = true;
+            Player.active = false;
+        }
         Vector3 targetPos = AnimZombie.transform.position;
         Timepassed += Time.deltaTime;
         seconds = (int)Timepassed;
@@ -296,5 +308,29 @@ public class MarkoScript : MonoBehaviour
             transform.position -= Vector3.left * Time.deltaTime * speed;
         }
     }
-
+    void AgentReset()
+    {
+        Timepassed = 0;
+        Food = 10;
+        Health = 15;
+        healthinc = false;
+        Food3.SetActive(false);
+        numberofCoins = 0;
+        Dopamin = 1;
+        OxetocinForHallo = 2;
+        OxetocinForLara = 2;
+        Reward = 0;
+        healthKit = 0;
+        seconds = 0;
+        i = 0;
+        count = 0;
+        Cointime = 0;
+        PrevFood = 15;
+        once = false;
+        OxetocinInHalloForMarko = 0;
+        OxetocinInLaraForMarko = 0;
+        DieAgent.MarkoLive = false;
+        //this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
+        this.transform.position = AgentStartingPos;
+    }
 }

@@ -68,6 +68,7 @@
     <Compile Include="Assets\BulletFire.cs" />
     <Compile Include="Assets\CameraFacing.cs" />
     <Compile Include="Assets\Coin.cs" />
+    <Compile Include="Assets\DieAgent.cs" />
     <Compile Include="Assets\Lara.cs" />
     <Compile Include="Assets\MarkoScript.cs" />
     <Compile Include="Assets\PythonCommunication.cs" />

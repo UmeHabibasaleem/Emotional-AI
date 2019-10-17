@@ -62,6 +62,9 @@ public class Lara : MonoBehaviour
     public GameObject ParticlesContainer;
     BulletFire bulletfire;
 
+    Vector3 AgentStartingPos;
+
+
     private void Awake()
     {
         this.AttackParticle.SetActive(false);
@@ -85,6 +88,7 @@ public class Lara : MonoBehaviour
         coin = new Coin();
         Aidkit = new FirstAidKit();
         bulletfire = new BulletFire();
+        AgentStartingPos = this.transform.position;
     }
     public void AddReward(float Reward)
     {
@@ -99,6 +103,17 @@ public class Lara : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        if (DieAgent.LaraLive == true)
+        {
+            AgentReset();
+        }
+
+        // DeadTime
+        if (this.Food <= 0)
+        {
+            DieAgent.LaraDied = true;
+            Player.active = false;
+        }
         Vector3 targetPos = AnimZombie.transform.position;
         Timepassed += Time.deltaTime;
         Timecheck += Time.deltaTime;
@@ -322,5 +337,26 @@ public class Lara : MonoBehaviour
             transform.position -= Vector3.left * Time.deltaTime * speed;
         }
     }
-
+    void AgentReset()
+    {
+        Timepassed = 0;
+        Timecheck = 0;
+        Food = 10;
+        Health = 15;
+        healthinc = false;
+        Food3.SetActive(false);
+        numberofCoins = 0;
+        Dopamin = 0;
+        OxetocinInHalloForLara = 0;
+        OxetocinInMarkoForLara = 0;
+        healthKit = 0;
+        seconds = 0;
+        i = 0;
+        count = 0;
+        Cointime = 0;
+        PrevFood = 15;
+        once = false;
+        DieAgent.LaraLive = false;
+        this.transform.position = AgentStartingPos;
+    }
 }
