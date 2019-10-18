@@ -196,6 +196,10 @@ public class MarkoScript : MonoBehaviour
         }
         if (Hallo.action == 7 && Vector3.Distance(this.transform.position, Hallo.transform.position) < 3 && AttackedByHallo)
         {
+            if (OxetocinForHallo > 0)
+            {
+                OxetocinForHallo -= 0.5f;
+            }
             Food--;
             AnimZombie.SetTrigger("attack");
             bulletfire.ShootBullet(AttackParticle, Player, ParticlesContainer);
@@ -210,6 +214,10 @@ public class MarkoScript : MonoBehaviour
         }
         if (Lara.action == 7 && Vector3.Distance(this.transform.position, Lara.transform.position) < 3 && AttackedByLara)
         {
+            if (OxetocinForLara > 0)
+            {
+                OxetocinForLara -= 0.5f;
+            }
             Food--;
             AnimZombie.SetTrigger("attack");
             bulletfire.ShootBullet(AttackParticle, Player, ParticlesContainer);

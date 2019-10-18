@@ -223,6 +223,11 @@ public class Lara : MonoBehaviour
         }
         if (Hallo.action == 7 && Vector3.Distance(this.transform.position, Hallo.transform.position) < 3 && AttackedByHallo)
         {
+            if(OxetocinForHallo > 0)
+            {
+                OxetocinForHallo -= 0.5f;
+            }
+           
             AnimZombie.SetTrigger("attack");
             bulletfire.ShootBullet(AttackParticle, Player, ParticlesContainer);
             Food--;
@@ -235,6 +240,10 @@ public class Lara : MonoBehaviour
         }
         if (Marko.action == 7 && Vector3.Distance(this.transform.position, Marko.transform.position) < 3 && AttackedByMarko)
         {
+            if (OxetocinForMarko > 0)
+            {
+                OxetocinForMarko -= 0.5f;
+            }
             AnimZombie.SetTrigger("attack");
             bulletfire.ShootBullet(AttackParticle, Player, ParticlesContainer);
 
