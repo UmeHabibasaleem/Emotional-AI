@@ -194,7 +194,7 @@ public class MarkoScript : MonoBehaviour
         {
             AttackedByHallo = true;
         }
-        if (Hallo.action == 7 && Vector3.Distance(this.transform.position, Hallo.transform.position) < 3 && AttackedByHallo)
+        if (Hallo.action == 7 && Vector3.Distance(this.transform.position, Hallo.transform.position) < 3 && AttackedByHallo && Hallo.OxetocinForMarko < 3)
         {
             if (OxetocinForHallo > 0)
             {
@@ -212,7 +212,7 @@ public class MarkoScript : MonoBehaviour
         {
             AttackedByLara = true;
         }
-        if (Lara.action == 7 && Vector3.Distance(this.transform.position, Lara.transform.position) < 3 && AttackedByLara)
+        if (Lara.action == 7 && Vector3.Distance(this.transform.position, Lara.transform.position) < 3 && AttackedByLara && Lara.OxetocinForMarko < 1)
         {
             if (OxetocinForLara > 0)
             {
@@ -231,7 +231,7 @@ public class MarkoScript : MonoBehaviour
 
         //Share action
         //Sharing with Hallo
-        if (action == 6 && DistanceWithHallo <= 1.42f)
+        if (action == 6 && DistanceWithHallo <= 1.42f && OxetocinForHallo > 4)
         {
             this.Food -= 0.5f;
             Hallo.Food += 0.5f;
@@ -254,7 +254,7 @@ public class MarkoScript : MonoBehaviour
         float DistanceWithLara = Vector3.Distance(this.transform.position, Lara.transform.position);
 
         //Sharing with Lara (Selfless)
-        if (action == 6 && DistanceWithLara <= 1.42f)
+        if (action == 6 && DistanceWithLara <= 1.42f && OxetocinForLara > 4)
         {
             this.Food -= 0.5f;
             Lara.Food += 0.5f;
