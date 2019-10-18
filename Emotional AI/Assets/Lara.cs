@@ -221,7 +221,7 @@ public class Lara : MonoBehaviour
         {
             AttackedByHallo = true;
         }
-        if (Hallo.action == 7 && Vector3.Distance(this.transform.position, Hallo.transform.position) < 3 && AttackedByHallo)
+        if (Hallo.action == 7 && Vector3.Distance(this.transform.position, Hallo.transform.position) < 3 && AttackedByHallo && Hallo.OxetocinForLara < 3)
         {
             if(OxetocinForHallo > 0)
             {
@@ -238,7 +238,7 @@ public class Lara : MonoBehaviour
         {
             AttackedByMarko = true;
         }
-        if (Marko.action == 7 && Vector3.Distance(this.transform.position, Marko.transform.position) < 3 && AttackedByMarko)
+        if (Marko.action == 7 && Vector3.Distance(this.transform.position, Marko.transform.position) < 3 && AttackedByMarko && Marko.OxetocinForLara < 3)
         {
             if (OxetocinForMarko > 0)
             {
@@ -254,7 +254,7 @@ public class Lara : MonoBehaviour
         float DistanceWithMarko = Vector3.Distance(this.transform.position, Marko.transform.position);
 
         //Sharing with Marko
-        if (action == 6 && DistanceWithMarko <= 1.42f)
+        if (action == 6 && DistanceWithMarko <= 1.42f && OxetocinForMarko >= 2)
         {
             this.Food -= 0.5f;
             Marko.Food += 0.5f;
@@ -275,7 +275,7 @@ public class Lara : MonoBehaviour
         }
         float DistanceWithHallo = Vector3.Distance(this.transform.position, Hallo.transform.position);
         //Sharing with Lara
-        if (action == 6 && DistanceWithHallo <= 1.42f)
+        if (action == 6 && DistanceWithHallo <= 1.42f && OxetocinForHallo >= 2)
         {
             this.Food -= 0.5f;
              Hallo.Food += 0.5f;
