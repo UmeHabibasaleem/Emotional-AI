@@ -10,7 +10,7 @@ public class Lara : MonoBehaviour
     public float Timecheck;
     public float prevOxeHallo;
     public float prevOxeMarko;
-
+    public int id = 1;
     float speed = 5.0f;
     public float Food;
     public float Health;
@@ -39,7 +39,7 @@ public class Lara : MonoBehaviour
     public float OxetocinForMarko;
     public float OxetocinInHalloForLara;
     public float OxetocinInMarkoForLara;
-
+  
 
 
     bool AttackedByHallo = false;
@@ -60,7 +60,7 @@ public class Lara : MonoBehaviour
     public GameObject AIDkit2;
     public int healthKit = 0;
     FirstAidKit Aidkit;
-
+    public PythonCommunicator py;
     //Bullet fire
     public GameObject Player;
     public GameObject AttackParticle;
@@ -97,6 +97,7 @@ public class Lara : MonoBehaviour
         Aidkit = new FirstAidKit();
         bulletfire = new BulletFire();
         AgentStartingPos = this.transform.position;
+        py = new PythonCommunicator();
     }
     public void AddReward(float Reward)
     {
@@ -111,6 +112,7 @@ public class Lara : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        py.Communication(id, LaraModel, MarkoModel, HalloModel, Marko, Hallo, this, this.Dopamin, this.OxetocinForHallo, this.OxetocinForMarko);
         if (DieAgent.LaraLive == true)
         {
             AgentReset();
@@ -126,11 +128,11 @@ public class Lara : MonoBehaviour
         Timepassed += Time.deltaTime;
         Timecheck += Time.deltaTime;
         seconds = (int)Timepassed;
-
+        action = py.AgentAction;
         if (seconds == count)
         {
             count += 1;
-            action = Random.Range(0, 7);
+            
             healthinc = false;
             once = false;
 
@@ -331,6 +333,7 @@ public class Lara : MonoBehaviour
             Cointime = 0;
             Coinseconds = 0;
         }
+        py.nextState(id, LaraModel, MarkoModel, HalloModel, Marko, Hallo, this, this.Dopamin, this.OxetocinForHallo, this.OxetocinForMarko, this.Reward);
     }
     private void FixedUpdate()
     {

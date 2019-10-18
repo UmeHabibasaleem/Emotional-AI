@@ -12,9 +12,11 @@ public class MarkoScript : MonoBehaviour
     public Lara Lara;
     float speed = 5.0f;
     public float Food;
+    public int Agentid = 2;
     public float Health;
     public int action;
     int seconds = 0;
+    public PythonCommunicator py;
     int i = 0;
     int count = 0;
     public GameObject Food1;
@@ -68,6 +70,7 @@ public class MarkoScript : MonoBehaviour
     public GameObject Player;
     public GameObject AttackParticle;
     public GameObject ParticlesContainer;
+    public PythonCommunicator py;
     BulletFire bulletfire;
     Vector3 AgentStartingPos;
 
@@ -90,13 +93,14 @@ public class MarkoScript : MonoBehaviour
         AnimZombie = GetComponent<Animator>();
         Aidkit = new FirstAidKit();
         bulletfire = new BulletFire();
-
+        py = new PythonCommunicator();
         AgentStartingPos = this.transform.position;
     }
 
     // Update is called once per frame
     void Update()
     {
+        py.Communication(Agentid, LaraModel, Marko, HalloModel, this, Hallo, Lara, this.Dopamin, this.OxetocinForHallo, this.OxetocinForLara);
         if (DieAgent.MarkoLive == true)
         {
             AgentReset();
@@ -111,12 +115,10 @@ public class MarkoScript : MonoBehaviour
         Vector3 targetPos = AnimZombie.transform.position;
         Timepassed += Time.deltaTime;
         seconds = (int)Timepassed;
-
+        action = py.AgentAction;
         if (seconds == count)
         {
             count += 1;
-
-            action = Random.Range(0, 7);
             healthinc = false;
             once = false;
 
@@ -296,7 +298,9 @@ public class MarkoScript : MonoBehaviour
             Cointime = 0;
             Coinseconds = 0;
         }
-    }
+        py.nextState(Agentid, LaraModel, Marko, HalloModel, this, Hallo, Lara, this.Dopamin, this.OxetocinForHallo, this.OxetocinForLara, this.Reward);
+    
+}
 
 
     public void AddReward(float Reward)
