@@ -62,7 +62,8 @@ public class MarkoScript : MonoBehaviour
     public GameObject AIDkit2;
     public int healthKit = 0;
     FirstAidKit Aidkit;
-
+    bool AttackedByHallo = false;
+    bool AttackedByLara = false;
     //Bullet fire
     public GameObject Player;
     public GameObject AttackParticle;
@@ -189,22 +190,30 @@ public class MarkoScript : MonoBehaviour
         }
 
         //Attack Agent Animation
-        if (action == 7)
-       {
-            AnimZombie.SetTrigger("attack");
-            bulletfire.ShootBullet(AttackParticle, Player, ParticlesContainer);
+        if(Hallo.RLForMarko >= Hallo.RLForLara)
+        {
+            AttackedByHallo = true;
         }
-
-        if (Hallo.action == 7 && Vector3.Distance(this.transform.position, Hallo.transform.position) < 3)
+        if (Hallo.action == 7 && Vector3.Distance(this.transform.position, Hallo.transform.position) < 3 && AttackedByHallo)
         {
             Food--;
+            AnimZombie.SetTrigger("attack");
+            bulletfire.ShootBullet(AttackParticle, Player, ParticlesContainer);
+
             //Increment in Rivalary level for Hallo
             this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
             RLForHallo += 0.5f;
         }
-        if (Lara.action == 7 && Vector3.Distance(this.transform.position, Lara.transform.position) < 3)
+        if (Lara.RLForMarko >= Lara.RLForHallo)
+        {
+            AttackedByLara = true;
+        }
+        if (Lara.action == 7 && Vector3.Distance(this.transform.position, Lara.transform.position) < 3 && AttackedByLara)
         {
             Food--;
+            AnimZombie.SetTrigger("attack");
+            bulletfire.ShootBullet(AttackParticle, Player, ParticlesContainer);
+
             //Increment in Rivalary level for Lara
             RLForLara += 0.5f;
             this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
@@ -364,4 +373,6 @@ public class MarkoScript : MonoBehaviour
         //this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
         this.transform.position = AgentStartingPos;
     }
+
+    
 }

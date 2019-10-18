@@ -40,6 +40,11 @@ public class Lara : MonoBehaviour
     public float OxetocinInHalloForLara;
     public float OxetocinInMarkoForLara;
 
+
+
+    bool AttackedByHallo = false;
+    bool AttackedByMarko = false;
+
     //For Coin Collection
     public GameObject Coin1;
     public GameObject Coin2;
@@ -211,24 +216,34 @@ public class Lara : MonoBehaviour
         }
 
         //Attack Agent Animation
-        if (action == 7)
+      
+        if (Hallo.RLForLara > Hallo.RLForMarko)
+        {
+            AttackedByHallo = true;
+        }
+        if (Hallo.action == 7 && Vector3.Distance(this.transform.position, Hallo.transform.position) < 3 && AttackedByHallo)
         {
             AnimZombie.SetTrigger("attack");
             bulletfire.ShootBullet(AttackParticle, Player, ParticlesContainer);
-        }
-        if (Hallo.action == 7 && Vector3.Distance(this.transform.position, Hallo.transform.position) < 3)
-        {
             Food--;
             this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
             RLForHallo += 0.5f;
         }
-        if (Marko.action == 7 && Vector3.Distance(this.transform.position, Marko.transform.position) < 3)
+        if(Marko.RLForLara > Marko.RLForHallo)
         {
+            AttackedByMarko = true;
+        }
+        if (Marko.action == 7 && Vector3.Distance(this.transform.position, Marko.transform.position) < 3 && AttackedByMarko)
+        {
+            AnimZombie.SetTrigger("attack");
+            bulletfire.ShootBullet(AttackParticle, Player, ParticlesContainer);
+
             Food--;
             this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
             RLForMarko += 0.5f;
         }
         float DistanceWithMarko = Vector3.Distance(this.transform.position, Marko.transform.position);
+
         //Sharing with Marko
         if (action == 6 && DistanceWithMarko <= 1.42f)
         {

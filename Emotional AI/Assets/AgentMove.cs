@@ -48,6 +48,9 @@ public class AgentMove : MonoBehaviour {
     public float OxetocinForLara = 2;
     public int healthKit = 0;
 
+
+    bool AttackedByMarko = false;
+    bool AttackedByLara = false;
     //Bullet fire
     public GameObject Player;
     public GameObject AttackParticle;
