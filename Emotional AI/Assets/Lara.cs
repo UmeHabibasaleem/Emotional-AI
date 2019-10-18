@@ -64,6 +64,9 @@ public class Lara : MonoBehaviour
 
     Vector3 AgentStartingPos;
 
+    //Rivalary Levels
+    public float RLForMarko;
+    public float RLForHallo;
 
     private void Awake()
     {
@@ -217,22 +220,26 @@ public class Lara : MonoBehaviour
         {
             Food--;
             this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
+            RLForHallo += 0.5f;
         }
         if (Marko.action == 7 && Vector3.Distance(this.transform.position, Marko.transform.position) < 3)
         {
             Food--;
             this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
+            RLForMarko += 0.5f;
         }
         float DistanceWithMarko = Vector3.Distance(this.transform.position, Marko.transform.position);
-
+        //Sharing with Marko
         if (action == 6 && DistanceWithMarko <= 1.42f)
         {
             this.Food -= 0.5f;
             Marko.Food += 0.5f;
             OxetocinInMarkoForLara += 0.5f;
             AddReward(0.25f);
-
-
+            if (Marko.RLForLara > 0)
+            {
+                Marko.RLForLara -= 0.5f;
+            }
             if (this.FoodFiller.size.x > 0)
             {
                 this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
@@ -243,14 +250,17 @@ public class Lara : MonoBehaviour
             }
         }
         float DistanceWithHallo = Vector3.Distance(this.transform.position, Hallo.transform.position);
-
+        //Sharing with Lara
         if (action == 6 && DistanceWithHallo <= 1.42f)
         {
             this.Food -= 0.5f;
-            Hallo.Food += 0.5f;
+             Hallo.Food += 0.5f;
             OxetocinInHalloForLara += 0.5f;
             AddReward(0.25f);
-
+            if (Hallo.RLForLara > 0)
+            {
+                Hallo.RLForLara -= 0.5f;
+            }
             if (this.FoodFiller.size.x > 0)
             {
                 this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);

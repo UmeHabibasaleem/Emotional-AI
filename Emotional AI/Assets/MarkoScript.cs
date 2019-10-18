@@ -30,8 +30,8 @@ public class MarkoScript : MonoBehaviour
     public float OxetocinInHalloForMarko;
     public float OxetocinInLaraForMarko;
 
-
-
+    //For dopamin increment in selfish agent
+    float PrevFoodForDopamin = 0;
     public GameObject Marko;
     float PrevFood = 10;
     float Pfood;
@@ -54,7 +54,9 @@ public class MarkoScript : MonoBehaviour
     Coin coin;
     public float Cointime = 0;
     public int Coinseconds;
-
+    //Rivalary Levels
+    public float RLForLara;
+    public float RLForHallo;
     //For health kit collection
     public GameObject AIDkit1;
     public GameObject AIDkit2;
@@ -81,11 +83,13 @@ public class MarkoScript : MonoBehaviour
         coin = new Coin();
         Timepassed = 0;
         Food = 10;
+        PrevFoodForDopamin = 10;
         Health = 15;
         healthinc = false;
         AnimZombie = GetComponent<Animator>();
         Aidkit = new FirstAidKit();
         bulletfire = new BulletFire();
+
         AgentStartingPos = this.transform.position;
     }
 
@@ -130,19 +134,28 @@ public class MarkoScript : MonoBehaviour
         if (PrevFood - Food == 1)
         {
             Health -= 0.5f;
-            this.HealthFiller.size = new Vector2(this.HealthFiller.size.x - 0.02f, this.HealthFiller.size.y);
+            if (HealthFiller.size.x > 0)
+            {
+                this.HealthFiller.size = new Vector2(this.HealthFiller.size.x - 0.02f, this.HealthFiller.size.y);
+            }
             PrevFood = Food;
         }
 
 
+        //To increase Dopamine level according to food level increment
+        if (Food - PrevFoodForDopamin >= 5)
+        {
+            this.Dopamin++;
+            PrevFoodForDopamin = Food;
+        }
         float dist1 = Vector3.Distance(Marko.transform.position, Food1.transform.position);
         dist = dist1;
 
+        //Eat action
         if (action == 5 && once == false /*&& dist1 < 1.42*/)
         {
             Food++;
-            this.Dopamin += 0.5f;
-            if (FoodFiller.size.x <= 1)
+            if (FoodFiller.size.x < 1)
             {
                 this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
             }
@@ -150,10 +163,14 @@ public class MarkoScript : MonoBehaviour
 
 
         }
+
         if (Food - PrevFood == 1 && healthinc == false)
         {
             Health++;
-            this.HealthFiller.size = new Vector2(this.HealthFiller.size.x + 0.02f, this.HealthFiller.size.y);
+            if (HealthFiller.size.x < 1)
+            {
+                this.HealthFiller.size = new Vector2(this.HealthFiller.size.x + 0.02f, this.HealthFiller.size.y);
+            }
             healthinc = true;
         }
         //Run Agent Animation 
@@ -181,48 +198,62 @@ public class MarkoScript : MonoBehaviour
         if (Hallo.action == 7 && Vector3.Distance(this.transform.position, Hallo.transform.position) < 3)
         {
             Food--;
+            //Increment in Rivalary level for Hallo
             this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
-
+            RLForHallo += 0.5f;
         }
         if (Lara.action == 7 && Vector3.Distance(this.transform.position, Lara.transform.position) < 3)
         {
             Food--;
+            //Increment in Rivalary level for Lara
+            RLForLara += 0.5f;
             this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
         }
 
         float DistanceWithHallo = Vector3.Distance(this.transform.position, Hallo.transform.position);
 
+        //Share action
+        //Sharing with Hallo
         if (action == 6 && DistanceWithHallo <= 1.42f)
         {
             this.Food -= 0.5f;
             Hallo.Food += 0.5f;
+            //Decrement in Rivalary Level
+            if (Hallo.RLForMarko > 0)
+            {
+                Hallo.RLForMarko -= 0.5f;
+            }
             Hallo.OxetocinForMarko += 0.5f;
             OxetocinInHalloForMarko += 0.5f;
             if (this.FoodFiller.size.x > 0)
             {
                 this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
             }
-            if (Hallo.FoodFiller.size.x <= 1)
+            if (Hallo.FoodFiller.size.x < 1)
             {
                 Hallo.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
             }
         }
         float DistanceWithLara = Vector3.Distance(this.transform.position, Lara.transform.position);
 
+        //Sharing with Lara (Selfless)
         if (action == 6 && DistanceWithLara <= 1.42f)
         {
             this.Food -= 0.5f;
             Lara.Food += 0.5f;
             Lara.OxetocinForMarko += 0.5f;
-
             OxetocinInLaraForMarko += 0.5f;
+            if (Lara.RLForMarko > 0)
+            {
+                Lara.RLForMarko -= 0.5f;
+            }
 
             if (this.FoodFiller.size.x > 0)
             {
                 this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
 
             }
-            if (Lara.FoodFiller.size.x <= 1)
+            if (Lara.FoodFiller.size.x < 1)
             {
                 Lara.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
             }

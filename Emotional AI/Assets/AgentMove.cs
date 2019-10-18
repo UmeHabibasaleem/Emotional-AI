@@ -55,7 +55,12 @@ public class AgentMove : MonoBehaviour {
     BulletFire bulletfire;
 
     Vector3 AgentStartingPos;
-    
+
+    //Rivalary Levels
+    public float RLForMarko;
+    public float RLForLara;
+
+
     private void Awake()
     {
         this.AttackParticle.SetActive(false);
@@ -111,14 +116,20 @@ public class AgentMove : MonoBehaviour {
         if (seconds == i)
         {
             Food = Food - 0.5f;
-            this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
+            if (FoodFiller.size.x > 0)
+            {
+                this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
+            }
             i += 2;
 
         }
         if (PrevFood - Food == 1)
         {
             Health -= 0.5f;
-            this.HealthFiller.size = new Vector2(this.HealthFiller.size.x - 0.02f, this.HealthFiller.size.y);
+            if (HealthFiller.size.x > 0)
+            {
+                this.HealthFiller.size = new Vector2(this.HealthFiller.size.x - 0.02f, this.HealthFiller.size.y);
+            }
             PrevFood = Food;
         }
 
