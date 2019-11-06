@@ -11,8 +11,9 @@ public class MarkoScript : MonoBehaviour
     public float Timepassed;
     public Lara Lara;
     float speed = 5.0f;
-    public float Food;
     public int Agentid = 2;
+    public float Food;
+    public float PrevFood = 10;
     public float Health;
     public int action;
     int seconds = 0;
@@ -35,7 +36,7 @@ public class MarkoScript : MonoBehaviour
     //For dopamin increment in selfish agent
     float PrevFoodForDopamin = 0;
     public GameObject Marko;
-    float PrevFood = 10;
+    
     float Pfood;
     bool once = false;
     bool healthinc;
@@ -70,13 +71,18 @@ public class MarkoScript : MonoBehaviour
     public GameObject Player;
     public GameObject AttackParticle;
     public GameObject ParticlesContainer;
-    public PythonCommunicator py;
+    //public PythonCommunicator py;
+
+    float FoodZerotimeSec = 0;
+    int FoodZerotime = 0;
     BulletFire bulletfire;
+
     Vector3 AgentStartingPos;
 
     private void Awake()
     {
         this.AttackParticle.SetActive(false);
+        Physics.IgnoreLayerCollision(11, 11);
     }
 
     // Use this for initialization
@@ -88,7 +94,7 @@ public class MarkoScript : MonoBehaviour
         Timepassed = 0;
         Food = 10;
         PrevFoodForDopamin = 10;
-        Health = 15;
+        Health = 10;
         healthinc = false;
         AnimZombie = GetComponent<Animator>();
         Aidkit = new FirstAidKit();
@@ -100,14 +106,23 @@ public class MarkoScript : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        py.Communication(Agentid, LaraModel, Marko, HalloModel, this, Hallo, Lara, this.Dopamin, this.OxetocinForHallo, this.OxetocinForLara);
+        // py.Communication(Agentid, LaraModel, Marko, HalloModel, this, Hallo, Lara, this.Dopamin, this.OxetocinForHallo, this.OxetocinForLara);
+        if (Food == 0)
+        {
+            FoodZerotimeSec += Time.deltaTime;
+            FoodZerotime = (int)FoodZerotimeSec;
+            if (FoodZerotime == 3)
+            {
+                Health = 0;
+            }
+        }
         if (DieAgent.MarkoLive == true)
         {
             AgentReset();
         }
 
         // DeadTime
-        if (this.Food <= 0)
+        if (this.Health <= 0)
         {
             DieAgent.MarkoDied = true;
             Player.active = false;
@@ -115,7 +130,7 @@ public class MarkoScript : MonoBehaviour
         Vector3 targetPos = AnimZombie.transform.position;
         Timepassed += Time.deltaTime;
         seconds = (int)Timepassed;
-        action = py.AgentAction;
+       // action = py.AgentAction;
         if (seconds == count)
         {
             count += 1;
@@ -126,10 +141,13 @@ public class MarkoScript : MonoBehaviour
         //after two seconds
         if (seconds == i)
         {
-            Food = Food - 0.5f;
-            if (FoodFiller.size.x > 0)
+            if (Food > 0)
             {
-                this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
+                Food = Food - 0.5f;
+                if (FoodFiller.size.x > 0)
+                {
+                    this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
+                }
             }
             i += 2;
 
@@ -202,7 +220,11 @@ public class MarkoScript : MonoBehaviour
             {
                 OxetocinForHallo -= 0.5f;
             }
-            Food--;
+            if (Food > 0)
+            {
+                Food--;
+            }
+            transform.LookAt(Hallo.transform.position);
             AnimZombie.SetTrigger("attack");
             bulletfire.ShootBullet(AttackParticle, Player, ParticlesContainer);
 
@@ -220,7 +242,11 @@ public class MarkoScript : MonoBehaviour
             {
                 OxetocinForLara -= 0.5f;
             }
-            Food--;
+            if (Food > 0)
+            {
+                Food--;
+            }
+            transform.LookAt(Lara.transform.position);
             AnimZombie.SetTrigger("attack");
             bulletfire.ShootBullet(AttackParticle, Player, ParticlesContainer);
 
@@ -235,8 +261,11 @@ public class MarkoScript : MonoBehaviour
         //Sharing with Hallo
         if (action == 6 && DistanceWithHallo <= 1.42f && OxetocinForHallo > 4)
         {
-            this.Food -= 0.5f;
-            Hallo.Food += 0.5f;
+            if (Food > 0)
+            {
+                this.Food -= 0.5f;
+                Hallo.Food += 0.5f;
+            }
             //Decrement in Rivalary Level
             if (Hallo.RLForMarko > 0)
             {
@@ -258,10 +287,13 @@ public class MarkoScript : MonoBehaviour
         //Sharing with Lara (Selfless)
         if (action == 6 && DistanceWithLara <= 1.42f && OxetocinForLara > 4)
         {
-            this.Food -= 0.5f;
-            Lara.Food += 0.5f;
-            Lara.OxetocinForMarko += 0.5f;
-            OxetocinInLaraForMarko += 0.5f;
+            if (Food > 0)
+            {
+                this.Food -= 0.5f;
+                Lara.Food += 0.5f;
+
+            }
+          
             if (Lara.RLForMarko > 0)
             {
                 Lara.RLForMarko -= 0.5f;
@@ -298,7 +330,7 @@ public class MarkoScript : MonoBehaviour
             Cointime = 0;
             Coinseconds = 0;
         }
-        py.nextState(Agentid, LaraModel, Marko, HalloModel, this, Hallo, Lara, this.Dopamin, this.OxetocinForHallo, this.OxetocinForLara, this.Reward);
+      //  py.nextState(Agentid, LaraModel, Marko, HalloModel, this, Hallo, Lara, this.Dopamin, this.OxetocinForHallo, this.OxetocinForLara, this.Reward);
     
 }
 
@@ -325,9 +357,7 @@ public class MarkoScript : MonoBehaviour
     {
 
         //Move PLayer
-
-
-        //Move Player forward
+       //Move Player forward
         if (action == 1)
         {
             transform.GetComponent<Rigidbody>().rotation = Quaternion.LookRotation(Vector3.left);
@@ -364,7 +394,7 @@ public class MarkoScript : MonoBehaviour
     {
         Timepassed = 0;
         Food = 10;
-        Health = 15;
+        Health = 10;
         healthinc = false;
         Food3.SetActive(false);
         numberofCoins = 0;
@@ -377,13 +407,15 @@ public class MarkoScript : MonoBehaviour
         i = 0;
         count = 0;
         Cointime = 0;
-        PrevFood = 15;
+        PrevFood = 10;
         once = false;
         OxetocinInHalloForMarko = 0;
         OxetocinInLaraForMarko = 0;
         DieAgent.MarkoLive = false;
         //this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
         this.transform.position = AgentStartingPos;
+        FoodZerotimeSec = 0;
+        FoodZerotime = 0;
     }
 
     

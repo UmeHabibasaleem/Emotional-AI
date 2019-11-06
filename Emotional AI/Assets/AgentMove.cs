@@ -22,7 +22,7 @@ public class AgentMove : MonoBehaviour {
     public SpriteRenderer FoodFiller;
     public SpriteRenderer HealthFiller;
     public GameObject Hallo;
-    float PrevFood = 15;
+    float PrevFood = 10;
     float Pfood;
     bool once = false;
     bool healthinc;
@@ -57,6 +57,8 @@ public class AgentMove : MonoBehaviour {
     public GameObject ParticlesContainer;
     BulletFire bulletfire;
 
+    float FoodZerotimeSec = 0;
+    int FoodZerotime = 0;
     Vector3 AgentStartingPos;
 
     //Rivalary Levels
@@ -67,6 +69,7 @@ public class AgentMove : MonoBehaviour {
     private void Awake()
     {
         this.AttackParticle.SetActive(false);
+        Physics.IgnoreLayerCollision(11, 11);
     }
 
 
@@ -77,7 +80,7 @@ public class AgentMove : MonoBehaviour {
         Timepassed = 0;
         Timecheck = 0;
         Food = 10;
-        Health = 15;
+        Health = 10;
         healthinc = false;
         AnimZombie = GetComponent<Animator>();
         Food3.SetActive(false);
@@ -90,13 +93,22 @@ public class AgentMove : MonoBehaviour {
     // Update is called once per frame
     void Update()
     {
-       if (DieAgent.HalloLive == true)
+        if (Food == 0)
+        {
+            FoodZerotimeSec += Time.deltaTime;
+            FoodZerotime = (int)FoodZerotimeSec;
+            if (FoodZerotime == 3)
+            {
+                Health = 0;
+            }
+        }
+        if (DieAgent.HalloLive == true)
         {
             AgentReset();
         }
             
        // DeadTime
-       if (this.Food <= 0)
+       if (this.Health <= 0)
        {
             DieAgent.HalloDied = true;
             Player.active = false;
@@ -118,13 +130,16 @@ public class AgentMove : MonoBehaviour {
         }
         if (seconds == i)
         {
-            Food = Food - 0.5f;
-            if (FoodFiller.size.x > 0)
+            if (Food > 0)
             {
-                this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
+                Food = Food - 0.5f;
+                if (FoodFiller.size.x > 0)
+                {
+                    this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
+                }
             }
             i += 2;
-
+          
         }
         if (PrevFood - Food == 1)
         {
@@ -206,20 +221,18 @@ public class AgentMove : MonoBehaviour {
         }
         if (Vector3.Distance(this.transform.position, Marko.transform.position) < 3)
         {
-            //Debug.Log("Marko calling");
+            transform.LookAt(Marko.transform.position);
             AnimZombie.SetTrigger("attack");
-            // bulletfire.fire();
-            // bulletfire.check = true;
-
+            bulletfire.ShootBullet(AttackParticle, Player, ParticlesContainer);
             Marko.Food--;
             Marko.FoodFiller.size = new Vector2(Marko.FoodFiller.size.x - 0.02f, Marko.FoodFiller.size.y);
 
         }
         if (Vector3.Distance(this.transform.position, Lara.transform.position) < 3)
         {
+            transform.LookAt(Lara.transform.position);
             AnimZombie.SetTrigger("attack");
-            //bulletfire.check = true;
-            
+            bulletfire.ShootBullet(AttackParticle, Player, ParticlesContainer);
             Lara.Food--;
             Lara.FoodFiller.size = new Vector2(Lara.FoodFiller.size.x - 0.02f, Lara.FoodFiller.size.y);
         }
@@ -299,7 +312,7 @@ public class AgentMove : MonoBehaviour {
         Timepassed = 0;
         Timecheck = 0;
         Food = 10;
-        Health = 15;
+        Health = 10;
         healthinc = false;
         Food3.SetActive(false);
         numberofCoins = 0;
@@ -311,9 +324,11 @@ public class AgentMove : MonoBehaviour {
         i = 0;
         count = 0;
         Cointime = 0;
-        PrevFood = 15;
+        PrevFood = 10;
         once = false;
         DieAgent.HalloLive = false;
         this.transform.position = AgentStartingPos;
+        FoodZerotimeSec = 0;
+        FoodZerotime = 0;
     }
 }

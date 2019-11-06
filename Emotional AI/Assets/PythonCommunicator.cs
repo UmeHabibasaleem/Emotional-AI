@@ -6,7 +6,7 @@ using System.Linq;
 using UnityEngine;
 public class PythonCommunicator : MonoBehaviour
 {
-    // Start is called before the first frame update
+  /*  // Start is called before the first frame update
     //public MarkoScript Marko;
     //public AgentMove Hallo;
     //public Lara Lara;
@@ -31,7 +31,7 @@ public class PythonCommunicator : MonoBehaviour
          Update();
 
 
-     }*/
+     }
     void Start()
     {
 
@@ -149,7 +149,7 @@ public class PythonCommunicator : MonoBehaviour
             // 5) Display output
             AgentAction = array[0];
         }
-        /*if (agent1act == 1)
+        if (agent1act == 1)
         {
             targetPos = this.transform.position + new Vector3(1f, 0, 0f);
         }
@@ -175,7 +175,7 @@ public class PythonCommunicator : MonoBehaviour
         Console.WriteLine(errors);
         Console.WriteLine();
         Console.WriteLine("Results:");
-        Console.WriteLine(results);*/
+        Console.WriteLine(results);
     }
     public void nextState(int id , GameObject Laraobj, GameObject Markoobj, GameObject Halloobj, MarkoScript Marko, AgentMove Hallo, Lara Lara, float Dopmainlevel, float DopmaninForAgent1, float DopmaninForAgent2 , float Reward)
     {
@@ -227,6 +227,6 @@ public class PythonCommunicator : MonoBehaviour
 
         }
 
-    }
+    }*/
 
 }

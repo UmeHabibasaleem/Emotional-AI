@@ -60,13 +60,15 @@ public class Lara : MonoBehaviour
     public GameObject AIDkit2;
     public int healthKit = 0;
     FirstAidKit Aidkit;
-    public PythonCommunicator py;
+    //public PythonCommunicator py;
     //Bullet fire
     public GameObject Player;
     public GameObject AttackParticle;
     public GameObject ParticlesContainer;
     BulletFire bulletfire;
 
+    float FoodZerotimeSec = 0;
+    int FoodZerotime = 0;
     Vector3 AgentStartingPos;
 
     //Rivalary Levels
@@ -76,6 +78,7 @@ public class Lara : MonoBehaviour
     private void Awake()
     {
         this.AttackParticle.SetActive(false);
+        Physics.IgnoreLayerCollision(11, 11);
     }
 
 
@@ -86,7 +89,7 @@ public class Lara : MonoBehaviour
         Timepassed = 0;
         Timecheck = 0;
         Food = 10;
-        Health = 15;
+        Health = 10;
         healthinc = false;
         AnimZombie = GetComponent<Animator>();
         Food3.SetActive(false);
@@ -97,7 +100,7 @@ public class Lara : MonoBehaviour
         Aidkit = new FirstAidKit();
         bulletfire = new BulletFire();
         AgentStartingPos = this.transform.position;
-        py = new PythonCommunicator();
+      //  py = new PythonCommunicator();
     }
     public void AddReward(float Reward)
     {
@@ -112,14 +115,24 @@ public class Lara : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        py.Communication(id, LaraModel, MarkoModel, HalloModel, Marko, Hallo, this, this.Dopamin, this.OxetocinForHallo, this.OxetocinForMarko);
+        this.action = 0;
+        // py.Communication(id, LaraModel, MarkoModel, HalloModel, Marko, Hallo, this, this.Dopamin, this.OxetocinForHallo, this.OxetocinForMarko);
+        if (Food == 0)
+        {
+            FoodZerotimeSec += Time.deltaTime;
+            FoodZerotime = (int)FoodZerotimeSec;
+            if (FoodZerotime == 3)
+            {
+                Health = 0;
+            }
+        }
         if (DieAgent.LaraLive == true)
         {
             AgentReset();
         }
 
         // DeadTime
-        if (this.Food <= 0)
+        if (this.Health <= 0)
         {
             DieAgent.LaraDied = true;
             Player.active = false;
@@ -128,24 +141,24 @@ public class Lara : MonoBehaviour
         Timepassed += Time.deltaTime;
         Timecheck += Time.deltaTime;
         seconds = (int)Timepassed;
-        action = py.AgentAction;
+        //action = py.AgentAction;
         if (seconds == count)
         {
             count += 1;
-            
             healthinc = false;
             once = false;
-
         }
         if (seconds == i)
         {
-            Food = Food - 0.5f;
-            if (FoodFiller.size.x > 0)
+            if(Food> 0)
             {
-                this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
+                Food = Food - 0.5f;
+                if (FoodFiller.size.x > 0)
+                {
+                    this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
+                }
             }
             i += 2;
-
         }
         if (PrevFood - Food == 1)
         {
@@ -229,11 +242,14 @@ public class Lara : MonoBehaviour
             {
                 OxetocinForHallo -= 0.5f;
             }
-           
+            transform.LookAt(Hallo.transform.position);
             AnimZombie.SetTrigger("attack");
             bulletfire.ShootBullet(AttackParticle, Player, ParticlesContainer);
-            Food--;
-            this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
+            if (Food > 0)
+            {
+                Food--;
+                this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
+            }
             RLForHallo += 0.5f;
         }
         if(Marko.RLForLara > Marko.RLForHallo)
@@ -246,11 +262,14 @@ public class Lara : MonoBehaviour
             {
                 OxetocinForMarko -= 0.5f;
             }
+            transform.LookAt(Marko.transform.position);
             AnimZombie.SetTrigger("attack");
             bulletfire.ShootBullet(AttackParticle, Player, ParticlesContainer);
-
-            Food--;
-            this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
+            if (Food > 0)
+            {
+                Food--;
+                this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
+            }
             RLForMarko += 0.5f;
         }
         float DistanceWithMarko = Vector3.Distance(this.transform.position, Marko.transform.position);
@@ -258,10 +277,13 @@ public class Lara : MonoBehaviour
         //Sharing with Marko
         if (action == 6 && DistanceWithMarko <= 1.42f && OxetocinForMarko >= 2)
         {
-            this.Food -= 0.5f;
-            Marko.Food += 0.5f;
-            OxetocinInMarkoForLara += 0.5f;
-            AddReward(0.25f);
+            if (Food > 0)
+            {
+                this.Food -= 0.5f;
+                Marko.Food += 0.5f;
+                OxetocinInMarkoForLara += 0.5f;
+                AddReward(0.25f);
+            }
             if (Marko.RLForLara > 0)
             {
                 Marko.RLForLara -= 0.5f;
@@ -279,10 +301,13 @@ public class Lara : MonoBehaviour
         //Sharing with Lara
         if (action == 6 && DistanceWithHallo <= 1.42f && OxetocinForHallo >= 2)
         {
-            this.Food -= 0.5f;
-             Hallo.Food += 0.5f;
-            OxetocinInHalloForLara += 0.5f;
-            AddReward(0.25f);
+            if (Food > 0)
+            {
+                this.Food -= 0.5f;
+                Hallo.Food += 0.5f;
+                OxetocinInHalloForLara += 0.5f;
+                AddReward(0.25f);
+            }
             if (Hallo.RLForLara > 0)
             {
                 Hallo.RLForLara -= 0.5f;
@@ -333,7 +358,7 @@ public class Lara : MonoBehaviour
             Cointime = 0;
             Coinseconds = 0;
         }
-        py.nextState(id, LaraModel, MarkoModel, HalloModel, Marko, Hallo, this, this.Dopamin, this.OxetocinForHallo, this.OxetocinForMarko, this.Reward);
+       // py.nextState(id, LaraModel, MarkoModel, HalloModel, Marko, Hallo, this, this.Dopamin, this.OxetocinForHallo, this.OxetocinForMarko, this.Reward);
     }
     private void FixedUpdate()
     {
@@ -379,7 +404,7 @@ public class Lara : MonoBehaviour
         Timepassed = 0;
         Timecheck = 0;
         Food = 10;
-        Health = 15;
+        Health = 10;
         healthinc = false;
         Food3.SetActive(false);
         numberofCoins = 0;
@@ -391,9 +416,11 @@ public class Lara : MonoBehaviour
         i = 0;
         count = 0;
         Cointime = 0;
-        PrevFood = 15;
+        PrevFood = 10;
         once = false;
         DieAgent.LaraLive = false;
         this.transform.position = AgentStartingPos;
+        FoodZerotimeSec = 0;
+        FoodZerotime = 0;
     }
 }
