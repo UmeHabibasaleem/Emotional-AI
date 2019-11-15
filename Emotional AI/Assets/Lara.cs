@@ -3,13 +3,15 @@ using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
 
+//SELFLESS
+
 public class Lara : MonoBehaviour
 {
     Animator AnimZombie;
     public float Timepassed;
     public float Timecheck;
-    public float prevOxeHallo;
-    public float prevOxeMarko;
+    //public float prevOxeHallo;
+    //public float prevOxeMarko;
     public int id = 1;
     float speed = 5.0f;
     public float Food;
@@ -26,7 +28,7 @@ public class Lara : MonoBehaviour
     public SpriteRenderer HealthFiller;
     public float Reward;
 
-    public float OxetocinForHallo;
+    //public float OxetocinForHallo;
     float PrevFood = 10;
     float Pfood;
     bool once = false;
@@ -36,9 +38,9 @@ public class Lara : MonoBehaviour
     public AgentMove Hallo;
     public GameObject LaraModel;
     public float Dopamin;
-    public float OxetocinForMarko;
-    public float OxetocinInHalloForLara;
-    public float OxetocinInMarkoForLara;
+    //public float OxetocinForMarko;
+    //public float OxetocinInHalloForLara;
+    //public float OxetocinInMarkoForLara;
   
 
 
@@ -72,8 +74,8 @@ public class Lara : MonoBehaviour
     Vector3 AgentStartingPos;
 
     //Rivalary Levels
-    public float RLForMarko;
-    public float RLForHallo;
+    //public float RLForMarko;
+    //public float RLForHallo;
 
     private void Awake()
     {
@@ -93,9 +95,9 @@ public class Lara : MonoBehaviour
         healthinc = false;
         AnimZombie = GetComponent<Animator>();
         Food3.SetActive(false);
-        Dopamin = 0;
-        OxetocinInHalloForLara = 0;
-        OxetocinInMarkoForLara = 0;
+        //Dopamin = 0;
+        //OxetocinInHalloForLara = 0;
+        //OxetocinInMarkoForLara = 0;
         coin = new Coin();
         Aidkit = new FirstAidKit();
         bulletfire = new BulletFire();
@@ -115,6 +117,7 @@ public class Lara : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
+        //this.action = 0;
         // py.Communication(id, LaraModel, MarkoModel, HalloModel, Marko, Hallo, this, this.Dopamin, this.OxetocinForHallo, this.OxetocinForMarko);
         if (Food == 0)
         {
@@ -144,9 +147,8 @@ public class Lara : MonoBehaviour
         if (seconds == count)
         {
             count += 1;
+            action = Random.Range(1, 7);
             healthinc = false;
-
-            action = Random.Range(0, 7);
             once = false;
         }
         if (seconds == i)
@@ -164,7 +166,12 @@ public class Lara : MonoBehaviour
         if (PrevFood - Food == 1)
         {
             Health -= 0.5f;
-            this.HealthFiller.size = new Vector2(this.HealthFiller.size.x - 0.02f, this.HealthFiller.size.y);
+            if(HealthFiller.size.x > 0)
+            {
+                this.HealthFiller.size = new Vector2(this.HealthFiller.size.x - 0.02f, this.HealthFiller.size.y);
+
+            }
+            //this.HealthFiller.size = new Vector2(this.HealthFiller.size.x - 0.02f, this.HealthFiller.size.y);
             PrevFood = Food;
         }
 
@@ -232,18 +239,19 @@ public class Lara : MonoBehaviour
         }
 
         //Attack Agent Animation
-      
-        if (Hallo.RLForLara > Hallo.RLForMarko)
+
+        //if (Hallo.RLForLara > Hallo.RLForMarko)
+        //{
+        //    AttackedByHallo = true;
+        //}
+        //action 7 is attack
+        if (Hallo.action == 7 && Vector3.Distance(this.transform.position, Hallo.transform.position) < 3 /*&& AttackedByHallo && Hallo.OxetocinForLara < 3*/)
         {
-            AttackedByHallo = true;
-        }
-        if (Hallo.action == 7 && Vector3.Distance(this.transform.position, Hallo.transform.position) < 3 && AttackedByHallo && Hallo.OxetocinForLara < 3)
-        {
-            if(OxetocinForHallo > 0)
-            {
-                OxetocinForHallo -= 0.5f;
-            }
-            transform.LookAt(Hallo.transform.position);
+            //if(OxetocinForHallo > 0)
+            //{
+            //    OxetocinForHallo -= 0.5f;
+            //}
+            //transform.LookAt(Hallo.transform.position);
             AnimZombie.SetTrigger("attack");
             bulletfire.ShootBullet(AttackParticle, Player, ParticlesContainer);
             if (Food > 0)
@@ -251,19 +259,19 @@ public class Lara : MonoBehaviour
                 Food--;
                 this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
             }
-            RLForHallo += 0.5f;
+            //RLForHallo += 0.5f;
         }
         //if(Marko.RLForLara > Marko.RLForHallo)
         //{
         //    AttackedByMarko = true;
         //}
-        if (Marko.action == 7 && Vector3.Distance(this.transform.position, Marko.transform.position) < 3 && AttackedByMarko /*&& Marko.OxetocinForLara < 3*/)
+        if (Marko.action == 7 && Vector3.Distance(this.transform.position, Marko.transform.position) < 3 /*&& AttackedByMarko && Marko.OxetocinForLara < 3*/)
         {
-            if (OxetocinForMarko > 0)
-            {
-                OxetocinForMarko -= 0.5f;
-            }
-            transform.LookAt(Marko.transform.position);
+            //if (OxetocinForMarko > 0)
+            //{
+            //    OxetocinForMarko -= 0.5f;
+            //}
+            //transform.LookAt(Marko.transform.position);
             AnimZombie.SetTrigger("attack");
             bulletfire.ShootBullet(AttackParticle, Player, ParticlesContainer);
             if (Food > 0)
@@ -271,18 +279,18 @@ public class Lara : MonoBehaviour
                 Food--;
                 this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
             }
-            RLForMarko += 0.5f;
+            //RLForMarko += 0.5f;
         }
         float DistanceWithMarko = Vector3.Distance(this.transform.position, Marko.transform.position);
 
         //Sharing with Marko
-        if (action == 6 && DistanceWithMarko <= 1.42f && OxetocinForMarko >= 2)
+        if (action == 6 && DistanceWithMarko <= 1.42f /*&& OxetocinForMarko >= 2*/)
         {
             if (Food > 0)
             {
                 this.Food -= 0.5f;
                 Marko.Food += 0.5f;
-                OxetocinInMarkoForLara += 0.5f;
+              //  OxetocinInMarkoForLara += 0.5f;
                 AddReward(0.25f);
             }
             //if (Marko.RLForLara > 0)
@@ -299,43 +307,44 @@ public class Lara : MonoBehaviour
             }
         }
         float DistanceWithHallo = Vector3.Distance(this.transform.position, Hallo.transform.position);
-        //Sharing with Lara
-        if (action == 6 && DistanceWithHallo <= 1.42f && OxetocinForHallo >= 2)
+        //Sharing with hallo
+        if (action == 6 && DistanceWithHallo <= 1.42f /*&& OxetocinForHallo >= 2*/)
         {
             if (Food > 0)
             {
                 this.Food -= 0.5f;
                 Hallo.Food += 0.5f;
-                OxetocinInHalloForLara += 0.5f;
-                AddReward(0.25f);
+               // OxetocinInHalloForLara += 0.5f;
+                AddReward(1f);
             }
-            if (Hallo.RLForLara > 0)
-            {
-                Hallo.RLForLara -= 0.5f;
-            }
+            //if (Hallo.RLForLara > 0)
+            //{
+            //    Hallo.RLForLara -= 0.5f;
+            //}
             if (this.FoodFiller.size.x > 0)
             {
                 this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
             }
-            if (Marko.FoodFiller.size.x <= 1)
+            //doesnt get out of the filler
+            if (Hallo.FoodFiller.size.x <= 1)
             {
-                Marko.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
+                Hallo.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
             }
         }
-        if (OxetocinInMarkoForLara - prevOxeMarko > 5)
-        {
-            prevOxeMarko = OxetocinInMarkoForLara;
-            Dopamin++;
-        }
-        if (OxetocinInHalloForLara - prevOxeHallo > 5)
-        {
-            prevOxeHallo = OxetocinInHalloForLara;
-            Dopamin++;
-        }
-        if (Dopamin > 5)
-        {
-            AddReward(1f);
-        }
+        //if (OxetocinInMarkoForLara - prevOxeMarko > 5)
+        //{
+        //    prevOxeMarko = OxetocinInMarkoForLara;
+        //    Dopamin++;
+        //}
+        //if (OxetocinInHalloForLara - prevOxeHallo > 5)
+        //{
+        //    prevOxeHallo = OxetocinInHalloForLara;
+        //    Dopamin++;
+        //}
+        //if (Dopamin > 5)
+        //{
+        //    AddReward(1f);
+        //}
         if (Health <= 0)
         {
             SetReward(-1f);
@@ -409,15 +418,15 @@ public class Lara : MonoBehaviour
         healthinc = false;
         Food3.SetActive(false);
         numberofCoins = 0;
-        Dopamin = 0;
-        OxetocinInHalloForLara = 0;
-        OxetocinInMarkoForLara = 0;
+        //Dopamin = 0;
+        //OxetocinInHalloForLara = 0;
+        //OxetocinInMarkoForLara = 0;
         healthKit = 0;
         seconds = 0;
         i = 0;
         count = 0;
         Cointime = 0;
-        PrevFood = 10;
+        //PrevFood = 10;
         once = false;
         DieAgent.LaraLive = false;
         this.transform.position = AgentStartingPos;
