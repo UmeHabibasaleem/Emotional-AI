@@ -107,10 +107,10 @@ MonoBehaviour:
     y: 30
     width: 1350
     height: 619
-  m_MinSize: {x: 713, y: 492}
-  m_MaxSize: {x: 18008, y: 14042}
+  m_MinSize: {x: 683, y: 342}
+  m_MaxSize: {x: 12008, y: 8042}
   vertical: 0
-  controlID: 76
+  controlID: 10
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -156,10 +156,10 @@ MonoBehaviour:
     y: 0
     width: 871
     height: 619
-  m_MinSize: {x: 234, y: 492}
-  m_MaxSize: {x: 10004, y: 14042}
+  m_MinSize: {x: 204, y: 342}
+  m_MaxSize: {x: 4004, y: 8042}
   vertical: 1
-  controlID: 77
+  controlID: 11
 --- !u!114 &8
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -206,14 +206,14 @@ MonoBehaviour:
     y: 348
     width: 871
     height: 271
-  m_MinSize: {x: 234, y: 271}
-  m_MaxSize: {x: 10004, y: 10021}
-  m_ActualView: {fileID: 16}
+  m_MinSize: {x: 104, y: 121}
+  m_MaxSize: {x: 4004, y: 4021}
+  m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 16}
   - {fileID: 17}
-  m_Selected: 0
-  m_LastSelected: 1
+  m_Selected: 1
+  m_LastSelected: 0
 --- !u!114 &10
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -346,9 +346,9 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: d6070000
-    m_LastClickedID: 0
-    m_ExpandedIDs: e4fbffff00000000
+    m_SelectedIDs: d0140000
+    m_LastClickedID: 5328
+    m_ExpandedIDs: e4fbffff000000008a10000028160000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -556,10 +556,10 @@ MonoBehaviour:
       e32: 0
       e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: 37d82fa54c51b44ef9696bdfb8f13ad4,
+  m_AnimatorController: {fileID: 9100000, guid: d7a261efe05c84aa090df5dc5df30474,
     type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: 1107180787082560062, guid: 37d82fa54c51b44ef9696bdfb8f13ad4,
+  - m_Target: {fileID: 1107180787082560062, guid: d7a261efe05c84aa090df5dc5df30474,
       type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
@@ -615,14 +615,14 @@ MonoBehaviour:
   m_StartGridSize: 16
   m_LastFolders: []
   m_LastFoldersGridSize: -1
-  m_LastProjectPath: C:\Users\Abubakar\Documents\GitHub\Emotional-AI\Emotional AI
+  m_LastProjectPath: C:\Users\Mamuna\Desktop\Recent\Emotional-AI\Emotional AI
   m_LockTracker:
     m_IsLocked: 0
   m_FolderTreeState:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 945b0000
     m_LastClickedID: 23444
-    m_ExpandedIDs: 00000000ca090000aa0a0000c80a00001e0b0000200b0000220b00002c0b0000ce0b0000660c0000dc0c0000f80c0000fe0c0000060d0000440d0000d60d0000ec0d0000560e0000880e0000960e0000c60e0000e60e00005a0f0000620f0000840f00009a0f0000584000005a4000005c4000005e40000060400000624000006440000066400000684000006a4000006c4000006e40000070400000
+    m_ExpandedIDs: 00000000b8090000980a0000b60a00000c0b00000e0b0000100b00001a0b0000bc0b0000540c0000ca0c0000e60c0000ec0c0000f40c0000320d0000c40d0000da0d0000440e0000760e0000840e0000b40e0000d40e0000480f0000500f0000720f0000880f000046400000484000004a4000004c4000004e40000050400000524000005440000056400000584000005a4000005c4000005e400000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -647,10 +647,10 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_AssetTreeState:
-    scrollPos: {x: 0, y: 108}
-    m_SelectedIDs: 
-    m_LastClickedID: 0
-    m_ExpandedIDs: ffffffff00000000ca090000aa0a0000c80a00001e0b0000200b0000220b00002c0b0000ce0b0000660c0000dc0c0000f80c0000fe0c0000060d0000440d0000d60d0000ec0d0000560e0000880e0000960e0000c60e0000e60e00005a0f0000620f0000840f00009a0f0000584000005a4000005c4000005e40000060400000624000006440000066400000684000006a4000006c4000006e40000070400000
+    scrollPos: {x: 0, y: 40.755554}
+    m_SelectedIDs: 72080000
+    m_LastClickedID: 2162
+    m_ExpandedIDs: 00000000b8090000980a0000b60a00000c0b00000e0b0000100b00001a0b0000bc0b0000540c0000ca0c0000e60c0000ec0c0000f40c0000320d0000c40d0000da0d0000440e0000760e0000840e0000b40e0000d40e0000480f0000500f0000720f0000880f000046400000484000004a4000004c4000004e40000050400000524000005440000056400000584000005a4000005c4000005e400000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -675,8 +675,8 @@ MonoBehaviour:
       m_Icon: {fileID: 0}
       m_ResourceFile: 
   m_ListAreaState:
-    m_SelectedInstanceIDs: 
-    m_LastClickedInstanceID: 0
+    m_SelectedInstanceIDs: 72080000
+    m_LastClickedInstanceID: 2162
     m_HadKeyboardFocusLastEvent: 0
     m_ExpandedInstanceIDs: 
     m_RenameOverlay:

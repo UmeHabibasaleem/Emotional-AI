@@ -115,7 +115,6 @@ public class Lara : MonoBehaviour
     // Update is called once per frame
     void Update()
     {
-        this.action = 0;
         // py.Communication(id, LaraModel, MarkoModel, HalloModel, Marko, Hallo, this, this.Dopamin, this.OxetocinForHallo, this.OxetocinForMarko);
         if (Food == 0)
         {
@@ -146,6 +145,8 @@ public class Lara : MonoBehaviour
         {
             count += 1;
             healthinc = false;
+
+            action = Random.Range(0, 7);
             once = false;
         }
         if (seconds == i)
@@ -252,11 +253,11 @@ public class Lara : MonoBehaviour
             }
             RLForHallo += 0.5f;
         }
-        if(Marko.RLForLara > Marko.RLForHallo)
-        {
-            AttackedByMarko = true;
-        }
-        if (Marko.action == 7 && Vector3.Distance(this.transform.position, Marko.transform.position) < 3 && AttackedByMarko && Marko.OxetocinForLara < 3)
+        //if(Marko.RLForLara > Marko.RLForHallo)
+        //{
+        //    AttackedByMarko = true;
+        //}
+        if (Marko.action == 7 && Vector3.Distance(this.transform.position, Marko.transform.position) < 3 && AttackedByMarko /*&& Marko.OxetocinForLara < 3*/)
         {
             if (OxetocinForMarko > 0)
             {
@@ -284,10 +285,10 @@ public class Lara : MonoBehaviour
                 OxetocinInMarkoForLara += 0.5f;
                 AddReward(0.25f);
             }
-            if (Marko.RLForLara > 0)
-            {
-                Marko.RLForLara -= 0.5f;
-            }
+            //if (Marko.RLForLara > 0)
+            //{
+            //    Marko.RLForLara -= 0.5f;
+            //}
             if (this.FoodFiller.size.x > 0)
             {
                 this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);

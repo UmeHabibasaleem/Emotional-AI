@@ -225,8 +225,10 @@ public class AgentMove : MonoBehaviour {
             AnimZombie.SetTrigger("attack");
             bulletfire.ShootBullet(AttackParticle, Player, ParticlesContainer);
             Marko.Food--;
-            Marko.FoodFiller.size = new Vector2(Marko.FoodFiller.size.x - 0.02f, Marko.FoodFiller.size.y);
-
+            if (Marko.FoodFiller.size.x > 0)
+            {
+                Marko.FoodFiller.size = new Vector2(Marko.FoodFiller.size.x - 0.02f, Marko.FoodFiller.size.y);
+            }
         }
         if (Vector3.Distance(this.transform.position, Lara.transform.position) < 3)
         {
@@ -234,9 +236,12 @@ public class AgentMove : MonoBehaviour {
             AnimZombie.SetTrigger("attack");
             bulletfire.ShootBullet(AttackParticle, Player, ParticlesContainer);
             Lara.Food--;
-            Lara.FoodFiller.size = new Vector2(Lara.FoodFiller.size.x - 0.02f, Lara.FoodFiller.size.y);
-        }
-        float DistanceWithMarko = Vector3.Distance(this.transform.position, Marko.transform.position);
+            if (Lara.FoodFiller.size.x > 0)
+            {
+
+                Lara.FoodFiller.size = new Vector2(Lara.FoodFiller.size.x - 0.02f, Lara.FoodFiller.size.y);
+            }
+        }        float DistanceWithMarko = Vector3.Distance(this.transform.position, Marko.transform.position);
 
         if (action == 6 && DistanceWithMarko <= 1.42f)
         {
