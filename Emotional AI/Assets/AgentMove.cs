@@ -8,7 +8,7 @@ public class AgentMove : MonoBehaviour
 {
     Animator AnimZombie;
     public int interactionWithLara;
-    public int interactionWithMarco;
+    public int interactionWithMarko;
     public float Timepassed;
     public float Timecheck;
     public Lara Lara;
@@ -168,9 +168,12 @@ public class AgentMove : MonoBehaviour
         float dist1 = Vector3.Distance(Hallo.transform.position, Food1.transform.position);
         float dist2 = Vector3.Distance(Hallo.transform.position, Food2.transform.position);
         float dist3 = Vector3.Distance(Hallo.transform.position, Food3.transform.position);
-
-
-        if (action == 5 && once == false && (dist1 < 1.42 || dist2 < 1.42 || dist3 < 1.42))
+        float distWithLara = Vector3.Distance(Hallo.transform.position, Lara.transform.position);
+        float distWithMarko = Vector3.Distance(Hallo.transform.position, Marko.transform.position);
+        //Eat if interaction with Marko is more
+        if (action == 5 && once == false && (dist1 < 1.42 || dist2 < 1.42 || dist3 < 1.42) && seconds >= 5
+            && interactionWithMarko >= interactionWithLara
+            && interactionWithMarko > 0)
         {
             Food++;
             this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
@@ -196,6 +199,35 @@ public class AgentMove : MonoBehaviour
 
 
         }
+        else if (action == 5 && once == false && (distWithLara < 1.42) && seconds >= 5
+            && interactionWithMarko >= interactionWithLara
+            && interactionWithMarko > 0)
+        {
+            Food++;
+            if (FoodFiller.size.x < 1)
+            {
+                this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
+            }
+            Lara.Food--;
+            AddReward(+1.0f);
+            once = true;
+        }
+        else if (action == 5 && once == false && (distWithMarko < 1.42) && seconds >= 5
+            && interactionWithMarko >= interactionWithLara
+            && interactionWithMarko > 0)
+        {
+            Food++;
+
+            AddReward(+1.0f);
+            if (FoodFiller.size.x < 1)
+            {
+                this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
+            }
+            Marko.Food--;
+            once = true;
+        }
+
+
         if ((int)Timecheck == 5)
         {
             Food1.SetActive(true);
@@ -211,8 +243,8 @@ public class AgentMove : MonoBehaviour
             healthinc = true;
         }
         //Run Agent Animation 
-        if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.A))
-        // if (action == 1 || action == 2 || action == 3 || action == 4)
+      //  if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.A))
+         if (action == 1 || action == 2 || action == 3 || action == 4)
         {
             AnimZombie.SetTrigger("run");
 
@@ -260,7 +292,7 @@ public class AgentMove : MonoBehaviour
         float DistanceWithMarko = Vector3.Distance(this.transform.position, Marko.transform.position);
         float distanceWithLara = Vector3.Distance(this.transform.position, Lara.transform.position);
 
-        if (action == 6 && DistanceWithMarko <= 1.42f && seconds >= 5 && interactionWithMarco <= interactionWithLara)
+        if (action == 6 && DistanceWithMarko <= 1.42f && seconds >= 5 && interactionWithMarko <= interactionWithLara)
         {
             this.Food -= 0.5f;
             Marko.Food += 0.5f;
@@ -275,7 +307,7 @@ public class AgentMove : MonoBehaviour
             }
 
         }
-        else if (action == 6 && distanceWithLara <= 1.42f && seconds >= 5 && interactionWithMarco <= interactionWithLara)
+        else if (action == 6 && distanceWithLara <= 1.42f && seconds >= 5 && interactionWithMarko <= interactionWithLara)
         {
             this.Food -= 0.5f;
             Marko.Food += 0.5f;
@@ -365,5 +397,7 @@ public class AgentMove : MonoBehaviour
         this.transform.position = AgentStartingPos;
         FoodZerotimeSec = 0;
         FoodZerotime = 0;
+        interactionWithLara = 0;
+        interactionWithMarko = 0;
     }
 }

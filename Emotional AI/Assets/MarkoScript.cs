@@ -188,7 +188,6 @@ public class MarkoScript : MonoBehaviour
                 this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
             }
             once = true;
-
             AddReward(+1.0f);
         }
         else if (action == 5 && once == false && (distWithLara < 1.42))
@@ -205,7 +204,7 @@ public class MarkoScript : MonoBehaviour
         else if (action == 5 && once == false && (distWithHallo < 1.42))
         {
             Food++;
-
+            Hallo.interactionWithMarko++;
             AddReward(+1.0f);
             if (FoodFiller.size.x < 1)
             {
@@ -214,6 +213,8 @@ public class MarkoScript : MonoBehaviour
             Hallo.Food--;
             once = true;
         }
+
+
 
         if (Food - PrevFood == 1 && healthinc == false)
         {

@@ -20,7 +20,7 @@ MonoBehaviour:
   m_ShowMode: 4
   m_Title: 
   m_RootView: {fileID: 2}
-  m_MinSize: {x: 950, y: 300}
+  m_MinSize: {x: 950, y: 371}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &2
 MonoBehaviour:
@@ -43,7 +43,7 @@ MonoBehaviour:
     y: 0
     width: 1350
     height: 669
-  m_MinSize: {x: 950, y: 300}
+  m_MinSize: {x: 950, y: 371}
   m_MaxSize: {x: 10000, y: 10000}
 --- !u!114 &3
 MonoBehaviour:
@@ -107,10 +107,10 @@ MonoBehaviour:
     y: 30
     width: 1350
     height: 619
-  m_MinSize: {x: 683, y: 342}
-  m_MaxSize: {x: 12008, y: 8042}
+  m_MinSize: {x: 679, y: 321}
+  m_MaxSize: {x: 12004, y: 8021}
   vertical: 0
-  controlID: 36
+  controlID: 10
 --- !u!114 &6
 MonoBehaviour:
   m_ObjectHideFlags: 52
@@ -129,8 +129,8 @@ MonoBehaviour:
     y: 0
     width: 202
     height: 619
-  m_MinSize: {x: 202, y: 221}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 200, y: 200}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 12}
   m_Panes:
   - {fileID: 12}
@@ -156,8 +156,8 @@ MonoBehaviour:
     y: 0
     width: 871
     height: 619
-  m_MinSize: {x: 204, y: 342}
-  m_MaxSize: {x: 4004, y: 8042}
+  m_MinSize: {x: 204, y: 321}
+  m_MaxSize: {x: 4004, y: 8021}
   vertical: 1
   controlID: 101
 --- !u!114 &8
@@ -206,8 +206,8 @@ MonoBehaviour:
     y: 348
     width: 871
     height: 271
-  m_MinSize: {x: 104, y: 121}
-  m_MaxSize: {x: 4004, y: 4021}
+  m_MinSize: {x: 100, y: 100}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 17}
   m_Panes:
   - {fileID: 16}
@@ -232,8 +232,8 @@ MonoBehaviour:
     y: 0
     width: 277
     height: 619
-  m_MinSize: {x: 277, y: 71}
-  m_MaxSize: {x: 4002, y: 4021}
+  m_MinSize: {x: 275, y: 50}
+  m_MaxSize: {x: 4000, y: 4000}
   m_ActualView: {fileID: 18}
   m_Panes:
   - {fileID: 18}
@@ -346,9 +346,9 @@ MonoBehaviour:
   m_PersistentViewDataDictionary: {fileID: 0}
   m_TreeViewState:
     scrollPos: {x: 0, y: 0}
-    m_SelectedIDs: 3e3d0000
-    m_LastClickedID: 15678
-    m_ExpandedIDs: b2f8ffffdcfaffff00000000
+    m_SelectedIDs: b43d0000
+    m_LastClickedID: 15796
+    m_ExpandedIDs: d2f6fffffcf8ffff000000003e350000dc3a0000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -556,10 +556,10 @@ MonoBehaviour:
       e32: 0
       e33: 1
   m_PreviewAnimator: {fileID: 0}
-  m_AnimatorController: {fileID: 9100000, guid: d7a261efe05c84aa090df5dc5df30474,
+  m_AnimatorController: {fileID: 9100000, guid: 2f00a2e48fcd34c088a791d3aa2f077a,
     type: 2}
   m_BreadCrumbs:
-  - m_Target: {fileID: 1107180787082560062, guid: d7a261efe05c84aa090df5dc5df30474,
+  - m_Target: {fileID: 1107180787082560062, guid: 2f00a2e48fcd34c088a791d3aa2f077a,
       type: 2}
     m_ScrollPosition: {x: 0, y: 0}
   stateMachineGraph: {fileID: 0}
@@ -622,7 +622,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 0}
     m_SelectedIDs: 945b0000
     m_LastClickedID: 23444
-    m_ExpandedIDs: 00000000482e0000282f0000462f00009c2f00009e2f0000a02f0000aa2f00004c300000e43000005a310000763100007c31000084310000c2310000543200006a320000d432000006330000143300004433000064330000d8330000e03300000234000018340000ee430000f0430000f2430000f4430000f6430000f8430000fa430000fc430000fe43000000440000024400000444000006440000
+    m_ExpandedIDs: 00000000be2e00009e2f0000bc2f000012300000143000001630000020300000c23000005a310000d0310000ec310000f2310000fa31000038320000ca320000e03200004a3300007c3300008a330000ba330000da3300004e34000056340000783400008e3400006444000066440000684400006a4400006c4400006e44000070440000724400007444000076440000784400007a4400007c440000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
@@ -650,7 +650,7 @@ MonoBehaviour:
     scrollPos: {x: 0, y: 40.755554}
     m_SelectedIDs: 72080000
     m_LastClickedID: 2162
-    m_ExpandedIDs: 00000000482e0000282f0000462f00009c2f00009e2f0000a02f0000aa2f00004c300000e43000005a310000763100007c31000084310000c2310000543200006a320000d432000006330000143300004433000064330000d8330000e03300000234000018340000ee430000f0430000f2430000f4430000f6430000f8430000fa430000fc430000fe43000000440000024400000444000006440000
+    m_ExpandedIDs: 00000000be2e00009e2f0000bc2f000012300000143000001630000020300000c23000005a310000d0310000ec310000f2310000fa31000038320000ca320000e03200004a3300007c3300008a330000ba330000da3300004e34000056340000783400008e3400006444000066440000684400006a4400006c4400006e44000070440000724400007444000076440000784400007a4400007c440000
     m_RenameOverlay:
       m_UserAcceptedRename: 0
       m_Name: 
