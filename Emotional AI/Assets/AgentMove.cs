@@ -2,12 +2,17 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+//2
 
-public class AgentMove : MonoBehaviour {
+public class AgentMove : MonoBehaviour
+{
     Animator AnimZombie;
+    public int interactionWithLara;
+    public int interactionWithMarco;
     public float Timepassed;
     public float Timecheck;
     public Lara Lara;
+    private float Reward;
     float speed = 3.0f;
     public float Food;
     public float Health;
@@ -38,9 +43,9 @@ public class AgentMove : MonoBehaviour {
     public float Cointime = 0;
     public int Coinseconds;
     Coin coin;
-    bool Attack= false;
-   
-    
+    bool Attack = false;
+
+
     FirstAidKit Aidkit;
     public int numberofCoins = 0;
     public float Dopamin = 3;
@@ -71,12 +76,20 @@ public class AgentMove : MonoBehaviour {
         this.AttackParticle.SetActive(false);
         Physics.IgnoreLayerCollision(11, 11);
     }
+    public void AddReward(float Reward)
+    {
+        this.Reward += Reward;
+    }
 
+    public void SetReward(float Reward)
+    {
+        this.Reward = Reward;
+    }
 
     // Use this for initialization
     void Start()
     {
-        
+
         Timepassed = 0;
         Timecheck = 0;
         Food = 10;
@@ -106,14 +119,14 @@ public class AgentMove : MonoBehaviour {
         {
             AgentReset();
         }
-            
-       // DeadTime
-       if (this.Health <= 0)
-       {
+
+        // DeadTime
+        if (this.Health <= 0)
+        {
             DieAgent.HalloDied = true;
             Player.active = false;
-       }
-        
+        }
+
         Vector3 targetPos = Hallo.transform.position;
         targetPos.y = 0;
         Timepassed += Time.deltaTime;
@@ -139,7 +152,7 @@ public class AgentMove : MonoBehaviour {
                 }
             }
             i += 2;
-          
+
         }
         if (PrevFood - Food == 1)
         {
@@ -206,15 +219,15 @@ public class AgentMove : MonoBehaviour {
         }
 
         //Stop Agent Animation
-        if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.A))
-        // if(action == 0)
+        // if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.A))
+        if (action == 0)
         {
             AnimZombie.SetTrigger("idle");
         }
 
         //Attack Agent Animation
-        if (Input.GetKeyDown(KeyCode.A))
-        // if (action == 7)
+        //if (Input.GetKeyDown(KeyCode.A))
+        if (action == 7)
         {
             AnimZombie.SetTrigger("attack");
             bulletfire.ShootBullet(AttackParticle, Player, ParticlesContainer);
@@ -229,6 +242,8 @@ public class AgentMove : MonoBehaviour {
             {
                 Marko.FoodFiller.size = new Vector2(Marko.FoodFiller.size.x - 0.02f, Marko.FoodFiller.size.y);
             }
+
+
         }
         if (Vector3.Distance(this.transform.position, Lara.transform.position) < 3)
         {
@@ -236,17 +251,35 @@ public class AgentMove : MonoBehaviour {
             AnimZombie.SetTrigger("attack");
             bulletfire.ShootBullet(AttackParticle, Player, ParticlesContainer);
             Lara.Food--;
+            //Lara.FoodFiller.size = new Vector2(Lara.FoodFiller.size.x - 0.02f, Lara.FoodFiller.size.y);
             if (Lara.FoodFiller.size.x > 0)
             {
-
                 Lara.FoodFiller.size = new Vector2(Lara.FoodFiller.size.x - 0.02f, Lara.FoodFiller.size.y);
             }
-        }        float DistanceWithMarko = Vector3.Distance(this.transform.position, Marko.transform.position);
+        }
+        float DistanceWithMarko = Vector3.Distance(this.transform.position, Marko.transform.position);
+        float distanceWithLara = Vector3.Distance(this.transform.position, Lara.transform.position);
 
-        if (action == 6 && DistanceWithMarko <= 1.42f)
+        if (action == 6 && DistanceWithMarko <= 1.42f && seconds >= 5 && interactionWithMarco <= interactionWithLara)
         {
             this.Food -= 0.5f;
             Marko.Food += 0.5f;
+            AddReward(1f);
+            if (this.FoodFiller.size.x > 0)
+            {
+                this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
+            }
+            if (Marko.FoodFiller.size.x <= 1)
+            {
+                Marko.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
+            }
+
+        }
+        else if (action == 6 && distanceWithLara <= 1.42f && seconds >= 5 && interactionWithMarco <= interactionWithLara)
+        {
+            this.Food -= 0.5f;
+            Marko.Food += 0.5f;
+            AddReward(1f);
             if (this.FoodFiller.size.x > 0)
             {
                 this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
@@ -268,26 +301,22 @@ public class AgentMove : MonoBehaviour {
         }
         if (Coinseconds == 10)
         {
-           Cointime = 0;
-           Coinseconds = 0;
+            Cointime = 0;
+            Coinseconds = 0;
         }
 
     }
     private void FixedUpdate()
     {
 
-        //Move PLayer
-
-        if (Input.GetKey(KeyCode.RightArrow))
-            //Move Player forward
-      //  if (action == 1)
+        if (action == 1)
         {
             transform.GetComponent<Rigidbody>().rotation = Quaternion.LookRotation(Vector3.left);
             transform.position += Vector3.left * Time.deltaTime * speed;
         }
 
-        if (Input.GetKey(KeyCode.UpArrow))
-       // if (action == 2)
+        //if (Input.GetKey(KeyCode.UpArrow))
+        if (action == 2)
 
         {
             transform.GetComponent<Rigidbody>().rotation = Quaternion.LookRotation(Vector3.forward);
@@ -295,22 +324,23 @@ public class AgentMove : MonoBehaviour {
         }
 
         //Move Player Backward
-         if (Input.GetKey(KeyCode.DownArrow))
-       // if (action == 3)
+        //  if (Input.GetKey(KeyCode.DownArrow))
+        if (action == 3)
         {
             transform.GetComponent<Rigidbody>().rotation = Quaternion.LookRotation(Vector3.back);
             transform.position -= Vector3.forward * Time.deltaTime * speed;
         }
 
         //Move Player left
-        if (Input.GetKey(KeyCode.LeftArrow))
-        
+        //if (Input.GetKey(KeyCode.LeftArrow))
+
         //Move Player Right
-        //if (action == 4)
+        if (action == 4)
         {
             transform.GetComponent<Rigidbody>().rotation = Quaternion.LookRotation(Vector3.right);
             transform.position -= Vector3.left * Time.deltaTime * speed;
         }
+
     }
     void AgentReset()
     {

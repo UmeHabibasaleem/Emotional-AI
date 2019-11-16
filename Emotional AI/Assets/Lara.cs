@@ -8,6 +8,7 @@ using UnityEngine;
 public class Lara : MonoBehaviour
 {
     Animator AnimZombie;
+   
     public float Timepassed;
     public float Timecheck;
     //public float prevOxeHallo;
@@ -291,7 +292,7 @@ public class Lara : MonoBehaviour
                 this.Food -= 0.5f;
                 Marko.Food += 0.5f;
               //  OxetocinInMarkoForLara += 0.5f;
-                AddReward(0.25f);
+                AddReward(1f);
             }
             //if (Marko.RLForLara > 0)
             //{
@@ -310,6 +311,7 @@ public class Lara : MonoBehaviour
         //Sharing with hallo
         if (action == 6 && DistanceWithHallo <= 1.42f /*&& OxetocinForHallo >= 2*/)
         {
+            Hallo.interactionWithLara++;
             if (Food > 0)
             {
                 this.Food -= 0.5f;
