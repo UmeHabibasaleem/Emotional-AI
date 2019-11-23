@@ -7112,8 +7112,7 @@ MonoBehaviour:
   m_EditorClassIdentifier: 
   Timepassed: 0
   Timecheck: 0
-  prevOxeHallo: 0
-  prevOxeMarko: 0
+  id: 1
   Food: 0
   Health: 0
   action: 0
@@ -7123,15 +7122,11 @@ MonoBehaviour:
   FoodFiller: {fileID: 930397511}
   HealthFiller: {fileID: 1334489972}
   Reward: 0
-  OxetocinForHallo: 2
   dist: 0
   Marko: {fileID: 1110879088}
   Hallo: {fileID: 2139491918}
   LaraModel: {fileID: 1779657706}
   Dopamin: 3
-  OxetocinForMarko: 2
-  OxetocinInHalloForLara: 0
-  OxetocinInMarkoForLara: 0
   Coin1: {fileID: 1556172671}
   Coin2: {fileID: 1203544610}
   Coin3: {fileID: 1707372164}
@@ -33940,6 +33935,65 @@ Transform:
   m_Father: {fileID: 652543057}
   m_RootOrder: 2
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
+--- !u!1 &1079298143
+GameObject:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  serializedVersion: 6
+  m_Component:
+  - component: {fileID: 1079298145}
+  - component: {fileID: 1079298144}
+  m_Layer: 0
+  m_Name: GameAcademy
+  m_TagString: Untagged
+  m_Icon: {fileID: 0}
+  m_NavMeshLayer: 0
+  m_StaticEditorFlags: 0
+  m_IsActive: 1
+--- !u!114 &1079298144
+MonoBehaviour:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1079298143}
+  m_Enabled: 1
+  m_EditorHideFlags: 0
+  m_Script: {fileID: 11500000, guid: 1fb968f056d096e4bba33b4898d7d59b, type: 3}
+  m_Name: 
+  m_EditorClassIdentifier: 
+  broadcastHub:
+    broadcastingBrains:
+    - {fileID: 11400000, guid: 8f9e9811af0dae6498bb725419741b26, type: 2}
+    _brainsToControl: []
+  maxSteps: 0
+  trainingConfiguration:
+    width: 80
+    height: 80
+    qualityLevel: 1
+    timeScale: 100
+    targetFrameRate: -1
+  inferenceConfiguration:
+    width: 1280
+    height: 720
+    qualityLevel: 5
+    timeScale: 1
+    targetFrameRate: 60
+  resetParameters:
+    resetParameters: []
+--- !u!4 &1079298145
+Transform:
+  m_ObjectHideFlags: 0
+  m_CorrespondingSourceObject: {fileID: 0}
+  m_PrefabInternal: {fileID: 0}
+  m_GameObject: {fileID: 1079298143}
+  m_LocalRotation: {x: 0, y: 0, z: 0, w: 1}
+  m_LocalPosition: {x: 9.02, y: 0.5867025, z: -8.399325}
+  m_LocalScale: {x: 1, y: 1, z: 1}
+  m_Children: []
+  m_Father: {fileID: 0}
+  m_RootOrder: 18
+  m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
 --- !u!1 &1088420160
 GameObject:
   m_ObjectHideFlags: 0
@@ -38907,11 +38961,22 @@ MonoBehaviour:
   m_Script: {fileID: 11500000, guid: dd6540c146c8e93428bed6dd6f380ca2, type: 3}
   m_Name: 
   m_EditorClassIdentifier: 
+  brain: {fileID: 11400000, guid: 8f9e9811af0dae6498bb725419741b26, type: 2}
+  agentParameters:
+    agentCameras: []
+    agentRenderTextures: []
+    maxStep: 0
+    resetOnDone: 1
+    onDemandDecision: 0
+    numberOfActionsBetweenDecisions: 1
   Timepassed: 0
   Lara: {fileID: 231043910}
+  Agentid: 2
   Food: 0
+  PrevFood: 10
   Health: 0
   action: 0
+  py: {fileID: 0}
   Food1: {fileID: 877429408}
   Food2: {fileID: 1101065285}
   Food3: {fileID: 1185085739}
@@ -38919,15 +38984,9 @@ MonoBehaviour:
   HealthFiller: {fileID: 1618439389}
   prevOxeHallo: 0
   prevOxeLara: 0
-  OxetocinInHalloForMarko: 0
-  OxetocinInLaraForMarko: 0
   Marko: {fileID: 206284176}
   dist: 0
   Hallo: {fileID: 2139491918}
-  Dopamin: 3
-  OxetocinForHallo: 2
-  OxetocinForLara: 2
-  Reward: 0
   Coin1: {fileID: 1556172671}
   Coin2: {fileID: 1203544610}
   Coin3: {fileID: 1707372164}
@@ -72161,6 +72220,17 @@ Prefab:
       propertyPath: ParticlesContainer
       value: 
       objectReference: {fileID: 2021992685}
+    - target: {fileID: 114910251880362912, guid: cd29bfc793d8948d19d5001b9c1b637f,
+        type: 2}
+      propertyPath: agentParameters.numberOfActionsBetweenDecisions
+      value: 1
+      objectReference: {fileID: 0}
+    - target: {fileID: 114910251880362912, guid: cd29bfc793d8948d19d5001b9c1b637f,
+        type: 2}
+      propertyPath: brain
+      value: 
+      objectReference: {fileID: 11400000, guid: 8f9e9811af0dae6498bb725419741b26,
+        type: 2}
     m_RemovedComponents: []
   m_SourcePrefab: {fileID: 100100000, guid: cd29bfc793d8948d19d5001b9c1b637f, type: 2}
   m_IsPrefabAsset: 0

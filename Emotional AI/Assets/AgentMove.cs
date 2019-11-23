@@ -2,9 +2,10 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using MLAgents;
 //2
 
-public class AgentMove : MonoBehaviour
+public class AgentMove : Agent
 {
     Animator AnimZombie;
     public int interactionWithLara;
@@ -12,7 +13,6 @@ public class AgentMove : MonoBehaviour
     public float Timepassed;
     public float Timecheck;
     public Lara Lara;
-    private float Reward;
     float speed = 3.0f;
     public float Food;
     public float Health;
@@ -76,15 +76,7 @@ public class AgentMove : MonoBehaviour
         this.AttackParticle.SetActive(false);
         Physics.IgnoreLayerCollision(11, 11);
     }
-    public void AddReward(float Reward)
-    {
-        this.Reward += Reward;
-    }
 
-    public void SetReward(float Reward)
-    {
-        this.Reward = Reward;
-    }
 
     // Use this for initialization
     void Start()
@@ -103,6 +95,32 @@ public class AgentMove : MonoBehaviour
         AgentStartingPos = this.transform.position;
     }
 
+
+    public override void CollectObservations()
+    {
+        AddVectorObs(Timepassed);
+        AddVectorObs(Lara.transform.position);
+        AddVectorObs(Food1.transform.position);
+        AddVectorObs(Food2.transform.position);
+        AddVectorObs(Food3.transform.position);
+        AddVectorObs(Marko.transform.position);
+        AddVectorObs(this.transform.position);
+        AddVectorObs(Food);
+        AddVectorObs(Health);
+        AddVectorObs(Coin1.transform.position);
+        AddVectorObs(Coin2.transform.position);
+        AddVectorObs(Coin3.transform.position);
+        AddVectorObs(Coin4.transform.position);
+        AddVectorObs(AIDkit1.transform.position);
+        AddVectorObs(AIDkit2.transform.position);
+        AddVectorObs(AttackParticle.transform.position);
+        AddVectorObs(ParticlesContainer.transform.position);
+        AddVectorObs(speed);
+        AddVectorObs(coin);
+        AddVectorObs(Coinseconds);
+        AddVectorObs(AnimZombie.transform.position);
+
+    }
     // Update is called once per frame
     void Update()
     {
@@ -171,10 +189,10 @@ public class AgentMove : MonoBehaviour
         float distWithLara = Vector3.Distance(Hallo.transform.position, Lara.transform.position);
         float distWithMarko = Vector3.Distance(Hallo.transform.position, Marko.transform.position);
         //Eat if interaction with Marko is more
-        if (action == 5 && once == false && (dist1 < 1.42 || dist2 < 1.42 || dist3 < 1.42) && seconds >= 5
-            && interactionWithMarko >= interactionWithLara
-            && interactionWithMarko > 0)
-        {
+        if (action == 5 && once == false && (dist1 < 1.42 || dist2 < 1.42 || dist3 < 1.42) /*&& seconds >= 5
+          && interactionWithMarko >= interactionWithLara
+           && interactionWithMarko > 0*/)
+           {
             Food++;
             this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
             once = true;
@@ -199,9 +217,9 @@ public class AgentMove : MonoBehaviour
 
 
         }
-        else if (action == 5 && once == false && (distWithLara < 1.42) && seconds >= 5
+        else if (action == 5 && once == false && (distWithLara < 1.42) /*&& seconds >= 5
             && interactionWithMarko >= interactionWithLara
-            && interactionWithMarko > 0)
+            && interactionWithMarko > 0*/)
         {
             Food++;
             if (FoodFiller.size.x < 1)
@@ -212,9 +230,9 @@ public class AgentMove : MonoBehaviour
             AddReward(+1.0f);
             once = true;
         }
-        else if (action == 5 && once == false && (distWithMarko < 1.42) && seconds >= 5
+        else if (action == 5 && once == false && (distWithMarko < 1.42) /*&& seconds >= 5
             && interactionWithMarko >= interactionWithLara
-            && interactionWithMarko > 0)
+            && interactionWithMarko > 0*/)
         {
             Food++;
 

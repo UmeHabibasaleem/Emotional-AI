@@ -1,11 +1,11 @@
 ﻿using System.Collections;
 using System.Collections.Generic;
 using TMPro;
-
 using UnityEngine;
+using MLAgents;
 
 
-public class MarkoScript : MonoBehaviour
+public class MarkoScript : Agent
 {
     Animator AnimZombie;
     public float Timepassed;
@@ -45,7 +45,7 @@ public class MarkoScript : MonoBehaviour
    // public float Dopamin = 1;
     //public float OxetocinForHallo = 2;
     //public float OxetocinForLara = 2;
-    public float Reward = 0;
+  
     ActionList l = new ActionList();
 
     //For Coin Colection
@@ -85,6 +85,31 @@ public class MarkoScript : MonoBehaviour
         Physics.IgnoreLayerCollision(11, 11);
     }
 
+    public override void CollectObservations()
+    {
+        AddVectorObs(Timepassed);
+        AddVectorObs(Lara.transform.position);
+        AddVectorObs(this.transform.position);
+        AddVectorObs(Food1.transform.position);
+        AddVectorObs(Food2.transform.position);
+        AddVectorObs(Food3.transform.position);
+        AddVectorObs(Hallo.transform.position);
+        AddVectorObs(Food);
+        AddVectorObs(Health);
+        AddVectorObs(Coin1.transform.position);
+        AddVectorObs(Coin2.transform.position);
+        AddVectorObs(Coin3.transform.position);
+        AddVectorObs(Coin4.transform.position);
+        AddVectorObs(AIDkit1.transform.position);
+        AddVectorObs(AIDkit2.transform.position);
+        AddVectorObs(AttackParticle.transform.position);
+        AddVectorObs(ParticlesContainer.transform.position);
+        AddVectorObs(speed);
+        AddVectorObs(coin);
+        AddVectorObs(Coinseconds);
+        AddVectorObs(AnimZombie.transform.position);
+
+    }
     // Use this for initialization
     void Start()
     {
@@ -368,16 +393,7 @@ public class MarkoScript : MonoBehaviour
 }
 
 
-    public void AddReward(float Reward)
-    {
-        this.Reward += Reward;
-    }
-
-    public void SetReward(float Reward)
-    {
-        this.Reward = Reward;
-    }
-
+    
     //public int Selfish()
     //{
     //    if (this.Dopamin > 5 && Lara.OxetocinForMarko < 4 && Hallo.OxetocinForMarko < 4)
@@ -423,6 +439,8 @@ public class MarkoScript : MonoBehaviour
             transform.position -= Vector3.left * Time.deltaTime * speed;
         }
     }
+
+
     void AgentReset()
     {
         Timepassed = 0;
@@ -434,7 +452,6 @@ public class MarkoScript : MonoBehaviour
         //Dopamin = 1;
         //OxetocinForHallo = 2;
         //OxetocinForLara = 2;
-        Reward = 0;
         healthKit = 0;
         seconds = 0;
         i = 0;
