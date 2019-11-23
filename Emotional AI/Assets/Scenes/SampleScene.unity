@@ -33981,6 +33981,19 @@ MonoBehaviour:
     targetFrameRate: 60
   resetParameters:
     resetParameters: []
+  Timepassed: 0
+  Lara: {fileID: 231043910}
+  Marko: {fileID: 1110879088}
+  MarkoFood: 0
+  MarkoHealth: 0
+  Hallo: {fileID: 2139491918}
+  HalloFood: 0
+  HalloHealth: 0
+  LaraFood: 0
+  LaraHealth: 0
+  Food1: {fileID: 877429408}
+  Food2: {fileID: 1101065285}
+  Food3: {fileID: 1185085739}
 --- !u!4 &1079298145
 Transform:
   m_ObjectHideFlags: 0
