@@ -154,7 +154,6 @@ public class AgentMove : Agent
         if (seconds == count)
         {
             count += 1;
-            action = Random.Range(0, 7);
             healthinc = false;
             once = false;
 
@@ -181,18 +180,69 @@ public class AgentMove : Agent
             }
             PrevFood = Food;
         }
+        if ((int)Timecheck == 5)
+        {
+            Food1.SetActive(true);
+            Food2.SetActive(true);
+            Food3.SetActive(true);
 
+        }
+
+        if (Food - PrevFood == 1 && healthinc == false)
+        {
+            Health += 0.5f;
+            this.HealthFiller.size = new Vector2(this.HealthFiller.size.x + 0.02f, this.HealthFiller.size.y);
+            healthinc = true;
+        }
+        //Run Agent Animation 
+        //  if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.A))
+        Cointime = Cointime + Time.deltaTime;
+        Coinseconds = (int)Cointime;
+        numberofCoins = numberofCoins + coin.coin_production(Coinseconds, Hallo, Coin1, Coin2, Coin3, Coin4);
+        healthKit = Aidkit.AIDKIT(Coinseconds, Hallo, AIDkit1, AIDkit2);
+        if (healthKit > 0)
+        {
+            Health += 0.5f;
+            this.HealthFiller.size = new Vector2(this.HealthFiller.size.x + 0.02f, this.HealthFiller.size.y);
+            healthKit = 0;
+        }
+        if (Coinseconds == 10)
+        {
+            Cointime = 0;
+            Coinseconds = 0;
+        }
+
+    }
+
+    public override void AgentAction(float[] vectorAction, string textAction)
+    {
+
+        action = Mathf.FloorToInt(vectorAction[0]);
         float CoinDist = Vector3.Distance(Hallo.transform.position, Coin1.transform.position);
         float dist1 = Vector3.Distance(Hallo.transform.position, Food1.transform.position);
         float dist2 = Vector3.Distance(Hallo.transform.position, Food2.transform.position);
         float dist3 = Vector3.Distance(Hallo.transform.position, Food3.transform.position);
-        float distWithLara = Vector3.Distance(Hallo.transform.position, Lara.transform.position);
-        float distWithMarko = Vector3.Distance(Hallo.transform.position, Marko.transform.position);
+        float DistanceWithMarko = Vector3.Distance(this.transform.position, Marko.transform.position);
+        float distanceWithLara = Vector3.Distance(this.transform.position, Lara.transform.position);
+
+        if (action == 0)
+        {
+            AnimZombie.SetTrigger("idle");
+        }
+
+        //Movement
+        if (action == 1 || action == 2 || action == 3 || action == 4)
+        {
+            AnimZombie.SetTrigger("run");
+
+        }
+
+
         //Eat if interaction with Marko is more
         if (action == 5 && once == false && (dist1 < 1.42 || dist2 < 1.42 || dist3 < 1.42) /*&& seconds >= 5
           && interactionWithMarko >= interactionWithLara
            && interactionWithMarko > 0*/)
-           {
+        {
             Food++;
             this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
             once = true;
@@ -217,7 +267,7 @@ public class AgentMove : Agent
 
 
         }
-        else if (action == 5 && once == false && (distWithLara < 1.42) /*&& seconds >= 5
+        else if (action == 5 && once == false && (distanceWithLara < 1.42) /*&& seconds >= 5
             && interactionWithMarko >= interactionWithLara
             && interactionWithMarko > 0*/)
         {
@@ -230,7 +280,7 @@ public class AgentMove : Agent
             AddReward(+1.0f);
             once = true;
         }
-        else if (action == 5 && once == false && (distWithMarko < 1.42) /*&& seconds >= 5
+        else if (action == 5 && once == false && (DistanceWithMarko < 1.42) /*&& seconds >= 5
             && interactionWithMarko >= interactionWithLara
             && interactionWithMarko > 0*/)
         {
@@ -245,71 +295,7 @@ public class AgentMove : Agent
             once = true;
         }
 
-
-        if ((int)Timecheck == 5)
-        {
-            Food1.SetActive(true);
-            Food2.SetActive(true);
-            Food3.SetActive(true);
-
-        }
-
-        if (Food - PrevFood == 1 && healthinc == false)
-        {
-            Health += 0.5f;
-            this.HealthFiller.size = new Vector2(this.HealthFiller.size.x + 0.02f, this.HealthFiller.size.y);
-            healthinc = true;
-        }
-        //Run Agent Animation 
-      //  if (Input.GetKeyDown(KeyCode.UpArrow) || Input.GetKeyDown(KeyCode.DownArrow) || Input.GetKeyDown(KeyCode.LeftArrow) || Input.GetKeyDown(KeyCode.RightArrow) || Input.GetKeyDown(KeyCode.A))
-         if (action == 1 || action == 2 || action == 3 || action == 4)
-        {
-            AnimZombie.SetTrigger("run");
-
-        }
-
-        //Stop Agent Animation
-        // if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.A))
-        if (action == 0)
-        {
-            AnimZombie.SetTrigger("idle");
-        }
-
-        //Attack Agent Animation
-        //if (Input.GetKeyDown(KeyCode.A))
-        if (action == 7)
-        {
-            AnimZombie.SetTrigger("attack");
-            bulletfire.ShootBullet(AttackParticle, Player, ParticlesContainer);
-        }
-        if (Vector3.Distance(this.transform.position, Marko.transform.position) < 3)
-        {
-            transform.LookAt(Marko.transform.position);
-            AnimZombie.SetTrigger("attack");
-            bulletfire.ShootBullet(AttackParticle, Player, ParticlesContainer);
-            Marko.Food--;
-            if (Marko.FoodFiller.size.x > 0)
-            {
-                Marko.FoodFiller.size = new Vector2(Marko.FoodFiller.size.x - 0.02f, Marko.FoodFiller.size.y);
-            }
-
-
-        }
-        if (Vector3.Distance(this.transform.position, Lara.transform.position) < 3)
-        {
-            transform.LookAt(Lara.transform.position);
-            AnimZombie.SetTrigger("attack");
-            bulletfire.ShootBullet(AttackParticle, Player, ParticlesContainer);
-            Lara.Food--;
-            //Lara.FoodFiller.size = new Vector2(Lara.FoodFiller.size.x - 0.02f, Lara.FoodFiller.size.y);
-            if (Lara.FoodFiller.size.x > 0)
-            {
-                Lara.FoodFiller.size = new Vector2(Lara.FoodFiller.size.x - 0.02f, Lara.FoodFiller.size.y);
-            }
-        }
-        float DistanceWithMarko = Vector3.Distance(this.transform.position, Marko.transform.position);
-        float distanceWithLara = Vector3.Distance(this.transform.position, Lara.transform.position);
-
+        //Sharing Action
         if (action == 6 && DistanceWithMarko <= 1.42f && seconds >= 5 && interactionWithMarko <= interactionWithLara)
         {
             this.Food -= 0.5f;
@@ -339,20 +325,21 @@ public class AgentMove : Agent
                 Marko.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
             }
         }
-        Cointime = Cointime + Time.deltaTime;
-        Coinseconds = (int)Cointime;
-        numberofCoins = numberofCoins + coin.coin_production(Coinseconds, Hallo, Coin1, Coin2, Coin3, Coin4);
-        healthKit = Aidkit.AIDKIT(Coinseconds, Hallo, AIDkit1, AIDkit2);
-        if (healthKit > 0)
+
+        //Attack Agent Animation
+        //if (Input.GetKeyDown(KeyCode.A))
+        if (Marko.action == 7 && Vector3.Distance(this.transform.position, Marko.transform.position) < 3)
         {
-            Health += 0.5f;
-            this.HealthFiller.size = new Vector2(this.HealthFiller.size.x + 0.02f, this.HealthFiller.size.y);
-            healthKit = 0;
-        }
-        if (Coinseconds == 10)
-        {
-            Cointime = 0;
-            Coinseconds = 0;
+            transform.LookAt(Marko.transform.position);
+            AnimZombie.SetTrigger("attack");
+            bulletfire.ShootBullet(AttackParticle, Player, ParticlesContainer);
+            Food--;
+            if (FoodFiller.size.x > 0)
+            {
+                FoodFiller.size = new Vector2(FoodFiller.size.x - 0.02f, FoodFiller.size.y);
+            }
+
+
         }
 
     }
