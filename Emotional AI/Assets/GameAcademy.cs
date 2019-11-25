@@ -15,6 +15,9 @@ public class GameAcademy : Academy {
     public float HalloHealth;
     public float LaraFood;
     public float LaraHealth;
+    public GameObject MarkoAgent;
+    public GameObject LaraAgent;
+    public GameObject HalloAgent;
     int seconds = 0;
    // public PythonCommunicator py;
     int i = 0;
@@ -31,10 +34,82 @@ public class GameAcademy : Academy {
         HalloFood = Hallo.Food;
         HalloHealth = Hallo.Health;
     }
-    public void SetEnvironment()
-    { }
+    /*public void SetEnvironment()
+    { } */
     public override void AcademyReset()
-    { }
+    {
+        MarkoAgent.SetActive(true);
+        LaraAgent.SetActive(true);
+        HalloAgent.SetActive(true);
+
+        Marko.Timepassed = 0;
+        Lara.Timepassed = 0;
+        Hallo.Timepassed = 0;
+
+        Marko.Food = 10;
+        Lara.Food = 10;
+        Hallo.Food = 10;
+
+        Marko.Health = 10;
+        Lara.Health = 10;
+        Hallo.Health = 10;
+
+        Marko.healthinc = false;
+        Lara.healthinc = false;
+        Hallo.healthinc = false;
+
+        Food3.SetActive(false);
+        
+        Marko.numberofCoins = 0;
+        Lara.numberofCoins = 0;
+        Hallo.numberofCoins = 0;
+        //Dopamin = 1;
+        //OxetocinForHallo = 2;
+        //OxetocinForLara = 2;
+        Marko.healthKit = 0;
+        Lara.healthKit = 0;
+        Hallo.healthKit = 0;
+
+        Marko.seconds = 0;
+        Lara.seconds = 0;
+        Hallo.seconds = 0;
+
+        Marko.i = 0;
+        Lara.i = 0;
+        Hallo.i = 0;
+
+        Marko.count = 0;
+        Lara.count = 0;
+        Hallo.count = 0;
+
+        Marko.Cointime = 0;
+        Lara.Cointime = 0;
+        Hallo.Cointime = 0;
+
+        Marko.PrevFood = 10;
+        Lara.PrevFood = 10;
+        Hallo.PrevFood = 10;
+
+        Marko.once = false;
+        Lara.once = false;
+        Hallo.once = false;
+        //OxetocinInHalloForMarko = 0;
+        //OxetocinInLaraForMarko = 0;
+        
+        //this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
+        Marko.transform.position = Marko.AgentStartingPos;
+        Lara.transform.position = Lara.AgentStartingPos;
+        Hallo.transform.position = Hallo.AgentStartingPos;
+
+        Marko.FoodZerotimeSec = 0;
+        Lara.FoodZerotimeSec = 0;
+        Hallo.FoodZerotimeSec = 0;
+
+        Marko.FoodZerotime = 0;
+        Lara.FoodZerotime = 0;
+        Hallo.FoodZerotime = 0;
+
+    }
 
     public override void AcademyStep()
     {

@@ -17,9 +17,9 @@ public class AgentMove : Agent
     public float Food;
     public float Health;
     public int action;
-    int seconds = 0;
-    int i = 0;
-    int count = 0;
+    public int seconds = 0;
+    public int i = 0;
+    public int count = 0;
     public GameObject Food1;
     public GameObject Food2;
     public GameObject Food3;
@@ -27,10 +27,10 @@ public class AgentMove : Agent
     public SpriteRenderer FoodFiller;
     public SpriteRenderer HealthFiller;
     public GameObject Hallo;
-    float PrevFood = 10;
-    float Pfood;
-    bool once = false;
-    bool healthinc;
+    public float PrevFood = 10;
+    public float Pfood;
+    public bool once = false;
+    public bool healthinc;
     public float dist;
     public MarkoScript Marko;
     public GameObject Coin1;
@@ -62,9 +62,10 @@ public class AgentMove : Agent
     public GameObject ParticlesContainer;
     BulletFire bulletfire;
 
-    float FoodZerotimeSec = 0;
-    int FoodZerotime = 0;
-    Vector3 AgentStartingPos;
+    public float FoodZerotimeSec = 0;
+    public int FoodZerotime = 0;
+    public Vector3 AgentStartingPos;
+    private GameAcademy academy;
 
     //Rivalary Levels
     public float RLForMarko;
@@ -81,7 +82,7 @@ public class AgentMove : Agent
     // Use this for initialization
     void Start()
     {
-
+        academy = FindObjectOfType(typeof(GameAcademy)) as GameAcademy;
         Timepassed = 0;
         Timecheck = 0;
         Food = 10;
@@ -133,16 +134,17 @@ public class AgentMove : Agent
                 Health = 0;
             }
         }
-        if (DieAgent.HalloLive == true)
+       /* if (DieAgent.HalloLive == true)
         {
             AgentReset();
-        }
+        } */
 
         // DeadTime
         if (this.Health <= 0)
         {
-            DieAgent.HalloDied = true;
-            Player.active = false;
+            Hallo.SetActive(false);
+          //  DieAgent.HalloDied = true;
+          //  Player.active = false;
         }
 
         Vector3 targetPos = Hallo.transform.position;
@@ -379,7 +381,7 @@ public class AgentMove : Agent
         }
 
     }
-    void AgentReset()
+  /*  void AgentReset()
     {
         Timepassed = 0;
         Timecheck = 0;
@@ -404,5 +406,5 @@ public class AgentMove : Agent
         FoodZerotime = 0;
         interactionWithLara = 0;
         interactionWithMarko = 0;
-    }
+    } */
 }

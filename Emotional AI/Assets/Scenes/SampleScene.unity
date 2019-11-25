@@ -7116,12 +7116,19 @@ MonoBehaviour:
   Food: 0
   Health: 0
   action: 0
+  seconds: 0
+  i: 0
+  count: 0
   Food1: {fileID: 877429408}
   Food2: {fileID: 1101065285}
   Food3: {fileID: 1185085739}
   FoodFiller: {fileID: 930397511}
   HealthFiller: {fileID: 1334489972}
   Reward: 0
+  PrevFood: 10
+  Pfood: 0
+  once: 0
+  healthinc: 0
   dist: 0
   Marko: {fileID: 1110879088}
   Hallo: {fileID: 2139491918}
@@ -7140,6 +7147,9 @@ MonoBehaviour:
   Player: {fileID: 231043908}
   AttackParticle: {fileID: 1395963316}
   ParticlesContainer: {fileID: 816201663}
+  FoodZerotimeSec: 0
+  FoodZerotime: 0
+  AgentStartingPos: {x: 0, y: 0, z: 0}
 --- !u!95 &231043911
 Animator:
   serializedVersion: 3
@@ -33991,6 +34001,9 @@ MonoBehaviour:
   HalloHealth: 0
   LaraFood: 0
   LaraHealth: 0
+  MarkoAgent: {fileID: 478624124}
+  LaraAgent: {fileID: 1779657706}
+  HalloAgent: {fileID: 1933964378}
   Food1: {fileID: 877429408}
   Food2: {fileID: 1101065285}
   Food3: {fileID: 1185085739}
@@ -38989,7 +39002,10 @@ MonoBehaviour:
   PrevFood: 10
   Health: 0
   action: 0
+  seconds: 0
   py: {fileID: 0}
+  i: 0
+  count: 0
   Food1: {fileID: 877429408}
   Food2: {fileID: 1101065285}
   Food3: {fileID: 1185085739}
@@ -38998,6 +39014,9 @@ MonoBehaviour:
   prevOxeHallo: 0
   prevOxeLara: 0
   Marko: {fileID: 206284176}
+  Pfood: 0
+  once: 0
+  healthinc: 0
   dist: 0
   Hallo: {fileID: 2139491918}
   Coin1: {fileID: 1556172671}
@@ -39005,6 +39024,7 @@ MonoBehaviour:
   Coin3: {fileID: 1707372164}
   Coin4: {fileID: 484664293}
   numberofCoins: 0
+  coin: {fileID: 0}
   Cointime: 0
   Coinseconds: 0
   AIDkit1: {fileID: 1192714099}
@@ -39013,6 +39033,9 @@ MonoBehaviour:
   Player: {fileID: 1110879083}
   AttackParticle: {fileID: 1092248425}
   ParticlesContainer: {fileID: 1353316446}
+  FoodZerotimeSec: 0
+  FoodZerotime: 0
+  AgentStartingPos: {x: 0, y: 0, z: 0}
 --- !u!95 &1110879089
 Animator:
   serializedVersion: 3

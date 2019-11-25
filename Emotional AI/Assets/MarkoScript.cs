@@ -16,10 +16,10 @@ public class MarkoScript : Agent
     public float PrevFood = 10;
     public float Health;
     public int action;
-    int seconds = 0;
+    public int seconds = 0;
     public PythonCommunicator py;
-    int i = 0;
-    int count = 0;
+    public int i = 0;
+    public int count = 0;
     public GameObject Food1;
     public GameObject Food2;
     public GameObject Food3;
@@ -37,9 +37,9 @@ public class MarkoScript : Agent
     //float PrevFoodForDopamin = 0;
     public GameObject Marko;
 
-    float Pfood;
-    bool once = false;
-    bool healthinc;
+    public float Pfood;
+    public bool once = false;
+    public bool healthinc;
     public float dist;
     public AgentMove Hallo;
     // public float Dopamin = 1;
@@ -54,7 +54,7 @@ public class MarkoScript : Agent
     public GameObject Coin3;
     public GameObject Coin4;
     public int numberofCoins = 0;
-    Coin coin;
+    public Coin coin;
     public float Cointime = 0;
     public int Coinseconds;
     //Rivalary Levels
@@ -73,12 +73,12 @@ public class MarkoScript : Agent
     public GameObject ParticlesContainer;
     //public PythonCommunicator py;
 
-    float FoodZerotimeSec = 0;
-    int FoodZerotime = 0;
+    public float FoodZerotimeSec = 0;
+    public int FoodZerotime = 0;
     BulletFire bulletfire;
 
-    Vector3 AgentStartingPos;
-
+    public Vector3 AgentStartingPos;
+    private GameAcademy academy;
     private void Awake()
     {
         this.AttackParticle.SetActive(false);
@@ -113,6 +113,7 @@ public class MarkoScript : Agent
     // Use this for initialization
     void Start()
     {
+        academy = FindObjectOfType(typeof(GameAcademy)) as GameAcademy;
         //   OxetocinInHalloForMarko = 0;
         // OxetocinInLaraForMarko = 0;
         coin = new Coin();
@@ -141,16 +142,17 @@ public class MarkoScript : Agent
                 Health = 0;
             }
         }
-        if (DieAgent.MarkoLive == true)
+      /*  if (DieAgent.MarkoLive == true)
         {
             AgentReset();
-        }
+        }*/
 
         // DeadTime
         if (this.Health <= 0)
         {
-            DieAgent.MarkoDied = true;
-            Player.active = false;
+            Marko.SetActive(false);
+            // DieAgent.MarkoDied = true;
+            // Player.active = false;
         }
         Vector3 targetPos = AnimZombie.transform.position;
         Timepassed += Time.deltaTime;
@@ -340,7 +342,7 @@ public class MarkoScript : Agent
     }
 
 
-    void AgentReset()
+  /*  void AgentReset()
     {
         Timepassed = 0;
         Food = 10;
@@ -365,7 +367,7 @@ public class MarkoScript : Agent
         this.transform.position = AgentStartingPos;
         FoodZerotimeSec = 0;
         FoodZerotime = 0;
-    }
+    } */
 
 
 }

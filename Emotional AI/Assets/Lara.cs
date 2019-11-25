@@ -18,9 +18,9 @@ public class Lara : MonoBehaviour
     public float Food;
     public float Health;
     public int action;
-    int seconds = 0;
-    int i = 0;
-    int count = 0;
+    public int seconds = 0;
+    public int i = 0;
+    public int count = 0;
     public GameObject Food1;
     public GameObject Food2;
     public GameObject Food3;
@@ -30,10 +30,10 @@ public class Lara : MonoBehaviour
     public float Reward;
 
     //public float OxetocinForHallo;
-    float PrevFood = 10;
-    float Pfood;
-    bool once = false;
-    bool healthinc;
+    public float PrevFood = 10;
+    public float Pfood;
+    public bool once = false;
+    public bool healthinc;
     public float dist;
     public MarkoScript Marko;
     public AgentMove Hallo;
@@ -70,9 +70,10 @@ public class Lara : MonoBehaviour
     public GameObject ParticlesContainer;
     BulletFire bulletfire;
 
-    float FoodZerotimeSec = 0;
-    int FoodZerotime = 0;
-    Vector3 AgentStartingPos;
+    public float FoodZerotimeSec = 0;
+    public int FoodZerotime = 0;
+    public Vector3 AgentStartingPos;
+    private GameAcademy academy;
 
     //Rivalary Levels
     //public float RLForMarko;
@@ -88,6 +89,7 @@ public class Lara : MonoBehaviour
     // Use this for initialization
     void Start()
     {
+        academy = FindObjectOfType(typeof(GameAcademy)) as GameAcademy;
         Reward = 0;
         Timepassed = 0;
         Timecheck = 0;
@@ -129,16 +131,17 @@ public class Lara : MonoBehaviour
                 Health = 0;
             }
         }
-        if (DieAgent.LaraLive == true)
+      /*  if (DieAgent.LaraLive == true)
         {
             AgentReset();
-        }
+        } */
 
         // DeadTime
         if (this.Health <= 0)
         {
-            DieAgent.LaraDied = true;
-            Player.active = false;
+            LaraModel.SetActive(false);
+           // DieAgent.LaraDied = true;
+           // Player.active = false;
         }
         Vector3 targetPos = AnimZombie.transform.position;
         Timepassed += Time.deltaTime;
@@ -411,7 +414,7 @@ public class Lara : MonoBehaviour
             transform.position -= Vector3.left * Time.deltaTime * speed;
         }
     }
-    void AgentReset()
+   /* void AgentReset()
     {
         Timepassed = 0;
         Timecheck = 0;
@@ -434,5 +437,5 @@ public class Lara : MonoBehaviour
         this.transform.position = AgentStartingPos;
         FoodZerotimeSec = 0;
         FoodZerotime = 0;
-    }
+    } */
 }
