@@ -2,9 +2,14 @@
 using System.Collections.Generic;
 using UnityEngine;
 using MLAgents;
+using System.Text;
+using System.IO;
 public class GameAcademy : Academy {
 
     Animator AnimZombie;
+    public static int larafile = 1;
+    public static int markofile = 11;
+    public static int moveagentfile = 21;
     public float Timepassed;
     public Lara Lara;
     public MarkoScript Marko;
@@ -58,7 +63,7 @@ public class GameAcademy : Academy {
         Lara.healthinc = false;
         Hallo.healthinc = false;
 
-        Food3.SetActive(false);
+        //Food3.SetActive(false);
         
         Marko.numberofCoins = 0;
         Lara.numberofCoins = 0;
@@ -108,6 +113,11 @@ public class GameAcademy : Academy {
         Marko.FoodZerotime = 0;
         Lara.FoodZerotime = 0;
         Hallo.FoodZerotime = 0;
+        SaveData(MarkoScript.rowData, markofile);
+        SaveData(Lara.rowData , larafile);
+        markofile++;
+        larafile++;
+
 
     }
 
@@ -121,5 +131,30 @@ public class GameAcademy : Academy {
            Done();        
         }
     }
+
+    public void SaveData(List<string[]> rowData , int counter)
+    {
+        string[][] output = new string[rowData.Count][];
+
+        for (int i = 0; i < output.Length; i++)
+        {
+            output[i] = Lara.rowData[i];
+        }
+
+        int length = output.GetLength(0);
+        string delimiter = ",";
+
+        StringBuilder sb = new StringBuilder();
+
+        for (int index = 0; index < length; index++)
+            sb.AppendLine(string.Join(delimiter, output[index]));
+
+
+        string filePath = "C:/" + "/CSV/" + counter+"Saved_data.csv";
+        StreamWriter outStream = System.IO.File.CreateText(filePath);
+        outStream.WriteLine(sb);
+        outStream.Close();
+
     }
+ }
 

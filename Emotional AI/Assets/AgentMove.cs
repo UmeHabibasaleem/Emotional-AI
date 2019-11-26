@@ -7,12 +7,13 @@ using MLAgents;
 
 public class AgentMove : Agent
 {
-    Animator AnimZombie;
+    public Animator AnimZombie;
     public int interactionWithLara;
     public int interactionWithMarko;
     public float Timepassed;
     public float Timecheck;
     public Lara Lara;
+    public int Agentid = 3;
     float speed = 3.0f;
     public float Food;
     public float Health;
@@ -60,7 +61,7 @@ public class AgentMove : Agent
     public GameObject Player;
     public GameObject AttackParticle;
     public GameObject ParticlesContainer;
-    BulletFire bulletfire;
+    public BulletFire bulletfire;
 
     public float FoodZerotimeSec = 0;
     public int FoodZerotime = 0;
@@ -99,12 +100,13 @@ public class AgentMove : Agent
 
     public override void CollectObservations()
     {
+        AddVectorObs(Agentid);
         AddVectorObs(Timepassed);
         AddVectorObs(Lara.transform.position);
+        AddVectorObs(Marko.transform.position);
         AddVectorObs(Food1.transform.position);
         AddVectorObs(Food2.transform.position);
         AddVectorObs(Food3.transform.position);
-        AddVectorObs(Marko.transform.position);
         AddVectorObs(this.transform.position);
         AddVectorObs(Food);
         AddVectorObs(Health);

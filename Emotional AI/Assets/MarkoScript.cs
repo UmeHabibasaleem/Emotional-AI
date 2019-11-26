@@ -7,7 +7,9 @@ using MLAgents;
 
 public class MarkoScript : Agent
 {
-    Animator AnimZombie;
+
+    public static List<string[]> rowData = new List<string[]>();
+    public Animator AnimZombie;
     public float Timepassed;
     public Lara Lara;
     float speed = 5.0f;
@@ -75,7 +77,7 @@ public class MarkoScript : Agent
 
     public float FoodZerotimeSec = 0;
     public int FoodZerotime = 0;
-    BulletFire bulletfire;
+    public BulletFire bulletfire;
 
     public Vector3 AgentStartingPos;
     private GameAcademy academy;
@@ -87,6 +89,7 @@ public class MarkoScript : Agent
 
     public override void CollectObservations()
     {
+        AddVectorObs(Agentid);
         AddVectorObs(Timepassed);
         AddVectorObs(Lara.transform.position);
         AddVectorObs(this.transform.position);
@@ -127,6 +130,30 @@ public class MarkoScript : Agent
         bulletfire = new BulletFire();
         py = new PythonCommunicator();
         AgentStartingPos = this.transform.position;
+        string[] rowDataTemp = new string[22];
+        rowDataTemp[0] = "Agentid";
+        rowDataTemp[1] = "TimePassed";
+        rowDataTemp[2] = "LaraPosition";
+        rowDataTemp[3] = "MarkoPosition";
+        rowDataTemp[4] = "Food1Position";
+        rowDataTemp[5] = "Food2Position";
+        rowDataTemp[6] = "Food3Position";
+        rowDataTemp[7] = "HalloPosition";
+        rowDataTemp[8] = "Food";
+        rowDataTemp[9] = "Health";
+        rowDataTemp[10] = "Coin1Position";
+        rowDataTemp[11] = "Coin2Position";
+        rowDataTemp[12] = "Coin3Position";
+        rowDataTemp[13] = "Coin4Position";
+        rowDataTemp[14] = "Aidkit1Position";
+        rowDataTemp[15] = "Aidkit2Position";
+        rowDataTemp[16] = "AttackParticlePosition";
+        rowDataTemp[17] = "ParticleContainPosition";
+        rowDataTemp[18] = "Speed";
+        rowDataTemp[19] = "Coin";
+        rowDataTemp[20] = "CoinSeconds";
+        rowDataTemp[21] = "AgentAnimePosition";
+        rowData.Add(rowDataTemp);
     }
 
     // Update is called once per frame
@@ -232,10 +259,10 @@ public class MarkoScript : Agent
         dist = dist1;
 
         //Eat action
-        float dist2 = Vector3.Distance(Hallo.transform.position, Food2.transform.position);
-        float dist3 = Vector3.Distance(Hallo.transform.position, Food3.transform.position);
-        float distWithLara = Vector3.Distance(Hallo.transform.position, Lara.transform.position);
-        float distWithHallo = Vector3.Distance(Hallo.transform.position, Hallo.transform.position);
+        float dist2 = Vector3.Distance(Marko.transform.position, Food2.transform.position);
+        float dist3 = Vector3.Distance(Marko.transform.position, Food3.transform.position);
+        float distWithLara = Vector3.Distance(Marko.transform.position, Lara.transform.position);
+        float distWithHallo = Vector3.Distance(Marko.transform.position, Hallo.transform.position);
 
         //Stop Agent Animation
         //    if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.A))
@@ -293,14 +320,40 @@ public class MarkoScript : Agent
             {
                 Food--;
             }
-            transform.LookAt(Hallo.transform.position);
-            AnimZombie.SetTrigger("attack");
-            bulletfire.ShootBullet(AttackParticle, Player, ParticlesContainer);
+            Hallo.transform.LookAt(this.transform.position);
+            Hallo.AnimZombie.SetTrigger("attack");
+            Hallo.bulletfire.ShootBullet(AttackParticle, Player, ParticlesContainer);
 
             //Increment in Rivalary level for Hallo
-            this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
+            if (FoodFiller.size.x > 0)
+            {
+                this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
+            }
         }
-
+        string[] rowDataTemp = new string[22];
+        rowDataTemp[0] = Agentid.ToString();
+        rowDataTemp[1] = Timepassed.ToString();
+        rowDataTemp[2] = this.transform.position.ToString();
+        rowDataTemp[3] = Marko.transform.position.ToString();
+        rowDataTemp[4] = Food1.transform.position.ToString();
+        rowDataTemp[5] = Food2.transform.position.ToString();
+        rowDataTemp[6] = Food3.transform.position.ToString();
+        rowDataTemp[7] = Hallo.transform.position.ToString();
+        rowDataTemp[8] = Food.ToString();
+        rowDataTemp[9] = Health.ToString();
+        rowDataTemp[10] = Coin1.transform.position.ToString();
+        rowDataTemp[11] = Coin2.transform.position.ToString();
+        rowDataTemp[12] = Coin3.transform.position.ToString();
+        rowDataTemp[13] = Coin4.transform.position.ToString();
+        rowDataTemp[14] = AIDkit1.transform.position.ToString();
+        rowDataTemp[15] = AIDkit2.transform.position.ToString();
+        rowDataTemp[16] = AttackParticle.transform.position.ToString();
+        rowDataTemp[17] = ParticlesContainer.transform.position.ToString();
+        rowDataTemp[18] = speed.ToString();
+        rowDataTemp[19] = coin.ToString();
+        rowDataTemp[20] = Coinseconds.ToString();
+        rowDataTemp[21] = AnimZombie.transform.position.ToString();
+        rowData.Add(rowDataTemp);
 
     }
     private void FixedUpdate()
