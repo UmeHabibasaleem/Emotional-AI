@@ -219,6 +219,38 @@ public class Lara : Agent
                 Marko.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
             }
         }
+
+
+
+        //Sharing with Hallo
+
+        if (action == 6 && distWithHallo <= 1.42f /*&& OxetocinForMarko >= 2*/)
+        {
+            if (Food > 0)
+            {
+                this.Food -= 0.5f;
+                Hallo.Food += 0.5f;
+                //  OxetocinInMarkoForLara += 0.5f;
+                AddReward(1f);
+            }
+            //if (Marko.RLForLara > 0)
+            //{
+            //    Marko.RLForLara -= 0.5f;
+            //}
+            if (this.FoodFiller.size.x > 0)
+            {
+                this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
+            }
+            if (Hallo.FoodFiller.size.x <= 1)
+            {
+                Hallo.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
+            }
+        }
+
+
+
+
+
         //Attacked By Hallo
         if (Hallo.action == 7 && Vector3.Distance(this.transform.position, Hallo.transform.position) < 3 /*&& AttackedByHallo && Hallo.OxetocinForMarko < 3*/)
         {

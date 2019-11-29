@@ -10,6 +10,7 @@ public class MarkoScript : Agent
 
     public static List<string[]> rowData = new List<string[]>();
     public Animator AnimZombie;
+    public float Timecheck;
     public float Timepassed;
     public Lara Lara;
     float speed = 5.0f;
@@ -120,6 +121,7 @@ public class MarkoScript : Agent
         //   OxetocinInHalloForMarko = 0;
         // OxetocinInLaraForMarko = 0;
         coin = new Coin();
+        Timecheck = 0;
         Timepassed = 0;
         Food = 10;
         //  PrevFoodForDopamin = 10;
@@ -183,13 +185,14 @@ public class MarkoScript : Agent
         }
         Vector3 targetPos = AnimZombie.transform.position;
         Timepassed += Time.deltaTime;
+        Timecheck += Time.deltaTime;
         seconds = (int)Timepassed;
         // action = py.AgentAction;
         if (seconds == count)
         {
             count += 1;
             healthinc = false;
-            once = false;
+           // once = false;
 
         }
         //after two seconds
@@ -276,19 +279,60 @@ public class MarkoScript : Agent
             AnimZombie.SetTrigger("run");
 
         }
+        if ((int)Timecheck == 5)
+        {
+            Food1.SetActive(true);
+            Food2.SetActive(true);
+            Food3.SetActive(true);
+            once = false;
+
+        }
 
         //Steal
         if (action == 5 && once == false && (dist1 < 1.42 || dist2 < 1.42 || dist3 < 1.42))
         {
             Food++;
-            if (FoodFiller.size.x < 1)
+
+            if (dist1 < 1.42)
             {
-                this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
+                
+                Food1.SetActive(false);
+                Timecheck = 0;
+                if (FoodFiller.size.x <= 1)
+                {
+                    this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
+                }
+                once = true;
+                AddReward(+1.0f);
+
             }
-            once = true;
-            AddReward(+1.0f);
+            else if (dist2 < 1.42f)
+            {
+                Food2.SetActive(false);
+                Timecheck = 0;
+                if (FoodFiller.size.x <= 1)
+                {
+                    this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
+                }
+                once = true;
+                AddReward(+1.0f);
+
+            }
+            else if (dist3 < 1.42f)
+            {
+                Food3.SetActive(false);
+                Timecheck = 0;
+                if (FoodFiller.size.x <= 1)
+                {
+                    this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
+                }
+                once = true;
+                AddReward(+1.0f);
+
+            }
+           
         }
-        else if (action == 5 && once == false && (distWithLara < 1.42))
+        else if (action == 5  && (distWithLara < 1.42))
         {
             Food++;
             if (FoodFiller.size.x < 1)
@@ -296,10 +340,14 @@ public class MarkoScript : Agent
                 this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
             }
             Lara.Food--;
+            if(Lara.FoodFiller.size.x > 0)
+            {
+                Lara.FoodFiller.size.x = new Vector2(Lara.FoodFiller.size.x - 0.02f, Lara.FoodFiller.size.y);
+            }
             AddReward(+1.0f);
-            once = true;
+          //  once = true;
         }
-        else if (action == 5 && once == false && (distWithHallo < 1.42))
+        else if (action == 5  && (distWithHallo < 1.42))
         {
             Food++;
             Hallo.interactionWithMarko++;
@@ -309,7 +357,11 @@ public class MarkoScript : Agent
                 this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
             }
             Hallo.Food--;
-            once = true;
+            if (Hallo.FoodFiller.size.x > 0)
+            {
+                Hallo.FoodFiller.size.x = new Vector2(Hallo.FoodFiller.size.x - 0.02f, Hallo.FoodFiller.size.y);
+            }
+           // once = true;
         }
         //Run Agent Animation 
 
