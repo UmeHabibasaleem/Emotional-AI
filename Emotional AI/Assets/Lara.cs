@@ -139,42 +139,54 @@ public class Lara : Agent
             AnimZombie.SetTrigger("run");
 
         }
+        //Eat 
         if (action == 5 && once == false && (dist1 < 1.42 || dist2 < 1.42 || dist3 < 1.42))
         {
             Food++;
-            if (FoodFiller.size.x <= 1)
+            
+            if (dist1 < 1.42)
             {
-                this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
+                Food1.SetActive(false);
+                Timecheck = 0;
+                if (FoodFiller.size.x <= 1)
+                {
+                    this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
+                }
+                once = true;
+
             }
-            once = true;
-            //if (dist1 < 1.42)
-            //{
-            //    Food1.SetActive(false);
-            //    Timecheck = 0;
+            else if (dist2 < 1.42f)
+            {
+                Food2.SetActive(false);
+                Timecheck = 0;
+                if (FoodFiller.size.x <= 1)
+                {
+                    this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
+                }
+                once = true;
 
-            //}
-            //else if (dist2 < 1.42f)
-            //{
-            //    Food2.SetActive(false);
-            //    Timecheck = 0;
+            }
+            else if (dist3 < 1.42f)
+            {
+                Food3.SetActive(false);
+                Timecheck = 0;
+                if (FoodFiller.size.x <= 1)
+                {
+                    this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
+                }
+                once = true;
 
-            //}
-            //else if (dist3 < 1.42f)
-            //{
-            //    Food3.SetActive(false);
-            //    Timecheck = 0;
-
-            //}
+            }
 
 
         }
-        //if ((int)Timecheck == 5)
-        //{
-        //    Food1.SetActive(true);
-        //    Food2.SetActive(true);
-        //    Food3.SetActive(true);
+        if ((int)Timecheck == 5)
+        {
+            Food1.SetActive(true);
+            Food2.SetActive(true);
+            Food3.SetActive(true);
 
-        //}
+        }
 
         if (Food - PrevFood == 1 && healthinc == false)
         {
