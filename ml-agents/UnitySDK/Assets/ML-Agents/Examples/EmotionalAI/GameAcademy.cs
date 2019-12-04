@@ -42,6 +42,8 @@ public class GameAcademy : Academy {
     { } */
     public override void AcademyReset()
     {
+        this.Timepassed = 0;
+        this.seconds = 0;
         MarkoAgent.SetActive(true);
         LaraAgent.SetActive(true);
         HalloAgent.SetActive(true);
@@ -127,12 +129,13 @@ public class GameAcademy : Academy {
             Lara.Done();
             Marko.Done();
             Hallo.Done();
+            AcademyReset();
+            SaveData(MarkoScript.rowData, markofile);
+            SaveData(Lara.rowData, larafile);
+            markofile++;
+            larafile++;
 
         }
-        SaveData(MarkoScript.rowData, markofile);
-        SaveData(Lara.rowData, larafile);
-        markofile++;
-        larafile++;
 
 
     }
@@ -143,7 +146,7 @@ public class GameAcademy : Academy {
 
         for (int i = 0; i < output.Length; i++)
         {
-            output[i] = Lara.rowData[i];
+            output[i] = rowData[i];
         }
 
         int length = output.GetLength(0);
@@ -155,7 +158,7 @@ public class GameAcademy : Academy {
             sb.AppendLine(string.Join(delimiter, output[index]));
 
 
-        string filePath = "C:/" + "/CSV1/" + counter+"Saved_data.csv";
+        string filePath = "E:/" + "/DATACSV1/" + counter+"Saved_data.csv";
         StreamWriter outStream = System.IO.File.CreateText(filePath);
         outStream.WriteLine(sb);
         outStream.Close();

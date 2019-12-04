@@ -81,7 +81,7 @@ public class AgentMove : Agent
 
 
     // Use this for initialization
-    void Start()
+    public override void InitializeAgent()
     {
         academy = FindObjectOfType(typeof(GameAcademy)) as GameAcademy;
         Timepassed = 0;
@@ -136,17 +136,17 @@ public class AgentMove : Agent
                 Health = 0;
             }
         }
-       /* if (DieAgent.HalloLive == true)
-        {
-            AgentReset();
-        } */
+        /* if (DieAgent.HalloLive == true)
+         {
+             AgentReset();
+         } */
 
         // DeadTime
         if (this.Health <= 0)
         {
             Hallo.SetActive(false);
-          //  DieAgent.HalloDied = true;
-          //  Player.active = false;
+            //  DieAgent.HalloDied = true;
+            //  Player.active = false;
         }
 
         Vector3 targetPos = Hallo.transform.position;
@@ -195,7 +195,10 @@ public class AgentMove : Agent
         if (Food - PrevFood == 1 && healthinc == false)
         {
             Health += 0.5f;
-            this.HealthFiller.size = new Vector2(this.HealthFiller.size.x + 0.02f, this.HealthFiller.size.y);
+            if (HealthFiller.size.x < 1)
+            {
+                this.HealthFiller.size = new Vector2(this.HealthFiller.size.x + 0.02f, this.HealthFiller.size.y);
+            }
             healthinc = true;
         }
         //Run Agent Animation 
@@ -207,7 +210,10 @@ public class AgentMove : Agent
         if (healthKit > 0)
         {
             Health += 0.5f;
-            this.HealthFiller.size = new Vector2(this.HealthFiller.size.x + 0.02f, this.HealthFiller.size.y);
+            if (HealthFiller.size.x < 1)
+            {
+                this.HealthFiller.size = new Vector2(this.HealthFiller.size.x + 0.02f, this.HealthFiller.size.y);
+            }
             healthKit = 0;
         }
         if (Coinseconds == 10)
@@ -334,9 +340,9 @@ public class AgentMove : Agent
         //if (Input.GetKeyDown(KeyCode.A))
         if (Marko.action == 7 && Vector3.Distance(this.transform.position, Marko.transform.position) < 3)
         {
-            transform.LookAt(Marko.transform.position);
-            AnimZombie.SetTrigger("attack");
-            bulletfire.ShootBullet(AttackParticle, Player, ParticlesContainer);
+            Marko.transform.LookAt(Marko.transform.position);
+            Marko.AnimZombie.SetTrigger("attack");
+            Marko.bulletfire.ShootBullet(AttackParticle, Player, ParticlesContainer);
             Food--;
             if (FoodFiller.size.x > 0)
             {
@@ -345,6 +351,22 @@ public class AgentMove : Agent
 
 
         }
+
+
+        if (Lara.action == 7 && Vector3.Distance(this.transform.position, Marko.transform.position) < 3)
+        {
+            Lara.transform.LookAt(Lara.transform.position);
+            Lara.AnimZombie.SetTrigger("attack");
+            Lara.bulletfire.ShootBullet(AttackParticle, Player, ParticlesContainer);
+            Food--;
+            if (FoodFiller.size.x > 0)
+            {
+                FoodFiller.size = new Vector2(FoodFiller.size.x - 0.02f, FoodFiller.size.y);
+            }
+
+
+        }
+
 
     }
     private void FixedUpdate()
@@ -383,30 +405,30 @@ public class AgentMove : Agent
         }
 
     }
-  /*  void AgentReset()
-    {
-        Timepassed = 0;
-        Timecheck = 0;
-        Food = 10;
-        Health = 10;
-        healthinc = false;
-        Food3.SetActive(false);
-        numberofCoins = 0;
-        Dopamin = 3;
-        OxetocinForMarko = 2;
-        OxetocinForLara = 2;
-        healthKit = 0;
-        seconds = 0;
-        i = 0;
-        count = 0;
-        Cointime = 0;
-        PrevFood = 10;
-        once = false;
-        DieAgent.HalloLive = false;
-        this.transform.position = AgentStartingPos;
-        FoodZerotimeSec = 0;
-        FoodZerotime = 0;
-        interactionWithLara = 0;
-        interactionWithMarko = 0;
-    } */
+    /*  void AgentReset()
+      {
+          Timepassed = 0;
+          Timecheck = 0;
+          Food = 10;
+          Health = 10;
+          healthinc = false;
+          Food3.SetActive(false);
+          numberofCoins = 0;
+          Dopamin = 3;
+          OxetocinForMarko = 2;
+          OxetocinForLara = 2;
+          healthKit = 0;
+          seconds = 0;
+          i = 0;
+          count = 0;
+          Cointime = 0;
+          PrevFood = 10;
+          once = false;
+          DieAgent.HalloLive = false;
+          this.transform.position = AgentStartingPos;
+          FoodZerotimeSec = 0;
+          FoodZerotime = 0;
+          interactionWithLara = 0;
+          interactionWithMarko = 0;
+      } */
 }

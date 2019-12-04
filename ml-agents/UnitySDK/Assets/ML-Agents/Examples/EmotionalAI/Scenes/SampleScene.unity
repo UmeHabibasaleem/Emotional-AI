@@ -7270,6 +7270,7 @@ MonoBehaviour:
     resetOnDone: 1
     onDemandDecision: 0
     numberOfActionsBetweenDecisions: 5
+  AnimZombie: {fileID: 0}
   Timepassed: 0
   Timecheck: 0
   Agentid: 1
@@ -7307,6 +7308,7 @@ MonoBehaviour:
   Player: {fileID: 231043908}
   AttackParticle: {fileID: 1395963316}
   ParticlesContainer: {fileID: 816201663}
+  bulletfire: {fileID: 0}
   FoodZerotimeSec: 0
   FoodZerotime: 0
   AgentStartingPos: {x: 0, y: 0, z: 0}
@@ -7390,7 +7392,7 @@ MonoBehaviour:
     vectorActionSize: 08000000
     vectorActionDescriptions: []
     vectorActionSpaceType: 0
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 11400000, guid: 1b12e1b1512d6534dbea1e6a66818957, type: 3}
   m_InferenceDevice: 0
   m_UseHeuristic: 0
   m_BehaviorName: brain
@@ -40075,7 +40077,7 @@ MonoBehaviour:
     vectorActionSize: 08000000
     vectorActionDescriptions: []
     vectorActionSpaceType: 0
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 11400000, guid: 1b12e1b1512d6534dbea1e6a66818957, type: 3}
   m_InferenceDevice: 0
   m_UseHeuristic: 0
   m_BehaviorName: brain
@@ -74130,7 +74132,7 @@ MonoBehaviour:
     vectorActionSize: 08000000
     vectorActionDescriptions: []
     vectorActionSpaceType: 0
-  m_Model: {fileID: 0}
+  m_Model: {fileID: 11400000, guid: 1b12e1b1512d6534dbea1e6a66818957, type: 3}
   m_InferenceDevice: 0
   m_UseHeuristic: 0
   m_BehaviorName: brain

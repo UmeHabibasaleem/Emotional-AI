@@ -9,7 +9,7 @@ public class Lara : Agent
 {
 
     public static List<string[]> rowData = new List<string[]>();
-    Animator AnimZombie;
+    public Animator AnimZombie;
 
     public float Timepassed;
     public float Timecheck;
@@ -71,7 +71,7 @@ public class Lara : Agent
     public GameObject Player;
     public GameObject AttackParticle;
     public GameObject ParticlesContainer;
-    BulletFire bulletfire;
+    public BulletFire bulletfire;
 
     public float FoodZerotimeSec = 0;
     public int FoodZerotime = 0;
@@ -139,10 +139,19 @@ public class Lara : Agent
             AnimZombie.SetTrigger("run");
 
         }
+        //Lara Should Not Attack
+
+        if (action == 7)
+        {
+            AddReward(-1f);
+        }
+
         //Eat 
         if (action == 5 && once == false && (dist1 < 1.42 || dist2 < 1.42 || dist3 < 1.42))
         {
             Food++;
+            //Lara Should avoid eating
+            AddReward(-0.02f);
 
             if (dist1 < 1.42)
             {
@@ -157,6 +166,7 @@ public class Lara : Agent
             }
             else if (dist2 < 1.42f)
             {
+
                 Food2.SetActive(false);
                 Timecheck = 0;
                 if (FoodFiller.size.x <= 1)
@@ -224,7 +234,7 @@ public class Lara : Agent
 
         //Sharing with Hallo
 
-        if (action == 6 && distWithHallo <= 1.42f /*&& OxetocinForMarko >= 2*/)
+        else if (action == 6 && distWithHallo <= 1.42f /*&& OxetocinForMarko >= 2*/)
         {
             if (Food > 0)
             {
@@ -252,6 +262,9 @@ public class Lara : Agent
 
 
         //Attacked By Hallo
+
+
+
         if (Hallo.action == 7 && Vector3.Distance(this.transform.position, Hallo.transform.position) < 3 /*&& AttackedByHallo && Hallo.OxetocinForMarko < 3*/)
         {
             if (Food > 0)
@@ -265,6 +278,8 @@ public class Lara : Agent
             //Increment in Rivalary level for Hallo
             this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
         }
+
+
         if (Marko.action == 7 && Vector3.Distance(this.transform.position, Marko.transform.position) < 3)
         {
             Marko.transform.LookAt(this.transform.position);
@@ -281,7 +296,7 @@ public class Lara : Agent
 
     }
     // Use this for initialization
-    void Start()
+   public  override void InitializeAgent()
     {
         Reward = 0;
         Timepassed = 0;
@@ -379,7 +394,6 @@ public class Lara : Agent
                 this.HealthFiller.size = new Vector2(this.HealthFiller.size.x - 0.02f, this.HealthFiller.size.y);
 
             }
-            //this.HealthFiller.size = new Vector2(this.HealthFiller.size.x - 0.02f, this.HealthFiller.size.y);
             PrevFood = Food;
         }
         if (Food - PrevFood == 1 && healthinc == false)
