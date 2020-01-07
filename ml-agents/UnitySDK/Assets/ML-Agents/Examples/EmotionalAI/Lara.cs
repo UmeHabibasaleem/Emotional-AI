@@ -353,7 +353,7 @@ public class Lara : Agent
                 Health = 0;
                 this.HealthFiller.size = new Vector2(0f, this.HealthFiller.size.y);
                 Hallo.SetReward(-1f);
-                Marko.SetReward(-1f);
+               // Marko.SetReward(-1f);
                 LaraModel.SetActive(false);
                 TopContainer.SetActive(false);
                 BottomContainer.SetActive(false);

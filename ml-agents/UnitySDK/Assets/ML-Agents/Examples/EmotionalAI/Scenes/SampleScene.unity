@@ -7281,9 +7281,9 @@ MonoBehaviour:
   Hallo: {fileID: 2139491918}
   LaraModel: {fileID: 1779657706}
   AnimZombie: {fileID: 0}
-  TopContainer: {fileID: 0}
-  BottomContainer: {fileID: 0}
-  gun: {fileID: 0}
+  TopContainer: {fileID: 914709153}
+  BottomContainer: {fileID: 1678081135}
+  gun: {fileID: 1544798672}
   Food1: {fileID: 877429408}
   Food2: {fileID: 1101065285}
   Food3: {fileID: 1185085739}
@@ -74098,6 +74098,26 @@ PrefabInstance:
       propertyPath: agentParameters.maxStep
       value: 5000
       objectReference: {fileID: 0}
+    - target: {fileID: 114910251880362912, guid: cd29bfc793d8948d19d5001b9c1b637f,
+        type: 3}
+      propertyPath: Model
+      value: 
+      objectReference: {fileID: 1933964381}
+    - target: {fileID: 114910251880362912, guid: cd29bfc793d8948d19d5001b9c1b637f,
+        type: 3}
+      propertyPath: TopContainer
+      value: 
+      objectReference: {fileID: 1933964382}
+    - target: {fileID: 114910251880362912, guid: cd29bfc793d8948d19d5001b9c1b637f,
+        type: 3}
+      propertyPath: BottomContainer
+      value: 
+      objectReference: {fileID: 1933964383}
+    - target: {fileID: 114910251880362912, guid: cd29bfc793d8948d19d5001b9c1b637f,
+        type: 3}
+      propertyPath: gun
+      value: 
+      objectReference: {fileID: 1933964380}
     - target: {fileID: 114433293529131006, guid: cd29bfc793d8948d19d5001b9c1b637f,
         type: 3}
       propertyPath: AttackParticle
@@ -74144,6 +74164,30 @@ MonoBehaviour:
   m_InferenceDevice: 0
   m_UseHeuristic: 0
   m_BehaviorName: brain
+--- !u!1 &1933964380 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1479005648842268, guid: cd29bfc793d8948d19d5001b9c1b637f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1933964376}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1933964381 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1167864781378758, guid: cd29bfc793d8948d19d5001b9c1b637f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1933964376}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1933964382 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1204022806486772, guid: cd29bfc793d8948d19d5001b9c1b637f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1933964376}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1933964383 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1713259799805966, guid: cd29bfc793d8948d19d5001b9c1b637f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1933964376}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1938499340
 GameObject:
   m_ObjectHideFlags: 0

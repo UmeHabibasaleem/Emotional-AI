@@ -155,7 +155,7 @@ public class MarkoScript : Agent
         seconds = (int)Timepassed;
 
         //Food is zero for 2 seconds then inactive agent
-        if (Food == 0)
+        if (Food <= 0)
         {
             FoodZerotimeSec += Time.deltaTime;
             FoodZerotime = (int)FoodZerotimeSec;
@@ -164,7 +164,7 @@ public class MarkoScript : Agent
                 Health = 0;
                 this.HealthFiller.size = new Vector2(0f, this.HealthFiller.size.y);
                 Hallo.SetReward(-1f);
-                Lara.SetReward(-1f);
+               // Lara.SetReward(-1f);
                 Player.SetActive(false);
                 TopContainer.SetActive(false);
                 BottomContainer.SetActive(false);
