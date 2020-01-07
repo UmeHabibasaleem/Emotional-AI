@@ -60,8 +60,7 @@ public class GameAcademy : Academy {
         Lara.Health = 10;
         Hallo.Health = 10;
 
-        Marko.healthinc = false;
-        Lara.healthinc = false;
+     
         Hallo.healthinc = false;
 
         //Food3.SetActive(false);
@@ -80,12 +79,11 @@ public class GameAcademy : Academy {
         Lara.seconds = 0;
         Hallo.seconds = 0;
 
-        Marko.i = 0;
-        Lara.i = 0;
+      //  Marko.i = 0;
+     //   Lara.i = 0;
         Hallo.i = 0;
 
-        Marko.count = 0;
-        Lara.count = 0;
+     
         Hallo.count = 0;
 
         Marko.Cointime = 0;
@@ -96,8 +94,7 @@ public class GameAcademy : Academy {
         Lara.PrevFood = 10;
         Hallo.PrevFood = 10;
 
-        Marko.once = false;
-        Lara.once = false;
+   
         Hallo.once = false;
         //OxetocinInHalloForMarko = 0;
         //OxetocinInLaraForMarko = 0;

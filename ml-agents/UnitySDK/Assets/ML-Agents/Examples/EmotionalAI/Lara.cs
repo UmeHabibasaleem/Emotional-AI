@@ -9,42 +9,54 @@ public class Lara : Agent
 {
 
     public static List<string[]> rowData = new List<string[]>();
-    public Animator AnimZombie;
+    public int idle, move, Eat, Share, Attack = 0;
+    public bool onceInSecond = false;
+    public float PrevSecond = 1;
 
-    public float Timepassed;
-    public float Timecheck;
-    //public float prevOxeHallo;
-    //public float prevOxeMarko;
-    public int Agentid = 1;
-    float speed = 5.0f;
-    public float Food;
-    public float Health;
-    public int action;
-    public int seconds = 0;
-    public int i = 0;
-    public int count = 0;
+
+    public MarkoScript Marko;
+    public AgentMove Hallo;
+    public GameObject LaraModel;
+    public Animator AnimZombie;
+    public GameObject TopContainer;
+    public GameObject BottomContainer;
+    public GameObject gun;
     public GameObject Food1;
     public GameObject Food2;
     public GameObject Food3;
-    Random random = new Random();
     public SpriteRenderer FoodFiller;
     public SpriteRenderer HealthFiller;
-    public float Reward;
+
+
+    public float Timepassed;
+
+
+
+
+    public int Agentid = 1;
+    public float Food;
+    public float Health;
+    public int action;
+    float speed = 5.0f;
+
+
+    public int seconds = 0;
+
+    public int count = 0;
+
+
+
+
     ActionList al = new ActionList();
 
     //public float OxetocinForHallo;
     public float PrevFood = 10;
-    public float Pfood;
-    public bool once = false;
-    public bool healthinc;
-    public float dist;
-    public MarkoScript Marko;
-    public AgentMove Hallo;
-    public GameObject LaraModel;
-    public float Dopamin;
-    //public float OxetocinForMarko;
-    //public float OxetocinInHalloForLara;
-    //public float OxetocinInMarkoForLara;
+
+    public bool ateFromRes = false;
+
+
+
+
 
 
 
@@ -93,12 +105,15 @@ public class Lara : Agent
         AddVectorObs(Timepassed);
         AddVectorObs(this.transform.position);
         AddVectorObs(Marko.transform.position);
+        AddVectorObs(Hallo.transform.position);
+
         AddVectorObs(Food1.transform.position);
         AddVectorObs(Food2.transform.position);
         AddVectorObs(Food3.transform.position);
-        AddVectorObs(Hallo.transform.position);
+
         AddVectorObs(Food);
         AddVectorObs(Health);
+
         AddVectorObs(Coin1.transform.position);
         AddVectorObs(Coin2.transform.position);
         AddVectorObs(Coin3.transform.position);
@@ -115,111 +130,98 @@ public class Lara : Agent
 
     }
 
-    public override void AgentAction(float[] vectorAction, string textAction)
+    public override void AgentAction(float[] vectorAction, string x)
     {
         action = Mathf.FloorToInt(vectorAction[0]);
-        float dist1 = Vector3.Distance(Marko.transform.position, Food1.transform.position);
-        dist = dist1;
 
-        //Eat action
+        float dist1 = Vector3.Distance(LaraModel.transform.position, Food1.transform.position);
         float dist2 = Vector3.Distance(LaraModel.transform.position, Food2.transform.position);
         float dist3 = Vector3.Distance(LaraModel.transform.position, Food3.transform.position);
+
+        //Eat action
+
         float distWithMarko = Vector3.Distance(LaraModel.transform.position, Marko.transform.position);
         float distWithHallo = Vector3.Distance(LaraModel.transform.position, Hallo.transform.position);
 
-        //Stop Agent Animation
-        //    if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.A))
         if (action == 0)
         {
+            idle++;
             AnimZombie.SetTrigger("idle");
         }
         //Movement
         if (action == 1 || action == 2 || action == 3 || action == 4)
         {
             AnimZombie.SetTrigger("run");
+            move++;
 
         }
-        //Lara Should Not Attack
 
-        if (action == 7)
-        {
-            AddReward(-1f);
-        }
 
         //Eat 
-        if (action == 5 && once == false && (dist1 < 1.42 || dist2 < 1.42 || dist3 < 1.42))
+
+
+
+        if (action == 5 && ateFromRes == false && (dist1 < 1.42 || dist2 < 1.42 || dist3 < 1.42))
         {
+            Eat++;
             Food++;
             //Lara Should avoid eating
             AddReward(-0.02f);
 
+            ateFromRes = true;
+
             if (dist1 < 1.42)
             {
                 Food1.SetActive(false);
-                Timecheck = 0;
+
                 if (FoodFiller.size.x <= 1)
                 {
                     this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
                 }
-                once = true;
+
 
             }
+
             else if (dist2 < 1.42f)
             {
 
                 Food2.SetActive(false);
-                Timecheck = 0;
+
                 if (FoodFiller.size.x <= 1)
                 {
                     this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
                 }
-                once = true;
+
 
             }
+
             else if (dist3 < 1.42f)
             {
                 Food3.SetActive(false);
-                Timecheck = 0;
+
                 if (FoodFiller.size.x <= 1)
                 {
                     this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
                 }
-                once = true;
 
             }
 
 
         }
-        if ((int)Timecheck == 5)
-        {
-            Food1.SetActive(true);
-            Food2.SetActive(true);
-            Food3.SetActive(true);
 
-        }
 
-        if (Food - PrevFood == 1 && healthinc == false)
-        {
-            Health += 0.5f;
-            this.HealthFiller.size = new Vector2(this.HealthFiller.size.x + 0.02f, this.HealthFiller.size.y);
-            healthinc = true;
-        }
+        //Sharing
 
-        //Run Agent Animation 
-        //Sharing with Marko
-        if (action == 6 && distWithMarko <= 1.42f /*&& OxetocinForMarko >= 2*/)
+        if (action == 6 && distWithMarko <= 1.42f)
         {
+            Share++;
             if (Food > 0)
             {
                 this.Food -= 0.5f;
                 Marko.Food += 0.5f;
-                //  OxetocinInMarkoForLara += 0.5f;
                 AddReward(1f);
             }
-            //if (Marko.RLForLara > 0)
-            //{
-            //    Marko.RLForLara -= 0.5f;
-            //}
+
             if (this.FoodFiller.size.x > 0)
             {
                 this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
@@ -228,25 +230,18 @@ public class Lara : Agent
             {
                 Marko.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
             }
+
         }
-
-
-
-        //Sharing with Hallo
-
-        else if (action == 6 && distWithHallo <= 1.42f /*&& OxetocinForMarko >= 2*/)
+        else if (action == 6 && distWithHallo <= 1.42f)
         {
+            Share++;
             if (Food > 0)
             {
                 this.Food -= 0.5f;
                 Hallo.Food += 0.5f;
-                //  OxetocinInMarkoForLara += 0.5f;
                 AddReward(1f);
             }
-            //if (Marko.RLForLara > 0)
-            //{
-            //    Marko.RLForLara -= 0.5f;
-            //}
+
             if (this.FoodFiller.size.x > 0)
             {
                 this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
@@ -257,15 +252,15 @@ public class Lara : Agent
             }
         }
 
-
-
-
-
         //Attacked By Hallo
+        if (action == 7)
+        {
+            Attack++;
+            AddReward(-1f);
+        }
 
 
-
-        if (Hallo.action == 7 && Vector3.Distance(this.transform.position, Hallo.transform.position) < 3 /*&& AttackedByHallo && Hallo.OxetocinForMarko < 3*/)
+        if (Hallo.action == 7 && Vector3.Distance(this.transform.position, Hallo.transform.position) < 3)
         {
             if (Food > 0)
             {
@@ -290,20 +285,19 @@ public class Lara : Agent
             {
                 FoodFiller.size = new Vector2(FoodFiller.size.x - 0.02f, FoodFiller.size.y);
             }
-
-
         }
 
     }
     // Use this for initialization
-   public  override void InitializeAgent()
+    public override void InitializeAgent()
     {
-        Reward = 0;
+
         Timepassed = 0;
-        Timecheck = 0;
         Food = 10;
         Health = 10;
-        healthinc = false;
+        PrevFood = 10;
+        PrevSecond = 1;
+        count = 1;
         AnimZombie = GetComponent<Animator>();
         Food3.SetActive(false);
         //Dopamin = 0;
@@ -344,67 +338,81 @@ public class Lara : Agent
     // Update is called once per frame
     void Update()
     {
-        //this.action = 0;
-        // py.Communication(id, LaraModel, MarkoModel, HalloModel, Marko, Hallo, this, this.Dopamin, this.OxetocinForHallo, this.OxetocinForMarko);
-        if (Food == 0)
+
+
+        Vector3 targetPos = AnimZombie.transform.position;
+        Timepassed += Time.deltaTime;
+        seconds = (int)Timepassed;
+
+        if (Food <= 0)
         {
             FoodZerotimeSec += Time.deltaTime;
             FoodZerotime = (int)FoodZerotimeSec;
-            if (FoodZerotime == 3)
+            if (FoodZerotime == 2)
             {
                 Health = 0;
+                this.HealthFiller.size = new Vector2(0f, this.HealthFiller.size.y);
+                Hallo.SetReward(-1f);
+                Marko.SetReward(-1f);
+                LaraModel.SetActive(false);
+                TopContainer.SetActive(false);
+                BottomContainer.SetActive(false);
+                gun.SetActive(false);
+                this.enabled = false;
             }
         }
 
+     
 
-        // DeadTime
-        if (this.Health <= 0)
+        //Food Level has been decreased
+        if (PrevFood - Food > 0)
         {
-            LaraModel.SetActive(false);
-        }
-        Vector3 targetPos = AnimZombie.transform.position;
-        Timepassed += Time.deltaTime;
-        Timecheck += Time.deltaTime;
-        seconds = (int)Timepassed;
-        //action = py.AgentAction;
-        if (seconds == count)
-        {
-            count += 1;
-            //action = Random.Range(1, 7);
-            healthinc = false;
-            once = false;
-        }
-        if (seconds == i)
-        {
-            if (Food > 0)
+            float factor = PrevFood - Food;
+            Health -= factor / 2;
+            if (this.HealthFiller.size.x > 0.2f)
             {
-                Food = Food - 0.5f;
-                if (FoodFiller.size.x > 0)
-                {
-                    this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
-                }
-            }
-            i += 2;
-        }
-        if (PrevFood - Food == 1)
-        {
-            Health -= 0.5f;
-            if (HealthFiller.size.x > 0)
-            {
-                this.HealthFiller.size = new Vector2(this.HealthFiller.size.x - 0.02f, this.HealthFiller.size.y);
-
+                this.HealthFiller.size = new Vector2(this.HealthFiller.size.x - 0.2f, this.HealthFiller.size.y);
             }
             PrevFood = Food;
+
         }
-        if (Food - PrevFood == 1 && healthinc == false)
+        else if (Food - PrevFood > 0)//Earned Food
         {
-            Health++;
-            if (HealthFiller.size.x < 1)
+            float factor = Food - PrevFood;
+            Health += factor / 2;
+            if (this.HealthFiller.size.x < 1)
             {
-                this.HealthFiller.size = new Vector2(this.HealthFiller.size.x + 0.02f, this.HealthFiller.size.y);
+                this.HealthFiller.size = new Vector2(this.HealthFiller.size.x + 0.2f, this.HealthFiller.size.y);
             }
-            healthinc = true;
+            PrevFood = Food;
+
+
         }
+
+        if (seconds == count )
+        {
+            PrevSecond = Timepassed;
+            if (Food > 0)
+            {
+                //Food Decremented by 0.5f after every 2sec
+                Food = Food - 0.25f;
+                if (FoodFiller.size.x > 0)
+                {
+                    this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.1f, this.FoodFiller.size.y);
+                }
+            }
+
+            //Agent is allowed to eat from res only once in a second
+            Food1.SetActive(true);
+            Food2.SetActive(true);
+            Food3.SetActive(true);
+            ateFromRes = false;
+          //  onceInSecond = true;
+            count += 1;
+        }
+
+
+
         //Coin collection
         Cointime = Cointime + Time.deltaTime;
         Coinseconds = (int)Cointime;
@@ -415,7 +423,11 @@ public class Lara : Agent
         if (healthKit > 0)
         {
             Health += 0.5f;
-            this.HealthFiller.size = new Vector2(this.HealthFiller.size.x + 0.02f, this.HealthFiller.size.y);
+            if (this.HealthFiller.size.x < 1)
+            {
+                this.HealthFiller.size = new Vector2(this.HealthFiller.size.x + 0.02f, this.HealthFiller.size.y);
+            }
+
             healthKit = 0;
         }
         if (Coinseconds == 5)
@@ -491,28 +503,5 @@ public class Lara : Agent
             transform.position -= Vector3.left * Time.deltaTime * speed;
         }
     }
-    //void AgentReset()
-    //{
-    //    Tiollmepassed = 0;
-    //    Timecheck = 0;
-    //    Food = 10;
-    //    Health = 10;
-    //    healthinc = false;
-    //    Food3.SetActive(false);
-    //    numberofCoins = 0;
-    //    Dopamin = 0;
-    //    OxetocinInHalloForLara = 0;
-    //    OxetocinInMarkoForLara = 0;
-    //    healthKit = 0;
-    //    seconds = 0;
-    //    i = 0;
-    //    count = 0;
-    //    Cointime = 0;
-    //    PrevFood = 10;
-    //    once = false;
-    //    DieAgent.LaraLive = false;
-    //    this.transform.position = AgentStartingPos;
-    //    FoodZerotimeSec = 0;
-    //    FoodZerotime = 0;
-    //}
+
 }

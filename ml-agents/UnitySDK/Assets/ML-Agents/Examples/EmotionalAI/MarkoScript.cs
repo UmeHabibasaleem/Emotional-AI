@@ -11,7 +11,11 @@ public class MarkoScript : Agent
     public static List<string[]> rowData = new List<string[]>();
     public Animator AnimZombie;
     public float Timepassed;
+
     public Lara Lara;
+    public GameObject Marko;
+    public AgentMove Hallo;
+
     float speed = 5.0f;
     public int Agentid = 2;
     public float Food;
@@ -21,32 +25,19 @@ public class MarkoScript : Agent
     public int seconds = 0;
     public PythonCommunicator py;
     public int i = 0;
-    public int count = 0;
+    public int oneSecondCounter = 1;
+    public bool FoodEaten = false;
+    public int idle, move, Eat, Share, Attack = 0;
+
+
     public GameObject Food1;
     public GameObject Food2;
     public GameObject Food3;
-    Random random = new Random();
+
     public SpriteRenderer FoodFiller;
     public SpriteRenderer HealthFiller;
 
-
-    public float prevOxeHallo;
-    public float prevOxeLara;
-    //public float OxetocinInHalloForMarko;
-    //public float OxetocinInLaraForMarko;
-
-    //For dopamin increment in selfish agent
-    //float PrevFoodForDopamin = 0;
-    public GameObject Marko;
-
-    public float Pfood;
-    public bool once = false;
-    public bool healthinc;
     public float dist;
-    public AgentMove Hallo;
-    // public float Dopamin = 1;
-    //public float OxetocinForHallo = 2;
-    //public float OxetocinForLara = 2;
 
     ActionList l = new ActionList();
 
@@ -55,26 +46,27 @@ public class MarkoScript : Agent
     public GameObject Coin2;
     public GameObject Coin3;
     public GameObject Coin4;
+
     public int numberofCoins = 0;
     public Coin coin;
     public float Cointime = 0;
     public int Coinseconds;
-    //Rivalary Levels
-    //public float RLForLara;
-    //public float RLForHallo;
-    //For health kit collection
+
     public GameObject AIDkit1;
     public GameObject AIDkit2;
+    public GameObject TopContainer;
+    public GameObject BottomContainer;
+    public GameObject gun;
+
+
     public int healthKit = 0;
     FirstAidKit Aidkit;
-    //bool AttackedByHallo = false;
-    //bool AttackedByLara = false;
-    //Bullet fire
+
     public GameObject Player;
     public GameObject AttackParticle;
     public GameObject ParticlesContainer;
-    //public PythonCommunicator py;
 
+    public bool MarkoDied = false;
     public float FoodZerotimeSec = 0;
     public int FoodZerotime = 0;
     public BulletFire bulletfire;
@@ -117,14 +109,12 @@ public class MarkoScript : Agent
     public override void InitializeAgent()
     {
         academy = FindObjectOfType(typeof(GameAcademy)) as GameAcademy;
-        //   OxetocinInHalloForMarko = 0;
-        // OxetocinInLaraForMarko = 0;
         coin = new Coin();
         Timepassed = 0;
         Food = 10;
+        oneSecondCounter = 1;
         //  PrevFoodForDopamin = 10;
         Health = 10;
-        healthinc = false;
         AnimZombie = GetComponent<Animator>();
         Aidkit = new FirstAidKit();
         bulletfire = new BulletFire();
@@ -160,56 +150,52 @@ public class MarkoScript : Agent
     // Update is called once per frame
     void Update()
     {
-        // py.Communication(Agentid, LaraModel, Marko, HalloModel, this, Hallo, Lara, this.Dopamin, this.OxetocinForHallo, this.OxetocinForLara);
+        Vector3 targetPos = AnimZombie.transform.position;
+        Timepassed += Time.deltaTime;
+        seconds = (int)Timepassed;
+
+        //Food is zero for 2 seconds then inactive agent
         if (Food == 0)
         {
             FoodZerotimeSec += Time.deltaTime;
             FoodZerotime = (int)FoodZerotimeSec;
-            if (FoodZerotime == 3)
+            if (FoodZerotime == 2)
             {
                 Health = 0;
+                this.HealthFiller.size = new Vector2(0f, this.HealthFiller.size.y);
+                Hallo.SetReward(-1f);
+                Lara.SetReward(-1f);
+                Player.SetActive(false);
+                TopContainer.SetActive(false);
+                BottomContainer.SetActive(false);
+                gun.SetActive(false);
+                this.enabled = false;
+
             }
         }
-        /*  if (DieAgent.MarkoLive == true)
-          {
-              AgentReset();
-          }*/
 
-        // DeadTime
-        if (this.Health <= 0)
+        //After one second
+        if (Timepassed == oneSecondCounter)
         {
-            Marko.SetActive(false);
-            // DieAgent.MarkoDied = true;
-            // Player.active = false;
-        }
-        Vector3 targetPos = AnimZombie.transform.position;
-        Timepassed += Time.deltaTime;
-        seconds = (int)Timepassed;
-        // action = py.AgentAction;
-        if (seconds == count)
-        {
-            count += 1;
-            healthinc = false;
-            once = false;
-
-        }
-        //after two seconds
-        if (seconds == i)
-        {
+            oneSecondCounter += 1;
             if (Food > 0)
             {
-                Food = Food - 0.5f;
+                Food = Food - 0.25f;
                 if (FoodFiller.size.x > 0)
                 {
                     this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
                 }
             }
-            i += 2;
-
+            FoodEaten = false;
+            Food1.SetActive(true);
+            Food2.SetActive(true);
+            Food3.SetActive(true);
         }
-        if (PrevFood - Food == 1)
+
+        //Increment in food
+        if (PrevFood - Food > 0)
         {
-            Health -= 0.5f;
+            Health -= (PrevFood - Food) / 2;
             if (HealthFiller.size.x > 0)
             {
                 this.HealthFiller.size = new Vector2(this.HealthFiller.size.x - 0.02f, this.HealthFiller.size.y);
@@ -217,18 +203,14 @@ public class MarkoScript : Agent
             PrevFood = Food;
         }
 
-
-
-
-
-        if (Food - PrevFood == 1 && healthinc == false)
+        //Decrement in food
+        if (Food - PrevFood > 0)
         {
-            Health++;
+            Health += (Food - PrevFood) / 2;
             if (HealthFiller.size.x < 1)
             {
                 this.HealthFiller.size = new Vector2(this.HealthFiller.size.x + 0.02f, this.HealthFiller.size.y);
             }
-            healthinc = true;
         }
         //Coin collection
 
@@ -256,7 +238,7 @@ public class MarkoScript : Agent
     }
 
 
-    public override void AgentAction(float[] vectorAction, string textAction)
+    public override void AgentAction(float[] vectorAction, string txt)
     {
         action = Mathf.FloorToInt(vectorAction[0]);
         float dist1 = Vector3.Distance(Marko.transform.position, Food1.transform.position);
@@ -272,53 +254,75 @@ public class MarkoScript : Agent
         //    if (Input.GetKeyUp(KeyCode.UpArrow) || Input.GetKeyUp(KeyCode.DownArrow) || Input.GetKeyUp(KeyCode.LeftArrow) || Input.GetKeyUp(KeyCode.RightArrow) || Input.GetKeyUp(KeyCode.A))
         if (action == 0)
         {
+            idle++;
             AnimZombie.SetTrigger("idle");
         }
         //Movement
         if (action == 1 || action == 2 || action == 3 || action == 4)
         {
+            move++;
             AnimZombie.SetTrigger("run");
 
         }
 
         //Steal
-        if (action == 5 && once == false && (dist1 < 1.42 || dist2 < 1.42 || dist3 < 1.42))
+        if (action == 5 && (dist1 < 1.42 || dist2 < 1.42 || dist3 < 1.42))
         {
+            Eat++;
+            FoodEaten = false;
             Food++;
             if (FoodFiller.size.x < 1)
             {
                 this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
             }
-            once = true;
+            if (dist1 < 1.42)
+            {
+                Food1.SetActive(false);
+            }
+            else if (dist2 < 1.42f)
+            {
+
+                Food2.SetActive(false);
+            }
+
+            else if (dist3 < 1.42f)
+            {
+                Food3.SetActive(false);
+            }
+
+            //Less Reward on eating from reservior
             AddReward(+0.5f);
         }
-        else if (action == 5 && once == false && (distWithLara < 1.42))
+        else if (action == 5 && (distWithLara < 1.42))
         {
+            Eat++;
             Food++;
             if (FoodFiller.size.x < 1)
             {
                 this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
             }
             Lara.Food--;
+            //More reward on stealing from other agents
             AddReward(+1.0f);
-            once = true;
         }
-        else if (action == 5 && once == false && (distWithHallo < 1.42))
+        //Stealing from Hallo
+        else if (action == 5 && (distWithHallo < 1.42))
         {
+            Eat++;
             Food++;
-            Hallo.interactionWithMarko++;
             AddReward(+1.0f);
             if (FoodFiller.size.x < 1)
             {
                 this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
             }
             Hallo.Food--;
-            once = true;
         }
 
-        if (action == 6 && distWithHallo <= 1.42f /*&& OxetocinForMarko >= 2*/)
+        //Share with Hallo
+        if (action == 6 && distWithHallo <= 1.42f)
         {
-
+            Share++;
+            //Selfish agent should not share food
             AddReward(-1f);
             if (Food > 0)
             {
@@ -341,6 +345,7 @@ public class MarkoScript : Agent
 
         else if (action == 6 && distWithLara <= 1.42f /*&& OxetocinForMarko >= 2*/)
         {
+            Share++;
             AddReward(-1f);
             if (Food > 0)
             {
@@ -358,9 +363,13 @@ public class MarkoScript : Agent
             }
         }
 
+        if (action == 7)
+        {
+            Attack++;
+        }
 
         //Attacked By Hallo
-        if (Hallo.action == 7 && Vector3.Distance(this.transform.position, Hallo.transform.position) < 3 /*&& AttackedByHallo && Hallo.OxetocinForMarko < 3*/)
+        if (Hallo.action == 7 && Vector3.Distance(this.transform.position, Hallo.transform.position) < 3)
         {
             if (Food > 0)
             {
@@ -369,8 +378,6 @@ public class MarkoScript : Agent
             Hallo.transform.LookAt(this.transform.position);
             Hallo.AnimZombie.SetTrigger("attack");
             Hallo.bulletfire.ShootBullet(AttackParticle, Player, ParticlesContainer);
-
-            //Increment in Rivalary level for Hallo
             if (FoodFiller.size.x > 0)
             {
                 this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
@@ -378,8 +385,8 @@ public class MarkoScript : Agent
         }
 
 
-
-        if (Lara.action == 7 && Vector3.Distance(this.transform.position, Hallo.transform.position) < 3 /*&& AttackedByHallo && Hallo.OxetocinForMarko < 3*/)
+        //If Attacked by Lara
+        if (Lara.action == 7 && Vector3.Distance(this.transform.position, Hallo.transform.position) < 3)
         {
             if (Food > 0)
             {
@@ -388,8 +395,6 @@ public class MarkoScript : Agent
             Lara.transform.LookAt(this.transform.position);
             Lara.AnimZombie.SetTrigger("attack");
             Lara.bulletfire.ShootBullet(AttackParticle, Player, ParticlesContainer);
-
-            //Increment in Rivalary level for Hallo
             if (FoodFiller.size.x > 0)
             {
                 this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
@@ -488,6 +493,5 @@ public class MarkoScript : Agent
           FoodZerotimeSec = 0;
           FoodZerotime = 0;
       } */
-
 
 }
