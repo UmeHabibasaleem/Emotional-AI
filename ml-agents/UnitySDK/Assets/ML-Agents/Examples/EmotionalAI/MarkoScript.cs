@@ -26,7 +26,6 @@ public class MarkoScript : Agent
     public PythonCommunicator py;
     public int i = 0;
     public int oneSecondCounter = 1;
-    public bool FoodEaten = false;
     public int idle, move, Eat, Share, Attack = 0;
 
 
@@ -164,7 +163,6 @@ public class MarkoScript : Agent
                 Health = 0;
                 this.HealthFiller.size = new Vector2(0f, this.HealthFiller.size.y);
                 Hallo.SetReward(-1f);
-               // Lara.SetReward(-1f);
                 Player.SetActive(false);
                 TopContainer.SetActive(false);
                 BottomContainer.SetActive(false);
@@ -186,7 +184,6 @@ public class MarkoScript : Agent
                     this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
                 }
             }
-            FoodEaten = false;
             Food1.SetActive(true);
             Food2.SetActive(true);
             Food3.SetActive(true);
@@ -238,7 +235,7 @@ public class MarkoScript : Agent
     }
 
 
-    public override void AgentAction(float[] vectorAction, string txt)
+    public override void AgentAction(float[] vectorAction, string textAction)
     {
         action = Mathf.FloorToInt(vectorAction[0]);
         float dist1 = Vector3.Distance(Marko.transform.position, Food1.transform.position);
@@ -269,7 +266,6 @@ public class MarkoScript : Agent
         if (action == 5 && (dist1 < 1.42 || dist2 < 1.42 || dist3 < 1.42))
         {
             Eat++;
-            FoodEaten = false;
             Food++;
             if (FoodFiller.size.x < 1)
             {
@@ -357,7 +353,7 @@ public class MarkoScript : Agent
             {
                 this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
             }
-            if (Lara.FoodFiller.size.x <= 1)
+            if (Lara.FoodFiller.size.x < 1)
             {
                 Lara.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
             }
@@ -386,7 +382,7 @@ public class MarkoScript : Agent
 
 
         //If Attacked by Lara
-        if (Lara.action == 7 && Vector3.Distance(this.transform.position, Hallo.transform.position) < 3)
+        if (Lara.action == 7 && Vector3.Distance(this.transform.position, Lara.transform.position) < 3)
         {
             if (Food > 0)
             {

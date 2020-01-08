@@ -48,7 +48,7 @@ public class AgentMove : Agent
     public float Cointime = 0;
     public int Coinseconds;
     Coin coin;
-   // bool Attack = false;
+    // bool Attack = false;
     public GameObject TopContainer;
     public GameObject BottomContainer;
     public GameObject gun;
@@ -94,7 +94,7 @@ public class AgentMove : Agent
         Food = 10;
         Health = 10;
         PrevFood = 10;
-       // PrevSecond = 1;
+        // PrevSecond = 1;
         count = 1;
         AnimZombie = GetComponent<Animator>();
         Food3.SetActive(false);
@@ -178,7 +178,6 @@ public class AgentMove : Agent
                 Health = 0;
                 this.HealthFiller.size = new Vector2(0f, this.HealthFiller.size.y);
                 SetReward(-1f);
-              //  Marko.SetReward(-1f);
                 Model.SetActive(false);
                 TopContainer.SetActive(false);
                 BottomContainer.SetActive(false);
@@ -216,7 +215,6 @@ public class AgentMove : Agent
 
         if (seconds == count)
         {
-          //  PrevSecond = Timepassed;
             if (Food > 0)
             {
                 //Food Decremented by 0.5f after every 2sec
@@ -290,7 +288,7 @@ public class AgentMove : Agent
         rowData.Add(rowDataTemp);
     }
 
-    public override void AgentAction(float[] vectorAction, string x)
+    public override void AgentAction(float[] vectorAction, string textAction)
     {
         action = Mathf.FloorToInt(vectorAction[0]);
 
@@ -302,7 +300,7 @@ public class AgentMove : Agent
 
         float distWithMarko = Vector3.Distance(Model.transform.position, Marko.transform.position);
         float distWithLara = Vector3.Distance(Model.transform.position, Lara.transform.position);
-
+        //idle action
         if (action == 0)
         {
             idle++;
@@ -317,19 +315,14 @@ public class AgentMove : Agent
         }
 
 
-        //Eat 
+        //Eat
 
 
 
-        if (action == 5 /*&& ateFromRes == false*/ && (dist1 < 1.42 || dist2 < 1.42 || dist3 < 1.42))
+        if (action == 5 && (dist1 < 1.42 || dist2 < 1.42 || dist3 < 1.42))
         {
             Eat++;
             Food++;
-            ////Lara Should avoid eating
-            //AddReward(-0.02f);
-
-            //ateFromRes = true;
-
             if (dist1 < 1.42)
             {
                 Food1.SetActive(false);
@@ -379,7 +372,7 @@ public class AgentMove : Agent
             {
                 this.Food -= 0.5f;
                 Marko.Food += 0.5f;
-               
+
             }
 
             if (this.FoodFiller.size.x > 0)
@@ -398,8 +391,8 @@ public class AgentMove : Agent
             if (Food > 0)
             {
                 this.Food -= 0.5f;
-               Lara.Food += 0.5f;
-              
+                Lara.Food += 0.5f;
+
             }
 
             if (this.FoodFiller.size.x > 0)
@@ -416,10 +409,10 @@ public class AgentMove : Agent
         if (action == 7)
         {
             Attack++;
-           
+
         }
 
-
+        //if Lara attacked at Hallo
         if (Lara.action == 7 && Vector3.Distance(this.transform.position, Lara.transform.position) < 3)
         {
             if (Food > 0)
@@ -430,8 +423,10 @@ public class AgentMove : Agent
             Lara.AnimZombie.SetTrigger("attack");
             Lara.bulletfire.ShootBullet(AttackParticle, Player, ParticlesContainer);
 
-            //Increment in Rivalary level for Hallo
-            this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
+            if (FoodFiller.size.x > 0)
+            {
+                FoodFiller.size = new Vector2(FoodFiller.size.x - 0.02f, FoodFiller.size.y);
+            }
         }
 
 
@@ -440,7 +435,10 @@ public class AgentMove : Agent
             Marko.transform.LookAt(this.transform.position);
             Marko.AnimZombie.SetTrigger("attack");
             Marko.bulletfire.ShootBullet(AttackParticle, Player, ParticlesContainer);
-            Food--;
+            if (Food > 0)
+            {
+                Food--;
+            }
             if (FoodFiller.size.x > 0)
             {
                 FoodFiller.size = new Vector2(FoodFiller.size.x - 0.02f, FoodFiller.size.y);
@@ -452,8 +450,6 @@ public class AgentMove : Agent
     {
 
         //Move PLayer
-
-
         //Move Player forward
         if (action == 1)
         {
@@ -487,30 +483,5 @@ public class AgentMove : Agent
             transform.position -= Vector3.left * Time.deltaTime * speed;
         }
     }
-    /*  void AgentReset()
-      {
-          Timepassed = 0;
-          Timecheck = 0;
-          Food = 10;
-          Health = 10;
-          healthinc = false;
-          Food3.SetActive(false);
-          numberofCoins = 0;
-          Dopamin = 3;
-          OxetocinForMarko = 2;
-          OxetocinForLara = 2;
-          healthKit = 0;
-          seconds = 0;
-          i = 0;
-          count = 0;
-          Cointime = 0;
-          PrevFood = 10;
-          once = false;
-          DieAgent.HalloLive = false;
-          this.transform.position = AgentStartingPos;
-          FoodZerotimeSec = 0;
-          FoodZerotime = 0;
-          interactionWithLara = 0;
-          interactionWithMarko = 0;
-      } */
+
 }
