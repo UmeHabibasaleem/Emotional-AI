@@ -11,6 +11,7 @@ public class MarkoScript : Agent
     public static List<string[]> rowData = new List<string[]>();
     public Animator AnimZombie;
     public float Timepassed;
+    public int idle, move, Eat, Share, Attack, Steal = 0;
 
     public Lara Lara;
     public GameObject Marko;
@@ -27,8 +28,7 @@ public class MarkoScript : Agent
     public int i = 0;
     public int oneSecondCounter = 1;
     public bool FoodEaten = false;
-    public int idle, move, Eat, Share, Attack = 0;
-
+    
 
     public GameObject Food1;
     public GameObject Food2;
@@ -175,7 +175,7 @@ public class MarkoScript : Agent
         }
 
         //After one second
-        if (Timepassed == oneSecondCounter)
+        if (seconds == oneSecondCounter)
         {
             oneSecondCounter += 1;
             if (Food > 0)
@@ -264,11 +264,14 @@ public class MarkoScript : Agent
             AnimZombie.SetTrigger("run");
 
         }
-
+        if(action == 5)
+        {
+            Eat++;
+        }
         //Steal
         if (action == 5 && (dist1 < 1.42 || dist2 < 1.42 || dist3 < 1.42))
         {
-            Eat++;
+
             FoodEaten = false;
             Food++;
             if (FoodFiller.size.x < 1)
@@ -281,7 +284,6 @@ public class MarkoScript : Agent
             }
             else if (dist2 < 1.42f)
             {
-
                 Food2.SetActive(false);
             }
 
@@ -295,7 +297,6 @@ public class MarkoScript : Agent
         }
         else if (action == 5 && (distWithLara < 1.42))
         {
-            Eat++;
             Food++;
             if (FoodFiller.size.x < 1)
             {
@@ -308,8 +309,7 @@ public class MarkoScript : Agent
         //Stealing from Hallo
         else if (action == 5 && (distWithHallo < 1.42))
         {
-            Eat++;
-            Food++;
+           Food++;
             AddReward(+1.0f);
             if (FoodFiller.size.x < 1)
             {

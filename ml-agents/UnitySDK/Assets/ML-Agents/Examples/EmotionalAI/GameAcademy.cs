@@ -4,7 +4,8 @@ using UnityEngine;
 using MLAgents;
 using System.Text;
 using System.IO;
-public class GameAcademy : Academy {
+public class GameAcademy : Academy
+{
     Animator AnimZombie;
     public static int larafile = 1;
     public static int markofile = 11;
@@ -23,14 +24,15 @@ public class GameAcademy : Academy {
     public GameObject LaraAgent;
     public GameObject HalloAgent;
     int seconds = 0;
-   // public PythonCommunicator py;
+    // public PythonCommunicator py;
     int i = 0;
     int count = 0;
     public GameObject Food1;
     public GameObject Food2;
     public GameObject Food3;
-   
-    public override void InitializeAcademy() {
+
+    public override void InitializeAcademy()
+    {
         MarkoFood = Marko.Food;
         MarkoHealth = Marko.Health;
         LaraFood = Lara.Food;
@@ -48,6 +50,34 @@ public class GameAcademy : Academy {
         LaraAgent.SetActive(true);
         HalloAgent.SetActive(true);
 
+        Marko.enabled = true;
+        Lara.enabled = true;
+        Hallo.enabled = true;
+
+        Marko.FoodFiller.size = new Vector2(1f, Marko.FoodFiller.size.y);
+        Marko.HealthFiller.size = new Vector2(1f, Marko.HealthFiller.size.y);
+        Marko.TopContainer.SetActive(true);
+        Marko.BottomContainer.SetActive(true);
+        Marko.gun.SetActive(true);
+
+
+        Lara.FoodFiller.size = new Vector2(1f, Lara.FoodFiller.size.y);
+        Lara.HealthFiller.size = new Vector2(1f, Lara.HealthFiller.size.y);
+        Lara.TopContainer.SetActive(true);
+        Lara.BottomContainer.SetActive(true);
+        Lara.gun.SetActive(true);
+
+        Hallo.FoodFiller.size = new Vector2(1f, Hallo.FoodFiller.size.y);
+        Hallo.HealthFiller.size = new Vector2(1f, Hallo.HealthFiller.size.y);
+        Hallo.TopContainer.SetActive(true);
+        Hallo.BottomContainer.SetActive(true);
+        Hallo.gun.SetActive(true);
+
+
+        Lara.count = 1;
+        Marko.oneSecondCounter = 1;
+        Hallo.count = 0;
+
         Marko.Timepassed = 0;
         Lara.Timepassed = 0;
         Hallo.Timepassed = 0;
@@ -60,11 +90,11 @@ public class GameAcademy : Academy {
         Lara.Health = 10;
         Hallo.Health = 10;
 
-     
+
         Hallo.healthinc = false;
 
         //Food3.SetActive(false);
-        
+
         Marko.numberofCoins = 0;
         Lara.numberofCoins = 0;
         Hallo.numberofCoins = 0;
@@ -79,11 +109,11 @@ public class GameAcademy : Academy {
         Lara.seconds = 0;
         Hallo.seconds = 0;
 
-      //  Marko.i = 0;
-     //   Lara.i = 0;
+        //  Marko.i = 0;
+        //   Lara.i = 0;
         Hallo.i = 0;
 
-     
+
         Hallo.count = 0;
 
         Marko.Cointime = 0;
@@ -94,11 +124,11 @@ public class GameAcademy : Academy {
         Lara.PrevFood = 10;
         Hallo.PrevFood = 10;
 
-   
+
         Hallo.once = false;
         //OxetocinInHalloForMarko = 0;
         //OxetocinInLaraForMarko = 0;
-        
+
         //this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
         Marko.transform.position = Marko.AgentStartingPos;
         Lara.transform.position = Lara.AgentStartingPos;
@@ -112,7 +142,7 @@ public class GameAcademy : Academy {
         Lara.FoodZerotime = 0;
         Hallo.FoodZerotime = 0;
 
-        
+
 
     }
 
@@ -127,8 +157,6 @@ public class GameAcademy : Academy {
             Marko.Done();
             Hallo.Done();
             AcademyReset();
-            SaveData(MarkoScript.rowData, markofile);
-            SaveData(Lara.rowData, larafile);
             markofile++;
             larafile++;
 
@@ -137,29 +165,5 @@ public class GameAcademy : Academy {
 
     }
 
-    public void SaveData(List<string[]> rowData , int counter)
-    {
-        string[][] output = new string[rowData.Count][];
-
-        for (int i = 0; i < output.Length; i++)
-        {
-            output[i] = rowData[i];
-        }
-
-        int length = output.GetLength(0);
-        string delimiter = ",";
-
-        StringBuilder sb = new StringBuilder();
-
-        for (int index = 0; index < length; index++)
-            sb.AppendLine(string.Join(delimiter, output[index]));
-
-
-        string filePath = "E:/" + "/DATACSV1/" + counter+"Saved_data.csv";
-        StreamWriter outStream = System.IO.File.CreateText(filePath);
-        outStream.WriteLine(sb);
-        outStream.Close();
-
-    }
- }
+}
 
