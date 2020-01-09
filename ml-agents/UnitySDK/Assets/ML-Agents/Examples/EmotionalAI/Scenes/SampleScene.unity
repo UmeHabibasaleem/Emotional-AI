@@ -7279,7 +7279,7 @@ MonoBehaviour:
   PrevSecond: 1
   Marko: {fileID: 1110879088}
   Hallo: {fileID: 2139491918}
-  LaraModel: {fileID: 231043908}
+  LaraModel: {fileID: 31804781}
   AnimZombie: {fileID: 0}
   TopContainer: {fileID: 914709153}
   BottomContainer: {fileID: 1678081135}
@@ -7395,7 +7395,7 @@ MonoBehaviour:
     vectorActionSize: 08000000
     vectorActionDescriptions: []
     vectorActionSpaceType: 0
-  m_Model: {fileID: 11400000, guid: eab909f50c1f69044819862451988dca, type: 3}
+  m_Model: {fileID: 11400000, guid: 64fe7cc0d0961d8418d2b07bb90f6885, type: 3}
   m_InferenceDevice: 0
   m_UseHeuristic: 0
   m_BehaviorName: brain
@@ -40013,6 +40013,7 @@ MonoBehaviour:
   py: {fileID: 0}
   i: 0
   oneSecondCounter: 1
+  FoodEaten: 0
   idle: 0
   move: 0
   Eat: 0
@@ -40034,9 +40035,9 @@ MonoBehaviour:
   Coinseconds: 0
   AIDkit1: {fileID: 1192714099}
   AIDkit2: {fileID: 506232581}
-  TopContainer: {fileID: 207325737}
-  BottomContainer: {fileID: 13482011}
-  gun: {fileID: 572344866}
+  TopContainer: {fileID: 0}
+  BottomContainer: {fileID: 0}
+  gun: {fileID: 0}
   healthKit: 0
   Player: {fileID: 1110879083}
   AttackParticle: {fileID: 1092248425}
@@ -40084,7 +40085,7 @@ MonoBehaviour:
     vectorActionSize: 08000000
     vectorActionDescriptions: []
     vectorActionSpaceType: 0
-  m_Model: {fileID: 11400000, guid: eab909f50c1f69044819862451988dca, type: 3}
+  m_Model: {fileID: 11400000, guid: 64fe7cc0d0961d8418d2b07bb90f6885, type: 3}
   m_InferenceDevice: 0
   m_UseHeuristic: 0
   m_BehaviorName: brain
@@ -74101,7 +74102,7 @@ PrefabInstance:
         type: 3}
       propertyPath: Model
       value: 
-      objectReference: {fileID: 1933964378}
+      objectReference: {fileID: 1933964381}
     - target: {fileID: 114910251880362912, guid: cd29bfc793d8948d19d5001b9c1b637f,
         type: 3}
       propertyPath: TopContainer
@@ -74166,6 +74167,12 @@ MonoBehaviour:
 --- !u!1 &1933964380 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1479005648842268, guid: cd29bfc793d8948d19d5001b9c1b637f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1933964376}
+  m_PrefabAsset: {fileID: 0}
+--- !u!1 &1933964381 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1167864781378758, guid: cd29bfc793d8948d19d5001b9c1b637f,
     type: 3}
   m_PrefabInstance: {fileID: 1933964376}
   m_PrefabAsset: {fileID: 0}

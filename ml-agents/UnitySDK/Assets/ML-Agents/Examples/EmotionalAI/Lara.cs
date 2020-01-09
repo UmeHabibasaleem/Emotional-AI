@@ -1,4 +1,5 @@
 ﻿using System.Collections;
+using System.Collections;
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
@@ -212,52 +213,56 @@ public class Lara : Agent
 
         //Sharing
 
-        if (action == 6 && distWithMarko <= 1.42f)
+        if (action == 6 /*&& */)
         {
             Share++;
-            if (Food > 0)
+            if (distWithMarko <= 1.42f)
             {
-                this.Food -= 0.5f;
-                Marko.Food += 0.5f;
-                AddReward(1f);
-            }
+                
+                if (Food > 0)
+                {
+                    this.Food -= 0.5f;
+                    Marko.Food += 0.5f;
+                    AddReward(1f);
+                }
 
-            if (this.FoodFiller.size.x > 0)
-            {
-                this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
-            }
-            if (Marko.FoodFiller.size.x <= 1)
-            {
-                Marko.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
+                if (this.FoodFiller.size.x > 0)
+                {
+                    this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
+                }
+                if (Marko.FoodFiller.size.x <= 1)
+                {
+                    Marko.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
+                }
             }
 
         }
-        else if (action == 6 && distWithHallo <= 1.42f)
+        else if (action == 6 /*&&*/)
         {
             Share++;
-            if (Food > 0)
+            if (distWithHallo <= 1.42f)
             {
-                this.Food -= 0.5f;
-                Hallo.Food += 0.5f;
-                AddReward(1f);
-            }
+                
+                if (Food > 0)
+                    {
+                        this.Food -= 0.5f;
+                        Hallo.Food += 0.5f;
+                        AddReward(1f);
+                    }
 
-            if (this.FoodFiller.size.x > 0)
-            {
-                this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
+                    if (this.FoodFiller.size.x > 0)
+                    {
+                        this.FoodFiller.size = new Vector2(this.FoodFiller.size.x - 0.02f, this.FoodFiller.size.y);
+                    }
+                    if (Hallo.FoodFiller.size.x <= 1)
+                    {
+                        Hallo.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
+                    }
             }
-            if (Hallo.FoodFiller.size.x <= 1)
-            {
-                Hallo.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
-            }
-        }
+       }
 
         //Attacked By Hallo
-        if (action == 7)
-        {
-            Attack++;
-            AddReward(-1f);
-        }
+     
 
 
         if (Hallo.action == 7 && Vector3.Distance(this.transform.position, Hallo.transform.position) < 3)
