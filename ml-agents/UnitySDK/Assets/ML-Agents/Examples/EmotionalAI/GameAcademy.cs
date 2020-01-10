@@ -46,12 +46,15 @@ public class GameAcademy : Academy
     {
         this.Timepassed = 0;
         this.seconds = 0;
+
         MarkoAgent.SetActive(true);
         LaraAgent.SetActive(true);
         HalloAgent.SetActive(true);
+        Lara.LaraModel.SetActive(true);
 
         Marko.enabled = true;
         Lara.enabled = true;
+        
         Hallo.enabled = true;
 
         Marko.FoodFiller.size = new Vector2(1f, Marko.FoodFiller.size.y);
@@ -82,47 +85,28 @@ public class GameAcademy : Academy
         Lara.Timepassed = 0;
         Hallo.Timepassed = 0;
 
-        Marko.Food = 10;
-        Lara.Food = 10;
-        Hallo.Food = 10;
+        Marko.Food = 5;
+        Lara.Food = 5;
+        Hallo.Food = 5;
 
-        Marko.Health = 10;
-        Lara.Health = 10;
-        Hallo.Health = 10;
+        Marko.Health = 5;
+        Lara.Health = 5;
+        Hallo.Health = 5;
 
 
         Hallo.healthinc = false;
 
         //Food3.SetActive(false);
 
-        Marko.numberofCoins = 0;
-        Lara.numberofCoins = 0;
-        Hallo.numberofCoins = 0;
-        //Dopamin = 1;
-        //OxetocinForHallo = 2;
-        //OxetocinForLara = 2;
-        Marko.healthKit = 0;
-        Lara.healthKit = 0;
-        Hallo.healthKit = 0;
-
+     
         Marko.seconds = 0;
         Lara.seconds = 0;
         Hallo.seconds = 0;
 
-        //  Marko.i = 0;
-        //   Lara.i = 0;
-        Hallo.i = 0;
-
-
         Hallo.count = 0;
-
-        Marko.Cointime = 0;
-        Lara.Cointime = 0;
-        Hallo.Cointime = 0;
-
-        Marko.PrevFood = 10;
-        Lara.PrevFood = 10;
-        Hallo.PrevFood = 10;
+         Marko.PrevFood = 5;
+        Lara.PrevFood = 5;
+        Hallo.PrevFood = 5;
 
 
         Hallo.once = false;

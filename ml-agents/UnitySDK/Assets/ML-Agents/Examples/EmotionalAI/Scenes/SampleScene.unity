@@ -5491,7 +5491,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 31804781}
   m_LocalRotation: {x: -0, y: -0, z: -0, w: 1}
-  m_LocalPosition: {x: -3.19, y: 0, z: -7.8693256}
+  m_LocalPosition: {x: -9, y: 0, z: -2}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
   - {fileID: 1573471762}
@@ -7298,17 +7298,7 @@ MonoBehaviour:
   count: 0
   PrevFood: 10
   ateFromRes: 0
-  Coin1: {fileID: 1556172671}
-  Coin2: {fileID: 1203544610}
-  Coin3: {fileID: 1707372164}
-  Coin4: {fileID: 484664293}
-  numberofCoins: 0
-  Cointime: 0
-  Coinseconds: 0
-  AIDkit1: {fileID: 1192714099}
-  AIDkit2: {fileID: 506232581}
-  healthKit: 0
-  Player: {fileID: 231043908}
+  Player: {fileID: 0}
   AttackParticle: {fileID: 1395963316}
   ParticlesContainer: {fileID: 816201663}
   bulletfire: {fileID: 0}
@@ -7390,15 +7380,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    vectorObservationSize: 52
+    vectorObservationSize: 29
     numStackedVectorObservations: 1
-    vectorActionSize: 08000000
+    vectorActionSize: 07000000
     vectorActionDescriptions: []
     vectorActionSpaceType: 0
-  m_Model: {fileID: 11400000, guid: 64fe7cc0d0961d8418d2b07bb90f6885, type: 3}
+  m_Model: {fileID: 11400000, guid: 11796f4dd8fcf4c4da5da095251bb77c, type: 3}
   m_InferenceDevice: 0
-  m_UseHeuristic: 0
-  m_BehaviorName: brain
+  m_BehaviorType: 0
+  m_BehaviorName: brainUgh
 --- !u!1 &244030522
 GameObject:
   m_ObjectHideFlags: 0
@@ -19835,7 +19825,7 @@ Transform:
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 534669902}
   m_LocalRotation: {x: 0.08866594, y: 0.001551189, z: 0.0042423275, w: 0.9960512}
-  m_LocalPosition: {x: -1.8, y: 11, z: -49.5}
+  m_LocalPosition: {x: -1.8, y: 10, z: -52}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children: []
   m_Father: {fileID: 0}
@@ -25657,7 +25647,7 @@ MonoBehaviour:
     vectorActionSpaceType: 0
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
-  m_UseHeuristic: 0
+  m_BehaviorType: 0
   m_BehaviorName: MyBehavior
 --- !u!1 &623094414
 GameObject:
@@ -34909,9 +34899,9 @@ MonoBehaviour:
   HalloHealth: 0
   LaraFood: 0
   LaraHealth: 0
-  MarkoAgent: {fileID: 478624124}
+  MarkoAgent: {fileID: 206284176}
   LaraAgent: {fileID: 1779657706}
-  HalloAgent: {fileID: 1933964378}
+  HalloAgent: {fileID: 1933964381}
   Food1: {fileID: 877429408}
   Food2: {fileID: 1101065285}
   Food3: {fileID: 1185085739}
@@ -39999,50 +39989,36 @@ MonoBehaviour:
     resetOnDone: 1
     onDemandDecision: 0
     numberOfActionsBetweenDecisions: 5
-  AnimZombie: {fileID: 0}
+  AnimZombie: {fileID: 1110879089}
   Timepassed: 0
-  Lara: {fileID: 231043910}
-  Marko: {fileID: 206284176}
-  Hallo: {fileID: 2139491918}
-  Agentid: 2
-  Food: 0
-  PrevFood: 10
-  Health: 0
-  action: 0
-  seconds: 0
-  py: {fileID: 0}
-  i: 0
-  oneSecondCounter: 1
-  FoodEaten: 0
   idle: 0
   move: 0
   Eat: 0
   Share: 0
-  Attack: 0
+  Steal: 0
+  Lara: {fileID: 231043910}
+  Marko: {fileID: 206284176}
+  Hallo: {fileID: 2139491918}
+  Food: 0
+  PrevFood: 10
+  action: 0
+  seconds: 0
+  i: 0
+  oneSecondCounter: 1
+  FoodEaten: 0
   Food1: {fileID: 877429408}
   Food2: {fileID: 1101065285}
   Food3: {fileID: 1185085739}
   FoodFiller: {fileID: 1986203625}
   HealthFiller: {fileID: 1618439389}
   dist: 0
-  Coin1: {fileID: 1556172671}
-  Coin2: {fileID: 1203544610}
-  Coin3: {fileID: 1707372164}
-  Coin4: {fileID: 484664293}
-  numberofCoins: 0
-  coin: {fileID: 0}
-  Cointime: 0
-  Coinseconds: 0
-  AIDkit1: {fileID: 1192714099}
-  AIDkit2: {fileID: 506232581}
+  Health: 0
   TopContainer: {fileID: 207325737}
   BottomContainer: {fileID: 13482011}
   gun: {fileID: 1149681628}
-  healthKit: 0
-  Player: {fileID: 1110879083}
+  Agentid: 2
   AttackParticle: {fileID: 1092248425}
   ParticlesContainer: {fileID: 1353316446}
-  MarkoDied: 0
   FoodZerotimeSec: 0
   FoodZerotime: 0
   bulletfire: {fileID: 0}
@@ -40080,15 +40056,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    vectorObservationSize: 52
+    vectorObservationSize: 29
     numStackedVectorObservations: 1
-    vectorActionSize: 08000000
+    vectorActionSize: 07000000
     vectorActionDescriptions: []
     vectorActionSpaceType: 0
-  m_Model: {fileID: 11400000, guid: 64fe7cc0d0961d8418d2b07bb90f6885, type: 3}
+  m_Model: {fileID: 11400000, guid: 11796f4dd8fcf4c4da5da095251bb77c, type: 3}
   m_InferenceDevice: 0
-  m_UseHeuristic: 0
-  m_BehaviorName: brain
+  m_BehaviorType: 0
+  m_BehaviorName: brainUgh
 --- !u!1 &1115816067
 GameObject:
   m_ObjectHideFlags: 0
@@ -74118,6 +74094,11 @@ PrefabInstance:
       propertyPath: gun
       value: 
       objectReference: {fileID: 1933964380}
+    - target: {fileID: 114910251880362912, guid: cd29bfc793d8948d19d5001b9c1b637f,
+        type: 3}
+      propertyPath: AnimZombie
+      value: 
+      objectReference: {fileID: 1933964395}
     - target: {fileID: 114433293529131006, guid: cd29bfc793d8948d19d5001b9c1b637f,
         type: 3}
       propertyPath: AttackParticle
@@ -74171,15 +74152,15 @@ MonoBehaviour:
   m_Name: 
   m_EditorClassIdentifier: 
   m_BrainParameters:
-    vectorObservationSize: 52
+    vectorObservationSize: 29
     numStackedVectorObservations: 1
-    vectorActionSize: 08000000
+    vectorActionSize: 07000000
     vectorActionDescriptions: []
     vectorActionSpaceType: 0
-  m_Model: {fileID: 11400000, guid: eab909f50c1f69044819862451988dca, type: 3}
+  m_Model: {fileID: 11400000, guid: 11796f4dd8fcf4c4da5da095251bb77c, type: 3}
   m_InferenceDevice: 0
-  m_UseHeuristic: 0
-  m_BehaviorName: brain
+  m_BehaviorType: 0
+  m_BehaviorName: brainUgh
 --- !u!1 &1933964380 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1479005648842268, guid: cd29bfc793d8948d19d5001b9c1b637f,
@@ -74201,6 +74182,12 @@ GameObject:
 --- !u!1 &1933964383 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1713259799805966, guid: cd29bfc793d8948d19d5001b9c1b637f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1933964376}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1933964395 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 95773385414553792, guid: cd29bfc793d8948d19d5001b9c1b637f,
     type: 3}
   m_PrefabInstance: {fileID: 1933964376}
   m_PrefabAsset: {fileID: 0}
