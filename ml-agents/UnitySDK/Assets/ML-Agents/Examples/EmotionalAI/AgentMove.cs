@@ -83,10 +83,11 @@ public class AgentMove : Agent
         AddVectorObs(Timepassed);//1
         AddVectorObs(Lara.transform.position);//3
         AddVectorObs(Marko.transform.position);//3
+        AddVectorObs(this.transform.position);//3
         AddVectorObs(Food1.transform.position);//3
         AddVectorObs(Food2.transform.position);//3
         AddVectorObs(Food3.transform.position);//3
-        AddVectorObs(this.transform.position);//3
+        
         AddVectorObs(Food);//1
         AddVectorObs(Health);//1
         AddVectorObs(AttackParticle.transform.position);//3
@@ -171,7 +172,7 @@ public class AgentMove : Agent
 
 
     }
-    public override void AgentAction(float[] vectorAction)
+    public override void AgentAction(float[] vectorAction ,string txt)
     {
         action = Mathf.FloorToInt(vectorAction[0]);
 
