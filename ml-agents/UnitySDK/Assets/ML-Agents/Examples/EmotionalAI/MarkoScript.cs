@@ -441,7 +441,7 @@ public class MarkoScript : Agent
         rowDataTemp[29] = action.ToString();
         rowData.Add(rowDataTemp);
 
-        SaveData(rowData, markofile);
+     //   SaveData(rowData, markofile);
 
     }
     private void FixedUpdate()

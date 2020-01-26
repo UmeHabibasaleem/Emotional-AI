@@ -300,7 +300,7 @@ public class Lara : Agent
         rowDataTemp[29] = action.ToString();
         rowData.Add(rowDataTemp);
 
-        SaveData(rowData, larafile);
+     //   SaveData(rowData, larafile);
 
     }
     // Use this for initialization
@@ -467,7 +467,7 @@ public class Lara : Agent
             transform.position -= Vector3.left * Time.deltaTime * speed;
         }
     }
-    public void SaveData(List<string[]> rowData, int counter)
+ /*   public void SaveData(List<string[]> rowData, int counter)
     {
         string[][] output = new string[rowData.Count][];
         Debug.Log(rowData.Count);
@@ -493,6 +493,6 @@ public class Lara : Agent
         counter++;
         larafile = counter;
 
-    }
+    } */
 
 }

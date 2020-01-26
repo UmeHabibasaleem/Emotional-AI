@@ -2,7 +2,10 @@
 using System.Collections.Generic;
 using TMPro;
 using UnityEngine;
+using NeuralNetwork.Helpers;
+using NeuralNetwork.NetworkModels;
 using MLAgents;
+using System;
 //2
 
 public class AgentMove : Agent
@@ -51,13 +54,21 @@ public class AgentMove : Agent
     public int FoodZerotime = 0;
     public Vector3 AgentStartingPos;
     private GameAcademy academy;
-
     
+    private static int _numInputParameters;
+    private static int _numHiddenLayers;
+    private static int[] _hiddenNeurons;
+    private static int _numOutputParameters;
+    private static NeuralNetwork.NetworkModels.Network _network;
+    private static List<DataSet> _dataSets;
+    double[] obser = new double[28];
+
 
     private void Awake()
     {
         this.AttackParticle.SetActive(false);
         Physics.IgnoreLayerCollision(11, 11);
+        ImportNetwork();
     }
 
 
@@ -93,7 +104,35 @@ public class AgentMove : Agent
         AddVectorObs(AttackParticle.transform.position);//3
         AddVectorObs(ParticlesContainer.transform.position);//3
         AddVectorObs(speed);//1
-    
+        obser[0] = Timepassed;
+        obser[1] = Lara.transform.position.x;
+        obser[2] = Lara.transform.position.y;
+        obser[3] = Lara.transform.position.z;
+        obser[4] = Marko.transform.position.x;
+        obser[5] = Marko.transform.position.y;
+        obser[6] = Marko.transform.position.z;
+        obser[7] = this.transform.position.x;
+        obser[8] = this.transform.position.y;
+        obser[9] = this.transform.position.z;
+        obser[10] = Food1.transform.position.x;
+        obser[11] = Food1.transform.position.y;
+        obser[12] = Food1.transform.position.z;
+        obser[13] = Food2.transform.position.x;
+        obser[14] = Food2.transform.position.y;
+        obser[15] = Food2.transform.position.z;
+        obser[16] = Food3.transform.position.x;
+        obser[17] = Food3.transform.position.y;
+        obser[18] = Food3.transform.position.z;
+        obser[19] = Food;
+        obser[20] = Health;
+        obser[21] = AttackParticle.transform.position.x;
+        obser[22] = AttackParticle.transform.position.y;
+        obser[23] = AttackParticle.transform.position.z;
+        obser[24] = ParticlesContainer.transform.position.x;
+        obser[25] = ParticlesContainer.transform.position.y;
+        obser[26] = ParticlesContainer.transform.position.z;
+        obser[27] = speed;  
+
     }
     // Update is called once per frame
     void Update()
@@ -174,7 +213,8 @@ public class AgentMove : Agent
     }
     public override void AgentAction(float[] vectorAction ,string txt)
     {
-        action = Mathf.FloorToInt(vectorAction[0]);
+        int ANNaction = TestNetwork(obser); //Action from ANN
+        action = Mathf.FloorToInt(vectorAction[0]);   //Action From RL
 
         float dist1 = Vector3.Distance(Hallo.transform.position, Food1.transform.position);
         float dist2 = Vector3.Distance(Hallo.transform.position, Food2.transform.position);
@@ -393,30 +433,48 @@ public class AgentMove : Agent
             transform.position -= Vector3.left * Time.deltaTime * speed;
         }
     }
-    /*  void AgentReset()
-      {
-          Timepassed = 0;
-          Timecheck = 0;
-          Food = 10;
-          Health = 10;
-          healthinc = false;
-          Food3.SetActive(false);
-          numberofCoins = 0;
-          Dopamin = 3;
-          OxetocinForMarko = 2;
-          OxetocinForLara = 2;
-          healthKit = 0;
-          seconds = 0;
-          i = 0;
-          count = 0;
-          Cointime = 0;
-          PrevFood = 10;
-          once = false;
-          DieAgent.HalloLive = false;
-          this.transform.position = AgentStartingPos;
-          FoodZerotimeSec = 0;
-          FoodZerotime = 0;
-          interactionWithLara = 0;
-          interactionWithMarko = 0;
-      } */
+
+    private static void ImportNetwork()
+    {
+
+        _network = ImportHelper.ImportNetwork();
+        if (_network == null)
+        {
+            Debug.Log("\t****Something went wrong while importing your network.****");
+            return;
+        }
+
+        _numInputParameters = _network.InputLayer.Count;
+        _hiddenNeurons = new int[_network.HiddenLayers.Count];
+        _numOutputParameters = _network.OutputLayer.Count;
+
+        Debug.Log("\t**Network successfully imported.**");
+
+    }
+    private static int TestNetwork(double[] array)
+    {
+        double max = 0.0;
+        int action = 0 ;
+        Debug.Log("\tTesting Network");
+        var values = array;
+        int act1 = -1;
+        if (values == null)
+        {
+            return -1;
+        }
+      //  Debug.Log("values inserted successfully");
+        var results = _network.Compute(values);
+        for(int i= 0; i<results.Length; i++)
+        {
+            if(results[i]> max)
+            {
+                max = results[i];
+                action = i;
+            }
+        }
+        Debug.Log($"\tOutput: {action}");
+        return action;
+
+    }
+
 }
