@@ -24,7 +24,6 @@ public class GameAcademy : Academy
     public GameObject LaraAgent;
     public GameObject HalloAgent;
     int seconds = 0;
-    // public PythonCommunicator py;
     int i = 0;
     int count = 0;
     public GameObject Food1;
@@ -46,6 +45,8 @@ public class GameAcademy : Academy
     {
         this.Timepassed = 0;
         this.seconds = 0;
+
+        Hallo.iteration = 0;
 
         MarkoAgent.SetActive(true);
         LaraAgent.SetActive(true);

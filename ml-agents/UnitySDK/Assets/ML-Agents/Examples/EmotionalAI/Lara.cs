@@ -103,7 +103,7 @@ public class Lara : Agent
 
     }
 
-    public override void AgentAction(float[] vectorAction , string txt) 
+    public override void AgentAction(float[] vectorAction ) 
     {
         action = Mathf.FloorToInt(vectorAction[0]);
 
@@ -131,15 +131,12 @@ public class Lara : Agent
 
 
         //Eat 
-        if (action == 5)
-        {
-        }
+       
 
 
         if (action == 5 && ateFromRes == false && (dist1 < 1.42 || dist2 < 1.42 || dist3 < 1.42))
         {
             Eat++;
-
             Food++;
             //Lara Should avoid eating
             AddReward(-0.05f);
@@ -190,10 +187,10 @@ public class Lara : Agent
 
         if (action == 6 /*&& */)
         {
-            Share++;
+         
             if (distWithMarko <= 1.42f)
             {
-
+                Share++;
                 if (Food > 0)
                 {
                     this.Food -= 0.5f;
@@ -214,9 +211,10 @@ public class Lara : Agent
         }
         else if (action == 6 /*&&*/)
         {
-            Share++;
+          
             if (distWithHallo <= 1.42f)
             {
+                Share++;
 
                 if (Food > 0)
                 {
@@ -353,17 +351,19 @@ public class Lara : Agent
     void Update()
     {
 
-
+        
         Vector3 targetPos = AnimZombie.transform.position;
         Timepassed += Time.deltaTime;
         seconds = (int)Timepassed;
 
         if (Food <= 0)
         {
+            Food = 0;
             FoodZerotimeSec += Time.deltaTime;
             FoodZerotime = (int)FoodZerotimeSec;
             if (FoodZerotime == 2)
             {
+
                 Health = 0;
                 this.HealthFiller.size = new Vector2(0f, this.HealthFiller.size.y);
                 Hallo.SetReward(-1f);

@@ -222,7 +222,7 @@ public class MarkoScript : Agent
     }
 
 
-    public override void AgentAction(float[] vectorAction , string txt)
+    public override void AgentAction(float[] vectorAction)
     {
         action = Mathf.FloorToInt(vectorAction[0]);
         float dist1 = Vector3.Distance(Marko.transform.position, Food1.transform.position);
@@ -247,10 +247,6 @@ public class MarkoScript : Agent
             move++;
             AnimZombie.SetTrigger("run");
 
-        }
-        if(action == 5)
-        {
-            Eat++;
         }
         //Steal
 
@@ -281,6 +277,7 @@ public class MarkoScript : Agent
 
         else if (action == 5 && !FoodEaten && (dist1 < 1.42 || dist2 < 1.42 || dist3 < 1.42))
         {
+            Eat++;
             FoodEaten = true;
             Food++;
             if (FoodFiller.size.x < 1)
@@ -305,9 +302,8 @@ public class MarkoScript : Agent
             AddReward(+0.2f);
         }
         //Share with Hallo
-        if(action == 6)
-        {
-        }
+      
+       
         if (action == 6 && distWithHallo <= 1.42f)
         {
             //Selfish agent should not share food

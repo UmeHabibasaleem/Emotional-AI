@@ -23,7 +23,7 @@ public class AgentMove : Agent
     public float Food;
     public float Health;
     public int action;
-
+    public int iteration;
     public int seconds = 0;
     public int count = 0;
 
@@ -211,11 +211,20 @@ public class AgentMove : Agent
 
 
     }
-    public override void AgentAction(float[] vectorAction ,string txt)
+    public override void AgentAction(float[] vectorAction)
     {
         int ANNaction = TestNetwork(obser); //Action from ANN
         action = Mathf.FloorToInt(vectorAction[0]);   //Action From RL
-
+        if(iteration % 5 == 0)
+        {
+            //for 20% ANN and 80% RL
+            action = ANNaction;
+        }
+      /*  if(iteration % 1.25 == 0)
+        {
+            //for 80% ANN and 20% RL
+            action = ANNaction;
+        }*/
         float dist1 = Vector3.Distance(Hallo.transform.position, Food1.transform.position);
         float dist2 = Vector3.Distance(Hallo.transform.position, Food2.transform.position);
         float dist3 = Vector3.Distance(Hallo.transform.position, Food3.transform.position);
