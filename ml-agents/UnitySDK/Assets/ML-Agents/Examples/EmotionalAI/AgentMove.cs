@@ -68,7 +68,7 @@ public class AgentMove : Agent
     {
         this.AttackParticle.SetActive(false);
         Physics.IgnoreLayerCollision(11, 11);
-        ImportNetwork();
+        //ImportNetwork();
     }
 
 
@@ -211,20 +211,20 @@ public class AgentMove : Agent
 
 
     }
-    public override void AgentAction(float[] vectorAction)
+    public override void AgentAction(float[] vectorAction, string txt)
     {
-        int ANNaction = TestNetwork(obser); //Action from ANN
+        //int ANNaction = TestNetwork(obser); //Action from ANN
         action = Mathf.FloorToInt(vectorAction[0]);   //Action From RL
-        if(iteration % 5 == 0)
-        {
-            //for 20% ANN and 80% RL
-            action = ANNaction;
-        }
-      /*  if(iteration % 1.25 == 0)
-        {
-            //for 80% ANN and 20% RL
-            action = ANNaction;
-        }*/
+        //if (iteration % 5 == 0)
+        //{
+        //    for 20 % ANN and 80 % RL
+        //    action = ANNaction;
+        //}
+        /*  if(iteration % 1.25 == 0)
+          {
+              //for 80% ANN and 20% RL
+              action = ANNaction;
+          }*/
         float dist1 = Vector3.Distance(Hallo.transform.position, Food1.transform.position);
         float dist2 = Vector3.Distance(Hallo.transform.position, Food2.transform.position);
         float dist3 = Vector3.Distance(Hallo.transform.position, Food3.transform.position);
@@ -443,47 +443,47 @@ public class AgentMove : Agent
         }
     }
 
-    private static void ImportNetwork()
-    {
+    //private static void ImportNetwork()
+    //{
 
-        _network = ImportHelper.ImportNetwork();
-        if (_network == null)
-        {
-            Debug.Log("\t****Something went wrong while importing your network.****");
-            return;
-        }
+    //    _network = ImportHelper.ImportNetwork();
+    //    if (_network == null)
+    //    {
+    //        Debug.Log("\t****Something went wrong while importing your network.****");
+    //        return;
+    //    }
 
-        _numInputParameters = _network.InputLayer.Count;
-        _hiddenNeurons = new int[_network.HiddenLayers.Count];
-        _numOutputParameters = _network.OutputLayer.Count;
+    //    _numInputParameters = _network.InputLayer.Count;
+    //    _hiddenNeurons = new int[_network.HiddenLayers.Count];
+    //    _numOutputParameters = _network.OutputLayer.Count;
 
-        Debug.Log("\t**Network successfully imported.**");
+    //    Debug.Log("\t**Network successfully imported.**");
 
-    }
-    private static int TestNetwork(double[] array)
-    {
-        double max = 0.0;
-        int action = 0 ;
-        Debug.Log("\tTesting Network");
-        var values = array;
-        int act1 = -1;
-        if (values == null)
-        {
-            return -1;
-        }
-      //  Debug.Log("values inserted successfully");
-        var results = _network.Compute(values);
-        for(int i= 0; i<results.Length; i++)
-        {
-            if(results[i]> max)
-            {
-                max = results[i];
-                action = i;
-            }
-        }
-        Debug.Log($"\tOutput: {action}");
-        return action;
+    //}
+    //private static int TestNetwork(double[] array)
+    //{
+    //    double max = 0.0;
+    //    int action = 0 ;
+    //    Debug.Log("\tTesting Network");
+    //    var values = array;
+    //    int act1 = -1;
+    //    if (values == null)
+    //    {
+    //        return -1;
+    //    }
+    //  //  Debug.Log("values inserted successfully");
+    //    var results = _network.Compute(values);
+    //    for(int i= 0; i<results.Length; i++)
+    //    {
+    //        if(results[i]> max)
+    //        {
+    //            max = results[i];
+    //            action = i;
+    //        }
+    //    }
+    //    Debug.Log($"\tOutput: {action}");
+    //    return action;
 
-    }
+    //}
 
 }

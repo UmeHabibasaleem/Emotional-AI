@@ -222,7 +222,7 @@ public class MarkoScript : Agent
     }
 
 
-    public override void AgentAction(float[] vectorAction)
+    public override void AgentAction(float[] vectorAction, string txt)
     {
         action = Mathf.FloorToInt(vectorAction[0]);
         float dist1 = Vector3.Distance(Marko.transform.position, Food1.transform.position);
@@ -280,6 +280,39 @@ public class MarkoScript : Agent
             Eat++;
             FoodEaten = true;
             Food++;
+            string[] rowDataTemp = new string[30];
+            rowDataTemp[0] = Agentid.ToString();
+            rowDataTemp[1] = Timepassed.ToString();
+            rowDataTemp[2] = this.transform.position.x.ToString();
+            rowDataTemp[3] = this.transform.position.y.ToString();
+            rowDataTemp[4] = this.transform.position.z.ToString();
+            rowDataTemp[5] = Marko.transform.position.x.ToString();
+            rowDataTemp[6] = Marko.transform.position.y.ToString();
+            rowDataTemp[7] = Marko.transform.position.z.ToString();
+            rowDataTemp[8] = Hallo.transform.position.x.ToString();
+            rowDataTemp[9] = Hallo.transform.position.y.ToString();
+            rowDataTemp[10] = Hallo.transform.position.z.ToString();
+            rowDataTemp[11] = Food1.transform.position.x.ToString();
+            rowDataTemp[12] = Food1.transform.position.y.ToString();
+            rowDataTemp[13] = Food1.transform.position.z.ToString();
+            rowDataTemp[14] = Food2.transform.position.x.ToString();
+            rowDataTemp[15] = Food2.transform.position.y.ToString();
+            rowDataTemp[16] = Food2.transform.position.z.ToString();
+            rowDataTemp[17] = Food3.transform.position.x.ToString();
+            rowDataTemp[18] = Food3.transform.position.y.ToString();
+            rowDataTemp[19] = Food3.transform.position.z.ToString();
+
+            rowDataTemp[20] = Food.ToString();
+            rowDataTemp[21] = Health.ToString();
+            rowDataTemp[22] = AttackParticle.transform.position.x.ToString();
+            rowDataTemp[23] = AttackParticle.transform.position.y.ToString();
+            rowDataTemp[24] = AttackParticle.transform.position.z.ToString();
+            rowDataTemp[25] = ParticlesContainer.transform.position.x.ToString();
+            rowDataTemp[26] = ParticlesContainer.transform.position.y.ToString();
+            rowDataTemp[27] = ParticlesContainer.transform.position.z.ToString();
+            rowDataTemp[28] = speed.ToString();
+            rowDataTemp[29] = action.ToString();
+            rowData.Add(rowDataTemp);
             if (FoodFiller.size.x < 1)
             {
                 this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
@@ -403,42 +436,46 @@ public class MarkoScript : Agent
         // rowDataTemp[21] = AnimZombie.transform.position.ToString();
         //rowDataTemp[22] = action.ToString();
         //rowData.Add(rowDataTemp);
-        string[] rowDataTemp = new string[30];
-        rowDataTemp[0] = Agentid.ToString();
-        rowDataTemp[1] = Timepassed.ToString();
-        rowDataTemp[2] = this.transform.position.x.ToString();
-        rowDataTemp[3] = this.transform.position.y.ToString();
-        rowDataTemp[4] = this.transform.position.z.ToString();
-        rowDataTemp[5] = Marko.transform.position.x.ToString();
-        rowDataTemp[6] = Marko.transform.position.y.ToString();
-        rowDataTemp[7] = Marko.transform.position.z.ToString();
-        rowDataTemp[8] = Hallo.transform.position.x.ToString();
-        rowDataTemp[9] = Hallo.transform.position.y.ToString();
-        rowDataTemp[10] = Hallo.transform.position.z.ToString();
-        rowDataTemp[11] = Food1.transform.position.x.ToString();
-        rowDataTemp[12] = Food1.transform.position.y.ToString();
-        rowDataTemp[13] = Food1.transform.position.z.ToString();
-        rowDataTemp[14] = Food2.transform.position.x.ToString();
-        rowDataTemp[15] = Food2.transform.position.y.ToString();
-        rowDataTemp[16] = Food2.transform.position.z.ToString();
-        rowDataTemp[17] = Food3.transform.position.x.ToString();
-        rowDataTemp[18] = Food3.transform.position.y.ToString();
-        rowDataTemp[19] = Food3.transform.position.z.ToString();
+        if (action != 5)
+        {
+            string[] rowDataTemp = new string[30];
+            rowDataTemp[0] = Agentid.ToString();
+            rowDataTemp[1] = Timepassed.ToString();
+            rowDataTemp[2] = this.transform.position.x.ToString();
+            rowDataTemp[3] = this.transform.position.y.ToString();
+            rowDataTemp[4] = this.transform.position.z.ToString();
+            rowDataTemp[5] = Marko.transform.position.x.ToString();
+            rowDataTemp[6] = Marko.transform.position.y.ToString();
+            rowDataTemp[7] = Marko.transform.position.z.ToString();
+            rowDataTemp[8] = Hallo.transform.position.x.ToString();
+            rowDataTemp[9] = Hallo.transform.position.y.ToString();
+            rowDataTemp[10] = Hallo.transform.position.z.ToString();
+            rowDataTemp[11] = Food1.transform.position.x.ToString();
+            rowDataTemp[12] = Food1.transform.position.y.ToString();
+            rowDataTemp[13] = Food1.transform.position.z.ToString();
+            rowDataTemp[14] = Food2.transform.position.x.ToString();
+            rowDataTemp[15] = Food2.transform.position.y.ToString();
+            rowDataTemp[16] = Food2.transform.position.z.ToString();
+            rowDataTemp[17] = Food3.transform.position.x.ToString();
+            rowDataTemp[18] = Food3.transform.position.y.ToString();
+            rowDataTemp[19] = Food3.transform.position.z.ToString();
 
-        rowDataTemp[20] = Food.ToString();
-        rowDataTemp[21] = Health.ToString();
-        rowDataTemp[22] = AttackParticle.transform.position.x.ToString();
-        rowDataTemp[23] = AttackParticle.transform.position.y.ToString();
-        rowDataTemp[24] = AttackParticle.transform.position.z.ToString();
-        rowDataTemp[25] = ParticlesContainer.transform.position.x.ToString();
-        rowDataTemp[26] = ParticlesContainer.transform.position.y.ToString();
-        rowDataTemp[27] = ParticlesContainer.transform.position.z.ToString();
-        rowDataTemp[28] = speed.ToString();
-        rowDataTemp[29] = action.ToString();
-        rowData.Add(rowDataTemp);
-
-     //   SaveData(rowData, markofile);
-
+            rowDataTemp[20] = Food.ToString();
+            rowDataTemp[21] = Health.ToString();
+            rowDataTemp[22] = AttackParticle.transform.position.x.ToString();
+            rowDataTemp[23] = AttackParticle.transform.position.y.ToString();
+            rowDataTemp[24] = AttackParticle.transform.position.z.ToString();
+            rowDataTemp[25] = ParticlesContainer.transform.position.x.ToString();
+            rowDataTemp[26] = ParticlesContainer.transform.position.y.ToString();
+            rowDataTemp[27] = ParticlesContainer.transform.position.z.ToString();
+            rowDataTemp[28] = speed.ToString();
+            rowDataTemp[29] = action.ToString();
+            rowData.Add(rowDataTemp);
+            if (markofile == 100)
+            {
+                SaveData(rowData, markofile);
+            }
+        }
     }
     private void FixedUpdate()
     {

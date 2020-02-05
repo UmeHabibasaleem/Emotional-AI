@@ -16,8 +16,6 @@ public class Lara : Agent
     public int idle, move, Eat, Share, Attack = 0;
     public bool onceInSecond = false;
     public float PrevSecond = 1;
-
-
     public MarkoScript Marko;
     public AgentMove Hallo;
     public GameObject LaraModel;
@@ -30,22 +28,13 @@ public class Lara : Agent
     public GameObject Food3;
     public SpriteRenderer FoodFiller;
     public SpriteRenderer HealthFiller;
-
-
     public float Timepassed;
-
-
-
-
     public int Agentid = 1;
     public float Food;
     public float Health;
     public int action;
     float speed = 5.0f;
-
-
     public int seconds = 0;
-
     public int count = 0;
 
 
@@ -57,14 +46,6 @@ public class Lara : Agent
     public float PrevFood = 5;
 
     public bool ateFromRes = false;
-
-
-
-
-
-
-
-   
     public GameObject Player;
     public GameObject AttackParticle;
     public GameObject ParticlesContainer;
@@ -103,7 +84,7 @@ public class Lara : Agent
 
     }
 
-    public override void AgentAction(float[] vectorAction ) 
+    public override void AgentAction(float[] vectorAction, string txt ) 
     {
         action = Mathf.FloorToInt(vectorAction[0]);
 
@@ -140,7 +121,39 @@ public class Lara : Agent
             Food++;
             //Lara Should avoid eating
             AddReward(-0.05f);
+            string[] rowDataTemp1 = new string[30];
+            rowDataTemp1[0] = Agentid.ToString();
+            rowDataTemp1[1] = Timepassed.ToString();
+            rowDataTemp1[2] = this.transform.position.x.ToString();
+            rowDataTemp1[3] = this.transform.position.y.ToString();
+            rowDataTemp1[4] = this.transform.position.z.ToString();
+            rowDataTemp1[5] = Marko.transform.position.x.ToString();
+            rowDataTemp1[6] = Marko.transform.position.y.ToString();
+            rowDataTemp1[7] = Marko.transform.position.z.ToString();
+            rowDataTemp1[8] = Hallo.transform.position.x.ToString();
+            rowDataTemp1[9] = Hallo.transform.position.y.ToString();
+            rowDataTemp1[10] = Hallo.transform.position.z.ToString();
+            rowDataTemp1[11] = Food1.transform.position.x.ToString();
+            rowDataTemp1[12] = Food1.transform.position.y.ToString();
+            rowDataTemp1[13] = Food1.transform.position.z.ToString();
+            rowDataTemp1[14] = Food2.transform.position.x.ToString();
+            rowDataTemp1[15] = Food2.transform.position.y.ToString();
+            rowDataTemp1[16] = Food2.transform.position.z.ToString();
+            rowDataTemp1[17] = Food3.transform.position.x.ToString();
+            rowDataTemp1[18] = Food3.transform.position.y.ToString();
+            rowDataTemp1[19] = Food3.transform.position.z.ToString();
 
+            rowDataTemp1[20] = Food.ToString();
+            rowDataTemp1[21] = Health.ToString();
+            rowDataTemp1[22] = AttackParticle.transform.position.x.ToString();
+            rowDataTemp1[23] = AttackParticle.transform.position.y.ToString();
+            rowDataTemp1[24] = AttackParticle.transform.position.z.ToString();
+            rowDataTemp1[25] = ParticlesContainer.transform.position.x.ToString();
+            rowDataTemp1[26] = ParticlesContainer.transform.position.y.ToString();
+            rowDataTemp1[27] = ParticlesContainer.transform.position.z.ToString();
+            rowDataTemp1[28] = speed.ToString();
+            rowDataTemp1[29] = action.ToString();
+            rowData.Add(rowDataTemp1);
             ateFromRes = true;
 
             if (dist1 < 1.42)
@@ -264,6 +277,8 @@ public class Lara : Agent
         //        FoodFiller.size = new Vector2(FoodFiller.size.x - 0.02f, FoodFiller.size.y);
         //    }
         //}
+        if (action!=5)
+        { 
         string[] rowDataTemp = new string[30];
         rowDataTemp[0] = Agentid.ToString();
         rowDataTemp[1] = Timepassed.ToString();
@@ -297,9 +312,11 @@ public class Lara : Agent
         rowDataTemp[28] = speed.ToString();
         rowDataTemp[29] = action.ToString();
         rowData.Add(rowDataTemp);
-
-     //   SaveData(rowData, larafile);
-
+        if (larafile == 100)
+        {
+           SaveData(rowData, larafile);
+        }
+     }
     }
     // Use this for initialization
     public override void InitializeAgent()
@@ -345,6 +362,7 @@ public class Lara : Agent
         rowDataTemp[28] = "Speed";
         rowDataTemp[29] = "Action";      
         rowData.Add(rowDataTemp);
+       
      }
 
     // Update is called once per frame
@@ -467,7 +485,7 @@ public class Lara : Agent
             transform.position -= Vector3.left * Time.deltaTime * speed;
         }
     }
- /*   public void SaveData(List<string[]> rowData, int counter)
+ public void SaveData(List<string[]> rowData, int counter)
     {
         string[][] output = new string[rowData.Count][];
         Debug.Log(rowData.Count);
@@ -493,6 +511,6 @@ public class Lara : Agent
         counter++;
         larafile = counter;
 
-    } */
+    } 
 
 }
