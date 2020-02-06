@@ -7387,7 +7387,7 @@ MonoBehaviour:
     vectorActionSpaceType: 0
   m_Model: {fileID: 11400000, guid: aea100225d62791448dcb725bbd74f13, type: 3}
   m_InferenceDevice: 0
-  m_UseHeuristic: 0
+  m_BehaviorType: 0
   m_BehaviorName: brainUgh
 --- !u!1 &244030522
 GameObject:
@@ -25647,7 +25647,7 @@ MonoBehaviour:
     vectorActionSpaceType: 0
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
-  m_UseHeuristic: 0
+  m_BehaviorType: 0
   m_BehaviorName: MyBehavior
 --- !u!1 &623094414
 GameObject:
@@ -34728,7 +34728,7 @@ Transform:
   m_PrefabInstance: {fileID: 0}
   m_PrefabAsset: {fileID: 0}
   m_GameObject: {fileID: 1064345585}
-  m_LocalRotation: {x: 0.034145992, y: 0.025656361, z: 0.14744918, w: 0.9881471}
+  m_LocalRotation: {x: 0.034145992, y: 0.02565636, z: 0.14744918, w: 0.988147}
   m_LocalPosition: {x: 0.0000000011564393, y: 0.05234057, z: -0.0052536833}
   m_LocalScale: {x: 1, y: 1, z: 1}
   m_Children:
@@ -40063,7 +40063,7 @@ MonoBehaviour:
     vectorActionSpaceType: 0
   m_Model: {fileID: 11400000, guid: aea100225d62791448dcb725bbd74f13, type: 3}
   m_InferenceDevice: 0
-  m_UseHeuristic: 0
+  m_BehaviorType: 0
   m_BehaviorName: brainUgh
 --- !u!1 &1115816067
 GameObject:
@@ -40678,12 +40678,6 @@ Transform:
   m_Father: {fileID: 1110879084}
   m_RootOrder: 3
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!212 &1158126112 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 212486427812174918, guid: cd29bfc793d8948d19d5001b9c1b637f,
-    type: 3}
-  m_PrefabInstance: {fileID: 1933964376}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1165477483
 GameObject:
   m_ObjectHideFlags: 0
@@ -67488,12 +67482,6 @@ SkinnedMeshRenderer:
     m_Center: {x: 0.011858508, y: 0.21122158, z: 0.14503203}
     m_Extent: {x: 0.44476765, y: 0.9177762, z: 0.43374777}
   m_DirtyAABB: 0
---- !u!212 &1780873628 stripped
-SpriteRenderer:
-  m_CorrespondingSourceObject: {fileID: 212891041180792162, guid: cd29bfc793d8948d19d5001b9c1b637f,
-    type: 3}
-  m_PrefabInstance: {fileID: 1933964376}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1001 &1783345265
 PrefabInstance:
   m_ObjectHideFlags: 0
@@ -74073,7 +74061,7 @@ PrefabInstance:
     - target: {fileID: 114910251880362912, guid: cd29bfc793d8948d19d5001b9c1b637f,
         type: 3}
       propertyPath: agentParameters.numberOfActionsBetweenDecisions
-      value: 1
+      value: 5
       objectReference: {fileID: 0}
     - target: {fileID: 114910251880362912, guid: cd29bfc793d8948d19d5001b9c1b637f,
         type: 3}
@@ -74084,18 +74072,18 @@ PrefabInstance:
     - target: {fileID: 114910251880362912, guid: cd29bfc793d8948d19d5001b9c1b637f,
         type: 3}
       propertyPath: agentParameters.maxStep
-      value: 0
+      value: 5000
       objectReference: {fileID: 0}
     - target: {fileID: 114910251880362912, guid: cd29bfc793d8948d19d5001b9c1b637f,
         type: 3}
       propertyPath: Model
       value: 
-      objectReference: {fileID: 618210768}
+      objectReference: {fileID: 1933964381}
     - target: {fileID: 114910251880362912, guid: cd29bfc793d8948d19d5001b9c1b637f,
         type: 3}
       propertyPath: TopContainer
       value: 
-      objectReference: {fileID: 207325737}
+      objectReference: {fileID: 1933964382}
     - target: {fileID: 114910251880362912, guid: cd29bfc793d8948d19d5001b9c1b637f,
         type: 3}
       propertyPath: BottomContainer
@@ -74105,27 +74093,12 @@ PrefabInstance:
         type: 3}
       propertyPath: gun
       value: 
-      objectReference: {fileID: 2043954981}
+      objectReference: {fileID: 1933964380}
     - target: {fileID: 114910251880362912, guid: cd29bfc793d8948d19d5001b9c1b637f,
         type: 3}
       propertyPath: AnimZombie
       value: 
-      objectReference: {fileID: 0}
-    - target: {fileID: 114910251880362912, guid: cd29bfc793d8948d19d5001b9c1b637f,
-        type: 3}
-      propertyPath: FoodFiller
-      value: 
-      objectReference: {fileID: 1158126112}
-    - target: {fileID: 114910251880362912, guid: cd29bfc793d8948d19d5001b9c1b637f,
-        type: 3}
-      propertyPath: HealthFiller
-      value: 
-      objectReference: {fileID: 1780873628}
-    - target: {fileID: 114910251880362912, guid: cd29bfc793d8948d19d5001b9c1b637f,
-        type: 3}
-      propertyPath: Hallo
-      value: 
-      objectReference: {fileID: 1933964378}
+      objectReference: {fileID: 1933964395}
     - target: {fileID: 114433293529131006, guid: cd29bfc793d8948d19d5001b9c1b637f,
         type: 3}
       propertyPath: AttackParticle
@@ -74186,17 +74159,35 @@ MonoBehaviour:
     vectorActionSpaceType: 0
   m_Model: {fileID: 11400000, guid: aea100225d62791448dcb725bbd74f13, type: 3}
   m_InferenceDevice: 0
-  m_UseHeuristic: 0
+  m_BehaviorType: 0
   m_BehaviorName: brainUgh
+--- !u!1 &1933964380 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1479005648842268, guid: cd29bfc793d8948d19d5001b9c1b637f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1933964376}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1933964381 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1167864781378758, guid: cd29bfc793d8948d19d5001b9c1b637f,
     type: 3}
   m_PrefabInstance: {fileID: 1933964376}
   m_PrefabAsset: {fileID: 0}
+--- !u!1 &1933964382 stripped
+GameObject:
+  m_CorrespondingSourceObject: {fileID: 1204022806486772, guid: cd29bfc793d8948d19d5001b9c1b637f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1933964376}
+  m_PrefabAsset: {fileID: 0}
 --- !u!1 &1933964383 stripped
 GameObject:
   m_CorrespondingSourceObject: {fileID: 1713259799805966, guid: cd29bfc793d8948d19d5001b9c1b637f,
+    type: 3}
+  m_PrefabInstance: {fileID: 1933964376}
+  m_PrefabAsset: {fileID: 0}
+--- !u!95 &1933964395 stripped
+Animator:
+  m_CorrespondingSourceObject: {fileID: 95773385414553792, guid: cd29bfc793d8948d19d5001b9c1b637f,
     type: 3}
   m_PrefabInstance: {fileID: 1933964376}
   m_PrefabAsset: {fileID: 0}
@@ -75261,12 +75252,6 @@ Transform:
   m_Father: {fileID: 1149681629}
   m_RootOrder: 1
   m_LocalEulerAnglesHint: {x: 0, y: 0, z: 0}
---- !u!1 &2043954981 stripped
-GameObject:
-  m_CorrespondingSourceObject: {fileID: 1899993470516954, guid: cd29bfc793d8948d19d5001b9c1b637f,
-    type: 3}
-  m_PrefabInstance: {fileID: 1933964376}
-  m_PrefabAsset: {fileID: 0}
 --- !u!1 &2050597757
 GameObject:
   m_ObjectHideFlags: 0

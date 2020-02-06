@@ -24,6 +24,7 @@ public class GameAcademy : Academy
     public GameObject LaraAgent;
     public GameObject HalloAgent;
     int seconds = 0;
+    // public PythonCommunicator py;
     int i = 0;
     int count = 0;
     public GameObject Food1;
