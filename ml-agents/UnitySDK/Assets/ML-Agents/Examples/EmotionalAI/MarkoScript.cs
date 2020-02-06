@@ -259,8 +259,10 @@ public class MarkoScript : Agent
                 this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
             }
             Lara.Food--;
+            
             //More reward on stealing from other agents
             AddReward(+1.0f);
+            AddParameters();
         }
         //Stealing from Hallo
         else if (action == 5 && (distWithHallo < 1.42))
@@ -273,6 +275,7 @@ public class MarkoScript : Agent
                 this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
             }
             Hallo.Food--;
+            AddParameters();
         }
 
         else if (action == 5 && !FoodEaten && (dist1 < 1.42 || dist2 < 1.42 || dist3 < 1.42))
@@ -300,6 +303,7 @@ public class MarkoScript : Agent
 
             //Less Reward on eating from reservior
             AddReward(+0.2f);
+            AddParameters();
         }
         //Share with Hallo
       
@@ -323,6 +327,7 @@ public class MarkoScript : Agent
             {
                 Hallo.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
             }
+            AddParameters();
         }
 
 
@@ -348,6 +353,7 @@ public class MarkoScript : Agent
             {
                 Lara.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
             }
+            AddParameters();
         }
 
         ////Attacked By Hallo
@@ -403,41 +409,11 @@ public class MarkoScript : Agent
         // rowDataTemp[21] = AnimZombie.transform.position.ToString();
         //rowDataTemp[22] = action.ToString();
         //rowData.Add(rowDataTemp);
-        string[] rowDataTemp = new string[30];
-        rowDataTemp[0] = Agentid.ToString();
-        rowDataTemp[1] = Timepassed.ToString();
-        rowDataTemp[2] = this.transform.position.x.ToString();
-        rowDataTemp[3] = this.transform.position.y.ToString();
-        rowDataTemp[4] = this.transform.position.z.ToString();
-        rowDataTemp[5] = Marko.transform.position.x.ToString();
-        rowDataTemp[6] = Marko.transform.position.y.ToString();
-        rowDataTemp[7] = Marko.transform.position.z.ToString();
-        rowDataTemp[8] = Hallo.transform.position.x.ToString();
-        rowDataTemp[9] = Hallo.transform.position.y.ToString();
-        rowDataTemp[10] = Hallo.transform.position.z.ToString();
-        rowDataTemp[11] = Food1.transform.position.x.ToString();
-        rowDataTemp[12] = Food1.transform.position.y.ToString();
-        rowDataTemp[13] = Food1.transform.position.z.ToString();
-        rowDataTemp[14] = Food2.transform.position.x.ToString();
-        rowDataTemp[15] = Food2.transform.position.y.ToString();
-        rowDataTemp[16] = Food2.transform.position.z.ToString();
-        rowDataTemp[17] = Food3.transform.position.x.ToString();
-        rowDataTemp[18] = Food3.transform.position.y.ToString();
-        rowDataTemp[19] = Food3.transform.position.z.ToString();
-
-        rowDataTemp[20] = Food.ToString();
-        rowDataTemp[21] = Health.ToString();
-        rowDataTemp[22] = AttackParticle.transform.position.x.ToString();
-        rowDataTemp[23] = AttackParticle.transform.position.y.ToString();
-        rowDataTemp[24] = AttackParticle.transform.position.z.ToString();
-        rowDataTemp[25] = ParticlesContainer.transform.position.x.ToString();
-        rowDataTemp[26] = ParticlesContainer.transform.position.y.ToString();
-        rowDataTemp[27] = ParticlesContainer.transform.position.z.ToString();
-        rowDataTemp[28] = speed.ToString();
-        rowDataTemp[29] = action.ToString();
-        rowData.Add(rowDataTemp);
-
-     //   SaveData(rowData, markofile);
+        if(action!=5 && action!=6)
+        {
+            AddParameters();
+        }
+        markofile++;
 
     }
     private void FixedUpdate()
@@ -531,6 +507,46 @@ public class MarkoScript : Agent
         counter++;
         markofile = counter;
 
+    }
+    public void AddParameters()
+    {
+        string[] rowDataTemp = new string[30];
+        rowDataTemp[0] = Agentid.ToString();
+        rowDataTemp[1] = Timepassed.ToString();
+        rowDataTemp[2] = this.transform.position.x.ToString();
+        rowDataTemp[3] = this.transform.position.y.ToString();
+        rowDataTemp[4] = this.transform.position.z.ToString();
+        rowDataTemp[5] = Marko.transform.position.x.ToString();
+        rowDataTemp[6] = Marko.transform.position.y.ToString();
+        rowDataTemp[7] = Marko.transform.position.z.ToString();
+        rowDataTemp[8] = Hallo.transform.position.x.ToString();
+        rowDataTemp[9] = Hallo.transform.position.y.ToString();
+        rowDataTemp[10] = Hallo.transform.position.z.ToString();
+        rowDataTemp[11] = Food1.transform.position.x.ToString();
+        rowDataTemp[12] = Food1.transform.position.y.ToString();
+        rowDataTemp[13] = Food1.transform.position.z.ToString();
+        rowDataTemp[14] = Food2.transform.position.x.ToString();
+        rowDataTemp[15] = Food2.transform.position.y.ToString();
+        rowDataTemp[16] = Food2.transform.position.z.ToString();
+        rowDataTemp[17] = Food3.transform.position.x.ToString();
+        rowDataTemp[18] = Food3.transform.position.y.ToString();
+        rowDataTemp[19] = Food3.transform.position.z.ToString();
+
+        rowDataTemp[20] = Food.ToString();
+        rowDataTemp[21] = Health.ToString();
+        rowDataTemp[22] = AttackParticle.transform.position.x.ToString();
+        rowDataTemp[23] = AttackParticle.transform.position.y.ToString();
+        rowDataTemp[24] = AttackParticle.transform.position.z.ToString();
+        rowDataTemp[25] = ParticlesContainer.transform.position.x.ToString();
+        rowDataTemp[26] = ParticlesContainer.transform.position.y.ToString();
+        rowDataTemp[27] = ParticlesContainer.transform.position.z.ToString();
+        rowDataTemp[28] = speed.ToString();
+        rowDataTemp[29] = action.ToString();
+        rowData.Add(rowDataTemp);
+        if (markofile >= 300)
+        {
+            SaveData(rowData, markofile);
+        }
     }
 
 }
