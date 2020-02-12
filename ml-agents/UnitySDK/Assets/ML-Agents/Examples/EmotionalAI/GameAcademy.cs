@@ -81,7 +81,7 @@ public class GameAcademy : Academy
 
         Lara.count = 1;
         Marko.oneSecondCounter = 1;
-        Hallo.count = 0;
+      
 
         Marko.Timepassed = 0;
         Lara.Timepassed = 0;
@@ -105,7 +105,7 @@ public class GameAcademy : Academy
         Lara.seconds = 0;
         Hallo.seconds = 0;
 
-        Hallo.count = 0;
+        Hallo.count = 1;
          Marko.PrevFood = 5;
         Lara.PrevFood = 5;
         Hallo.PrevFood = 5;
@@ -137,7 +137,7 @@ public class GameAcademy : Academy
         Timepassed += Time.deltaTime;
         seconds = (int)Timepassed;
 
-        if (seconds == 10)
+        if (seconds == 6)
         {
             Lara.Done();
             Marko.Done();

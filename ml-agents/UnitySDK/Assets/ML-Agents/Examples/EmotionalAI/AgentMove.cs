@@ -91,6 +91,7 @@ public class AgentMove : Agent
     public override void CollectObservations()
     {
         AddVectorObs(Agentid);//1
+
         AddVectorObs(Timepassed);//1
         AddVectorObs(Lara.transform.position);//3
         AddVectorObs(Marko.transform.position);//3
@@ -101,8 +102,6 @@ public class AgentMove : Agent
         
         AddVectorObs(Food);//1
         AddVectorObs(Health);//1
-        AddVectorObs(AttackParticle.transform.position);//3
-        AddVectorObs(ParticlesContainer.transform.position);//3
         AddVectorObs(speed);//1
         obser[0] = Timepassed;
         obser[1] = Lara.transform.position.x;
@@ -211,7 +210,7 @@ public class AgentMove : Agent
 
 
     }
-    public override void AgentAction(float[] vectorAction, string actiontext)
+    public override void AgentAction(float[] vectorAction, string textAction)
     {
       //  int ANNaction = TestNetwork(obser); //Action from ANN
         action = Mathf.FloorToInt(vectorAction[0]);   //Action From RL
@@ -250,6 +249,10 @@ public class AgentMove : Agent
                 this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
             }
             Lara.Food--;
+            if (Lara.FoodFiller.size.x > 0)
+            {
+                Lara.FoodFiller.size = new Vector2(Lara.FoodFiller.size.x - 0.02f, Lara.FoodFiller.size.y);
+            }
         }
         //Stealing from Marko
         else if (action == 5 && (distWithMarko < 1.42))
@@ -261,6 +264,10 @@ public class AgentMove : Agent
                 this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
             }
             Marko.Food--;
+            if (Marko.FoodFiller.size.x > 0)
+            {
+                Marko.FoodFiller.size = new Vector2(Marko.FoodFiller.size.x - 0.02f, Marko.FoodFiller.size.y);
+            }
         }
         else if (action == 5 && ateFromRes == false && (dist1 < 1.42 || dist2 < 1.42 || dist3 < 1.42))
         {
@@ -310,13 +317,10 @@ public class AgentMove : Agent
 
 
         //Sharing
-        if(action == 6)
+       if (action == 6 && distWithMarko <= 1.42f)
         {
             Share++;
-        }
-        if (action == 6 && distWithMarko <= 1.42f)
-        {
-          
+
             if (Food > 0)
             {
                 this.Food -= 0.5f;
@@ -330,12 +334,13 @@ public class AgentMove : Agent
             }
             if (Marko.FoodFiller.size.x <= 1)
             {
-                Marko.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
+                Marko.FoodFiller.size = new Vector2(Marko.FoodFiller.size.x + 0.02f, Marko.FoodFiller.size.y);
             }
 
         }
         else if (action == 6 && distWithLara <= 1.42f)
         {
+            Share++;
             if (Food > 0)
             {
                 this.Food -= 0.5f;
@@ -349,7 +354,7 @@ public class AgentMove : Agent
             }
             if (Lara.FoodFiller.size.x <= 1)
             {
-                Lara.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
+                Lara.FoodFiller.size = new Vector2(Lara.FoodFiller.size.x + 0.02f, Lara.FoodFiller.size.y);
             }
         }
 

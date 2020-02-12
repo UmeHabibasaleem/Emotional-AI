@@ -44,12 +44,8 @@ public class MarkoScript : Agent
     public GameObject TopContainer;
     public GameObject BottomContainer;
     public GameObject gun;
-
-
     public int Agentid = 2;
-    public GameObject AttackParticle;
-    public GameObject ParticlesContainer;
-
+    
     public float FoodZerotimeSec = 0;
     public int FoodZerotime = 0;
     public BulletFire bulletfire;
@@ -58,13 +54,13 @@ public class MarkoScript : Agent
     private GameAcademy academy;
     private void Awake()
     {
-        this.AttackParticle.SetActive(false);
         Physics.IgnoreLayerCollision(11, 11);
     }
 
     public override void CollectObservations()
     {
         AddVectorObs(Agentid);//1
+
         AddVectorObs(Timepassed);//1
         AddVectorObs(Lara.transform.position);//3
         AddVectorObs(this.transform.position);//3
@@ -75,9 +71,7 @@ public class MarkoScript : Agent
 
         AddVectorObs(Food);//1
         AddVectorObs(Health);//1
-        AddVectorObs(AttackParticle.transform.position);//3
-        AddVectorObs(ParticlesContainer.transform.position);//3
-        AddVectorObs(speed);//1
+         AddVectorObs(speed);//1
     }
     // Use this for initialization
     public override void InitializeAgent()
@@ -222,7 +216,7 @@ public class MarkoScript : Agent
     }
 
 
-    public override void AgentAction(float[] vectorAction, string actiontext)
+    public override void AgentAction(float[] vectorAction, string textAction)
     {
         action = Mathf.FloorToInt(vectorAction[0]);
         float dist1 = Vector3.Distance(Marko.transform.position, Food1.transform.position);
@@ -252,6 +246,7 @@ public class MarkoScript : Agent
 
         if (action == 5 && (distWithLara < 1.42))
         {
+            AddReward(+1.0f);
             Steal++;
             Food++;
             if (FoodFiller.size.x < 1)
@@ -259,10 +254,11 @@ public class MarkoScript : Agent
                 this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
             }
             Lara.Food--;
-            
+            if (Lara.FoodFiller.size.x > 0)
+            {
+                Lara.FoodFiller.size = new Vector2(Lara.FoodFiller.size.x - 0.02f, Lara.FoodFiller.size.y);
+            }
             //More reward on stealing from other agents
-            AddReward(+1.0f);
-            AddParameters();
         }
         //Stealing from Hallo
         else if (action == 5 && (distWithHallo < 1.42))
@@ -275,11 +271,15 @@ public class MarkoScript : Agent
                 this.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
             }
             Hallo.Food--;
-            AddParameters();
+            if (Hallo.FoodFiller.size.x > 0)
+            {
+                Hallo.FoodFiller.size = new Vector2(Hallo.FoodFiller.size.x - 0.02f, Hallo.FoodFiller.size.y);
+            }
         }
 
         else if (action == 5 && !FoodEaten && (dist1 < 1.42 || dist2 < 1.42 || dist3 < 1.42))
         {
+            AddReward(+0.2f);
             Eat++;
             FoodEaten = true;
             Food++;
@@ -302,8 +302,6 @@ public class MarkoScript : Agent
             }
 
             //Less Reward on eating from reservior
-            AddReward(+0.2f);
-            AddParameters();
         }
         //Share with Hallo
       
@@ -311,13 +309,13 @@ public class MarkoScript : Agent
         if (action == 6 && distWithHallo <= 1.42f)
         {
             //Selfish agent should not share food
-            SetReward(-1f);
-            Share++;
-
+        
             if (Food > 0)
             {
                 this.Food -= 0.5f;
                 Hallo.Food += 0.5f;
+                SetReward(-1f);
+                Share++;
             }
             if (this.FoodFiller.size.x > 0)
             {
@@ -327,7 +325,6 @@ public class MarkoScript : Agent
             {
                 Hallo.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
             }
-            AddParameters();
         }
 
 
@@ -336,11 +333,10 @@ public class MarkoScript : Agent
 
         else if (action == 6 && distWithLara <= 1.42f /*&& OxetocinForMarko >= 2*/)
         {
-            AddReward(-1f);
-
-            Share++;
-            if (Food > 0)
+             if (Food > 0)
             {
+                SetReward(-1f);
+                Share++;
                 this.Food -= 0.5f;
                 Lara.Food += 0.5f;
 
@@ -353,7 +349,6 @@ public class MarkoScript : Agent
             {
                 Lara.FoodFiller.size = new Vector2(this.FoodFiller.size.x + 0.02f, this.FoodFiller.size.y);
             }
-            AddParameters();
         }
 
         ////Attacked By Hallo
@@ -409,11 +404,41 @@ public class MarkoScript : Agent
         // rowDataTemp[21] = AnimZombie.transform.position.ToString();
         //rowDataTemp[22] = action.ToString();
         //rowData.Add(rowDataTemp);
-        if(action!=5 && action!=6)
-        {
-            AddParameters();
-        }
-        markofile++;
+        string[] rowDataTemp = new string[30];
+        rowDataTemp[0] = Agentid.ToString();
+        rowDataTemp[1] = Timepassed.ToString();
+        rowDataTemp[2] = this.transform.position.x.ToString();
+        rowDataTemp[3] = this.transform.position.y.ToString();
+        rowDataTemp[4] = this.transform.position.z.ToString();
+        rowDataTemp[5] = Marko.transform.position.x.ToString();
+        rowDataTemp[6] = Marko.transform.position.y.ToString();
+        rowDataTemp[7] = Marko.transform.position.z.ToString();
+        rowDataTemp[8] = Hallo.transform.position.x.ToString();
+        rowDataTemp[9] = Hallo.transform.position.y.ToString();
+        rowDataTemp[10] = Hallo.transform.position.z.ToString();
+        rowDataTemp[11] = Food1.transform.position.x.ToString();
+        rowDataTemp[12] = Food1.transform.position.y.ToString();
+        rowDataTemp[13] = Food1.transform.position.z.ToString();
+        rowDataTemp[14] = Food2.transform.position.x.ToString();
+        rowDataTemp[15] = Food2.transform.position.y.ToString();
+        rowDataTemp[16] = Food2.transform.position.z.ToString();
+        rowDataTemp[17] = Food3.transform.position.x.ToString();
+        rowDataTemp[18] = Food3.transform.position.y.ToString();
+        rowDataTemp[19] = Food3.transform.position.z.ToString();
+
+        rowDataTemp[20] = Food.ToString();
+        rowDataTemp[21] = Health.ToString();
+        //rowDataTemp[22] = AttackParticle.transform.position.x.ToString();
+        //rowDataTemp[23] = AttackParticle.transform.position.y.ToString();
+        //rowDataTemp[24] = AttackParticle.transform.position.z.ToString();
+        //rowDataTemp[25] = ParticlesContainer.transform.position.x.ToString();
+        //rowDataTemp[26] = ParticlesContainer.transform.position.y.ToString();
+        //rowDataTemp[27] = ParticlesContainer.transform.position.z.ToString();
+        rowDataTemp[28] = speed.ToString();
+        rowDataTemp[29] = action.ToString();
+        rowData.Add(rowDataTemp);
+
+     //   SaveData(rowData, markofile);
 
     }
     private void FixedUpdate()
@@ -507,46 +532,6 @@ public class MarkoScript : Agent
         counter++;
         markofile = counter;
 
-    }
-    public void AddParameters()
-    {
-        string[] rowDataTemp = new string[30];
-        rowDataTemp[0] = Agentid.ToString();
-        rowDataTemp[1] = Timepassed.ToString();
-        rowDataTemp[2] = this.transform.position.x.ToString();
-        rowDataTemp[3] = this.transform.position.y.ToString();
-        rowDataTemp[4] = this.transform.position.z.ToString();
-        rowDataTemp[5] = Marko.transform.position.x.ToString();
-        rowDataTemp[6] = Marko.transform.position.y.ToString();
-        rowDataTemp[7] = Marko.transform.position.z.ToString();
-        rowDataTemp[8] = Hallo.transform.position.x.ToString();
-        rowDataTemp[9] = Hallo.transform.position.y.ToString();
-        rowDataTemp[10] = Hallo.transform.position.z.ToString();
-        rowDataTemp[11] = Food1.transform.position.x.ToString();
-        rowDataTemp[12] = Food1.transform.position.y.ToString();
-        rowDataTemp[13] = Food1.transform.position.z.ToString();
-        rowDataTemp[14] = Food2.transform.position.x.ToString();
-        rowDataTemp[15] = Food2.transform.position.y.ToString();
-        rowDataTemp[16] = Food2.transform.position.z.ToString();
-        rowDataTemp[17] = Food3.transform.position.x.ToString();
-        rowDataTemp[18] = Food3.transform.position.y.ToString();
-        rowDataTemp[19] = Food3.transform.position.z.ToString();
-
-        rowDataTemp[20] = Food.ToString();
-        rowDataTemp[21] = Health.ToString();
-        rowDataTemp[22] = AttackParticle.transform.position.x.ToString();
-        rowDataTemp[23] = AttackParticle.transform.position.y.ToString();
-        rowDataTemp[24] = AttackParticle.transform.position.z.ToString();
-        rowDataTemp[25] = ParticlesContainer.transform.position.x.ToString();
-        rowDataTemp[26] = ParticlesContainer.transform.position.y.ToString();
-        rowDataTemp[27] = ParticlesContainer.transform.position.z.ToString();
-        rowDataTemp[28] = speed.ToString();
-        rowDataTemp[29] = action.ToString();
-        rowData.Add(rowDataTemp);
-        if (markofile >= 300)
-        {
-            SaveData(rowData, markofile);
-        }
     }
 
 }
