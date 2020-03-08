@@ -61,7 +61,7 @@ public class AgentMove : Agent
     private static int _numOutputParameters;
     private static NeuralNetwork.NetworkModels.Network _network;
     private static List<DataSet> _dataSets;
-    double[] obser = new double[28];
+    double[] obser = new double[22];
 
 
     private void Awake()
@@ -124,13 +124,7 @@ public class AgentMove : Agent
         obser[18] = Food3.transform.position.z;
         obser[19] = Food;
         obser[20] = Health;
-        obser[21] = AttackParticle.transform.position.x;
-        obser[22] = AttackParticle.transform.position.y;
-        obser[23] = AttackParticle.transform.position.z;
-        obser[24] = ParticlesContainer.transform.position.x;
-        obser[25] = ParticlesContainer.transform.position.y;
-        obser[26] = ParticlesContainer.transform.position.z;
-        obser[27] = speed;  
+        obser[21] = speed;  
 
     }
     // Update is called once per frame
@@ -212,7 +206,7 @@ public class AgentMove : Agent
     }
     public override void AgentAction(float[] vectorAction, string textAction)
     {
-      //  int ANNaction = TestNetwork(obser); //Action from ANN
+        int ANNaction = TestNetwork(obser); //Action from ANN
         action = Mathf.FloorToInt(vectorAction[0]);   //Action From RL
         
         float dist1 = Vector3.Distance(Hallo.transform.position, Food1.transform.position);
