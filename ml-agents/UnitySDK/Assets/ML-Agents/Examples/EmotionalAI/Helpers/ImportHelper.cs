@@ -124,7 +124,7 @@ namespace NeuralNetwork.Helpers
 
 		private static HelperNetwork GetHelperNetwork()
 		{
-            string path = @"C:\Users\Abubakar\Documents\GitHub\Emotional-AI\ml-agents\UnitySDK\Assets\ML-Agents\Examples\EmotionalAI\DataExamples\MybestFinalNetwork.txt";
+            string path = @"E:\Most recent\Emotional-AI\ml-agents\UnitySDK\Assets\ML-Agents\Examples\EmotionalAI\DataExamples\MybestFinalNetwork.txt";
 			try
 			{
 			using (var file = File.OpenText(path))

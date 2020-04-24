@@ -37,7 +37,7 @@ public class AgentMove : Agent
     public GameObject Hallo;
     public float PrevFood = 5;
     public float Pfood;
-    public bool once = false;
+    public bool isDead = false;
     public bool healthinc;
     public float dist;
     public MarkoScript Marko;
@@ -75,7 +75,7 @@ public class AgentMove : Agent
     // Use this for initialization
     public override void InitializeAgent()
     {
-
+        isDead = false;
         Timepassed = 0;
         Food = 5;
         Health = 5;
@@ -142,6 +142,7 @@ public class AgentMove : Agent
             FoodZerotime = (int)FoodZerotimeSec;
             if (FoodZerotime == 2)
             {
+                isDead = true;
                 Health = 0;
                 this.HealthFiller.size = new Vector2(0f, this.HealthFiller.size.y);
                 SetReward(-1f);
@@ -208,7 +209,33 @@ public class AgentMove : Agent
     {
         int ANNaction = TestNetwork(obser); //Action from ANN
         action = Mathf.FloorToInt(vectorAction[0]);   //Action From RL
-        
+        iteration++;
+        //For 20% ANN and 80% RL
+        //if(iteration % 5 == 0)
+        //{
+        //    action = ANNaction;
+        //}
+
+        //For 80% ANN and 20% RL
+
+        /*if (iteration % 5 != 0)
+        {
+            action = ANNaction;
+        }*/
+
+        //approx. 30% ANN and 70% RL
+        //if (iteration % 3 == 0)
+        //{
+        //    action = ANNaction; //Action from ANN
+        //}
+
+        //approx. 70% ANN and 30% RL
+
+        if (iteration % 3 != 0)
+        {
+            action = ANNaction; //Action from ANN
+        }
+
         float dist1 = Vector3.Distance(Hallo.transform.position, Food1.transform.position);
         float dist2 = Vector3.Distance(Hallo.transform.position, Food2.transform.position);
         float dist3 = Vector3.Distance(Hallo.transform.position, Food3.transform.position);

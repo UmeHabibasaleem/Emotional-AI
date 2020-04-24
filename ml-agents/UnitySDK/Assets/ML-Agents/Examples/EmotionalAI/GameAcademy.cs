@@ -48,6 +48,7 @@ public class GameAcademy : Academy
         this.seconds = 0;
 
         Hallo.iteration = 0;
+        Hallo.isDead = false;
 
         MarkoAgent.SetActive(true);
         LaraAgent.SetActive(true);
@@ -111,7 +112,7 @@ public class GameAcademy : Academy
         Hallo.PrevFood = 5;
 
 
-        Hallo.once = false;
+        
         //OxetocinInHalloForMarko = 0;
         //OxetocinInLaraForMarko = 0;
 

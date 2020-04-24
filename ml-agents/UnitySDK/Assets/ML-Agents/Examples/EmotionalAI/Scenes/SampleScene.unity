@@ -7383,9 +7383,9 @@ MonoBehaviour:
     vectorActionSize: 07000000
     vectorActionDescriptions: []
     vectorActionSpaceType: 0
-  m_Model: {fileID: 11400000, guid: 3b65e3506d4c56440b8deea9625c2e45, type: 3}
+  m_Model: {fileID: 11400000, guid: 31d558b91c9bd664a9b4efa9ce4f6ddf, type: 3}
   m_InferenceDevice: 0
-  m_BehaviorType: 0
+  m_UseHeuristic: 0
   m_BehaviorName: brainUgh
 --- !u!1 &244030522
 GameObject:
@@ -25645,7 +25645,7 @@ MonoBehaviour:
     vectorActionSpaceType: 0
   m_Model: {fileID: 0}
   m_InferenceDevice: 0
-  m_BehaviorType: 0
+  m_UseHeuristic: 0
   m_BehaviorName: MyBehavior
 --- !u!1 &623094414
 GameObject:
@@ -40057,9 +40057,9 @@ MonoBehaviour:
     vectorActionSize: 07000000
     vectorActionDescriptions: []
     vectorActionSpaceType: 0
-  m_Model: {fileID: 11400000, guid: d39da308055a4804f9b8dc13be066bdb, type: 3}
+  m_Model: {fileID: 11400000, guid: 31d558b91c9bd664a9b4efa9ce4f6ddf, type: 3}
   m_InferenceDevice: 0
-  m_BehaviorType: 0
+  m_UseHeuristic: 0
   m_BehaviorName: brainUgh
 --- !u!1 &1115816067
 GameObject:
@@ -74163,9 +74163,9 @@ MonoBehaviour:
     vectorActionSize: 07000000
     vectorActionDescriptions: []
     vectorActionSpaceType: 0
-  m_Model: {fileID: 11400000, guid: 3b65e3506d4c56440b8deea9625c2e45, type: 3}
+  m_Model: {fileID: 11400000, guid: 31d558b91c9bd664a9b4efa9ce4f6ddf, type: 3}
   m_InferenceDevice: 0
-  m_BehaviorType: 0
+  m_UseHeuristic: 0
   m_BehaviorName: brainUgh
 --- !u!1 &1933964380 stripped
 GameObject:
