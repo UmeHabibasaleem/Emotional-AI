@@ -34900,6 +34900,8 @@ MonoBehaviour:
   MarkoAgent: {fileID: 206284176}
   LaraAgent: {fileID: 1779657706}
   HalloAgent: {fileID: 1933964381}
+  TotalTime: 0
+  HalloDeathCount: 0
   Food1: {fileID: 877429408}
   Food2: {fileID: 1101065285}
   Food3: {fileID: 1185085739}
@@ -40057,7 +40059,7 @@ MonoBehaviour:
     vectorActionSize: 07000000
     vectorActionDescriptions: []
     vectorActionSpaceType: 0
-  m_Model: {fileID: 11400000, guid: 31d558b91c9bd664a9b4efa9ce4f6ddf, type: 3}
+  m_Model: {fileID: 11400000, guid: d39da308055a4804f9b8dc13be066bdb, type: 3}
   m_InferenceDevice: 0
   m_UseHeuristic: 0
   m_BehaviorName: brainUgh
@@ -74105,6 +74107,11 @@ PrefabInstance:
       propertyPath: agentParameters.onDemandDecision
       value: 0
       objectReference: {fileID: 0}
+    - target: {fileID: 114910251880362912, guid: cd29bfc793d8948d19d5001b9c1b637f,
+        type: 3}
+      propertyPath: academy
+      value: 
+      objectReference: {fileID: 1079298144}
     - target: {fileID: 114433293529131006, guid: cd29bfc793d8948d19d5001b9c1b637f,
         type: 3}
       propertyPath: AttackParticle

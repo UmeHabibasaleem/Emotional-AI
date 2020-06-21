@@ -154,22 +154,25 @@ public class MarkoScript : Agent
         //Food is zero for 2 seconds then inactive agent
         if (Food <= 0)
         {
-            FoodZerotimeSec += Time.deltaTime;
-            FoodZerotime = (int)FoodZerotimeSec;
-            if (FoodZerotime == 2)
-            {
-                Health = 0;
-                this.HealthFiller.size = new Vector2(0f, this.HealthFiller.size.y);
-                Hallo.SetReward(-1f);
-               // Lara.SetReward(-1f);
-                Marko.SetActive(false);
-                TopContainer.SetActive(false);
-                BottomContainer.SetActive(false);
-                gun.SetActive(false);
-                this.enabled = false;
-                FoodEaten = true;
 
-            }
+            Food = 0;
+            Health = 0;
+            this.HealthFiller.size = new Vector2(0f, this.HealthFiller.size.y);
+            Hallo.SetReward(-1f);
+            // Lara.SetReward(-1f);
+            Marko.SetActive(false);
+            TopContainer.SetActive(false);
+            BottomContainer.SetActive(false);
+            gun.SetActive(false);
+            this.enabled = false;
+            FoodEaten = true;
+
+            //FoodZerotimeSec += Time.deltaTime;
+            //FoodZerotime = (int)FoodZerotimeSec;
+            //if (FoodZerotime == 2)
+            //{
+   
+            //}
         }
 
         //After one second

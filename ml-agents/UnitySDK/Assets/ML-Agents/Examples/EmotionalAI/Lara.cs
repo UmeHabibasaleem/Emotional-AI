@@ -372,22 +372,23 @@ public class Lara : Agent
 
         if (Food <= 0)
         {
-            
-            FoodZerotimeSec += Time.deltaTime;
-            FoodZerotime = (int)FoodZerotimeSec;
-            if (FoodZerotime == 2)
-            {
-                Health = 0;
-                this.HealthFiller.size = new Vector2(0f, this.HealthFiller.size.y);
-                Hallo.SetReward(-1f);
-                // Marko.SetReward(-1f);
-                LaraModel.SetActive(false);
-                TopContainer.SetActive(false);
-                BottomContainer.SetActive(false);
-                gun.SetActive(false);
-                this.enabled = false;
-            }
-        }
+            Food = 0;
+            Health = 0;
+            this.HealthFiller.size = new Vector2(0f, this.HealthFiller.size.y);
+            Hallo.SetReward(-1f);
+            // Marko.SetReward(-1f);
+            LaraModel.SetActive(false);
+            TopContainer.SetActive(false);
+            BottomContainer.SetActive(false);
+            gun.SetActive(false);
+            this.enabled = false;
+
+        //    FoodZerotimeSec += Time.deltaTime;
+        //    FoodZerotime = (int)FoodZerotimeSec;
+        //    if (FoodZerotime == 2)
+        //    {
+        //               }
+}
 
 
 

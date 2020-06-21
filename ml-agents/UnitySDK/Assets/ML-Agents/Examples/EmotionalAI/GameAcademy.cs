@@ -24,6 +24,10 @@ public class GameAcademy : Academy
     public GameObject LaraAgent;
     public GameObject HalloAgent;
     int seconds = 0;
+    public float TotalTime = 0;
+
+    public int HalloDeathCount;
+
     // public PythonCommunicator py;
     int i = 0;
     int count = 0;
@@ -96,6 +100,7 @@ public class GameAcademy : Academy
         Lara.Health = 5;
         Hallo.Health = 5;
 
+        
 
         Hallo.healthinc = false;
 
@@ -137,7 +142,7 @@ public class GameAcademy : Academy
     {
         Timepassed += Time.deltaTime;
         seconds = (int)Timepassed;
-
+        TotalTime += 0.02f;
         if (seconds == 6)
         {
             Lara.Done();

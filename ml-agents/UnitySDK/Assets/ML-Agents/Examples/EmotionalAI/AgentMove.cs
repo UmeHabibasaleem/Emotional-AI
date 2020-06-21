@@ -41,7 +41,6 @@ public class AgentMove : Agent
     public bool healthinc;
     public float dist;
     public MarkoScript Marko;
-
     public GameObject TopContainer;
     public GameObject BottomContainer;
     public GameObject gun;
@@ -53,7 +52,7 @@ public class AgentMove : Agent
     public float FoodZerotimeSec = 0;
     public int FoodZerotime = 0;
     public Vector3 AgentStartingPos;
-    private GameAcademy academy;
+    public GameAcademy academy;
     
     private static int _numInputParameters;
     private static int _numHiddenLayers;
@@ -135,9 +134,10 @@ public class AgentMove : Agent
         Vector3 targetPos = AnimZombie.transform.position;
         Timepassed += Time.deltaTime;
         seconds = (int)Timepassed;
-
+        
         if (Food <= 0)
         {
+            academy.HalloDeathCount++;
             FoodZerotimeSec += Time.deltaTime;
             FoodZerotime = (int)FoodZerotimeSec;
             if (FoodZerotime == 2)
@@ -218,23 +218,23 @@ public class AgentMove : Agent
 
         //For 80% ANN and 20% RL
 
-        /*if (iteration % 5 != 0)
+        if (iteration % 5 != 0)
         {
             action = ANNaction;
-        }*/
+        }
 
         //approx. 30% ANN and 70% RL
-        //if (iteration % 3 == 0)
+        //if (iteration % 3 != 0)
         //{
         //    action = ANNaction; //Action from ANN
         //}
 
         //approx. 70% ANN and 30% RL
 
-        if (iteration % 3 != 0)
-        {
-            action = ANNaction; //Action from ANN
-        }
+        //if (iteration % 3 != 0)
+        //{
+        //    action = ANNaction; //Action from ANN
+        //}
 
         float dist1 = Vector3.Distance(Hallo.transform.position, Food1.transform.position);
         float dist2 = Vector3.Distance(Hallo.transform.position, Food2.transform.position);
