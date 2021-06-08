@@ -22,7 +22,7 @@ setup(
     zip_safe=False,
 
     install_requires=[
-        'Pillow>=4.2.1,<=5.4.1',
+        'Pillow>=4.2.1,<8.2.1',
         'numpy>=1.13.3,<=1.16.1',
         'pytest>=3.2.2,<4.0.0',
         'protobuf>=3.6,<3.7',
